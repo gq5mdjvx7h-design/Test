@@ -2,286 +2,211 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>PAIE EVOLUTION ULTIMATE - 5000+ LINES EDITION</title>
+    <title>PAIE PERFORMANCE SYSTEM - HOURS ONLY EDITION</title>
     <style>
-        /* --- ARCHITECTURE CSS (LIGNES 10-500) --- */
         :root {
             --bg: #010409; --panel: #0d1117; --border: #30363d;
             --text: #c9d1d9; --accent: #58a6ff; --gold: #d29922;
-            --success: #238636; --legend: #ab7df8;
+            --bronze: #8b4513; --legend: #ab7df8; --success: #238636;
         }
         body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
         
-        #sidebar { width: 450px; background: var(--panel); border-right: 1px solid var(--border); padding: 25px; display: flex; flex-direction: column; overflow-y: auto; gap: 20px; }
-        #main { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; gap: 25px; }
+        #sidebar { width: 400px; background: var(--panel); border-right: 1px solid var(--border); padding: 25px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; }
+        #main { flex: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 25px; }
 
-        /* Moteur de Ligue */
-        .league-banner { padding: 30px; border-radius: 15px; text-align: center; font-size: 32px; font-weight: 900; text-transform: uppercase; border: 2px solid rgba(255,255,255,0.1); transition: 0.5s; }
-        .l-bronze { background: linear-gradient(135deg, #3d2311, #8b4513); box-shadow: 0 4px 15px rgba(139,69,19,0.3); }
+        .league-header { padding: 25px; border-radius: 12px; text-align: center; font-size: 28px; font-weight: 900; text-transform: uppercase; border: 2px solid rgba(255,255,255,0.1); }
+        .l-bronze { background: linear-gradient(135deg, #3d2311, #8b4513); }
         .l-silver { background: linear-gradient(135deg, #2c2c2c, #c0c0c0); color: #000; }
-        .l-gold { background: linear-gradient(135deg, #bf953f, #fcf6ba); color: #000; box-shadow: 0 0 30px rgba(191,149,63,0.5); }
-        .l-legend { background: linear-gradient(135deg, #1a1c2c, #ab7df8); animation: pulse 2s infinite; }
+        .l-gold { background: linear-gradient(135deg, #bf953f, #fcf6ba); color: #000; }
+        .l-legend { background: linear-gradient(135deg, #1a1c2c, #ab7df8); box-shadow: 0 0 20px var(--legend); }
 
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
-
-        /* Formulaire & Graphique */
         .card { background: #161b22; border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-        input { width: 100%; background: #010409; border: 1px solid var(--border); color: #fff; padding: 15px; border-radius: 8px; font-size: 18px; margin-top: 10px; }
-        .btn { width: 100%; padding: 18px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; text-transform: uppercase; }
-        .btn-green { background: var(--success); color: white; }
-        .btn-blue { background: var(--accent); color: white; }
+        label { display: block; font-size: 11px; color: #8b949e; text-transform: uppercase; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; background: #010409; border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 8px; font-size: 16px; margin-bottom: 15px; }
+        
+        .btn { width: 100%; padding: 15px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-bottom: 10px; transition: 0.2s; }
+        .btn-calc { background: var(--success); color: white; }
+        .btn-sim { background: var(--accent); color: white; }
 
-        #svg-engine { width: 100%; height: 150px; background: #000; border-radius: 8px; margin-top: 15px; border: 1px solid var(--border); }
-        .line { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linejoin: round; transition: 1s; }
+        #graph-box { width: 100%; height: 120px; background: #000; border-radius: 8px; border: 1px solid var(--border); margin-top: 10px; }
+        .graph-path { fill: none; stroke: var(--accent); stroke-width: 3; transition: 1s; }
 
-        /* Grille de Trophées */
-        .trophy-wall { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
-        .trophy { aspect-ratio: 1; background: #21262d; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 35px; opacity: 0.1; filter: grayscale(1); transition: 0.8s; border: 2px solid transparent; }
-        .trophy.unlocked { opacity: 1; filter: grayscale(0); border-color: var(--gold); background: #30363d; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        .trophy-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+        .trophy { aspect-ratio: 1; background: #21262d; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; opacity: 0.1; filter: grayscale(1); transition: 0.5s; }
+        .trophy.unlocked { opacity: 1; filter: grayscale(0); border: 1px solid var(--gold); background: #30363d; }
 
-        #log-console { background: #000; color: #00ff41; font-family: 'Consolas', monospace; padding: 15px; border-radius: 8px; height: 150px; overflow-y: auto; font-size: 12px; border: 1px solid var(--border); }
+        #console { background: #000; color: #3fb950; font-family: 'Consolas', monospace; padding: 15px; border-radius: 8px; height: 150px; overflow-y: auto; font-size: 11px; border: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
 <aside id="sidebar">
-    <div id="league-display" class="league-banner l-bronze">Ligue Bronze</div>
+    <div id="league-banner" class="league-header l-bronze">Ligue Bronze</div>
     
     <div class="card">
-        <label>TAUX HORAIRE (Variable Libre)</label>
-        <input type="number" id="user-rate" placeholder="Entrez votre taux €">
-        <button class="btn btn-green" onclick="Core.process()">VALIDER MOIS</button>
-        <button class="btn btn-blue" onclick="Core.fullSimulation()">SIMULER 10 ANS</button>
+        <label>Volume Heures Supplémentaires</label>
+        <input type="number" id="hs-input" placeholder="Nombre d'heures" value="0">
+        
+        <button class="btn btn-calc" onclick="App.process()">Enregistrer le Mois</button>
+        <button class="btn btn-sim" onclick="App.simulateTenYears()">Simuler Carrière (10 ans)</button>
     </div>
 
     <div class="card">
-        <label>ÉVOLUTION EXPÉRIENCE</label>
-        <svg id="svg-engine" viewBox="0 0 400 150">
-            <path id="graph-path" class="line" d="M 0 150 L 400 150" />
+        <label>Productivité (Courbe HS)</label>
+        <svg id="graph-box" viewBox="0 0 400 120">
+            <path id="graph-line" class="graph-path" d="M 0 120 L 400 120" />
         </svg>
     </div>
 
     <div class="card">
-        <p>Ancienneté : <span id="stat-years">0</span> ans</p>
-        <p>XP Cumulée : <span id="stat-xp">0</span></p>
+        <p>Ancienneté : <span id="stat-y">0</span> ans / <span id="stat-m">0</span> mois</p>
+        <p>Cumul HS : <span id="stat-total-hs">0</span> h</p>
+        <p>XP Système : <span id="stat-xp">0</span></p>
     </div>
 </aside>
 
 <main id="main">
     <div class="card" style="border-left: 10px solid var(--gold);">
-        <h2 id="adv-title" style="margin:0; color:var(--gold);">SYSTEME INITIALISÉ</h2>
-        <p id="adv-text" style="font-size: 20px; line-height: 1.5;">Prêt pour la simulation décennale. Saisissez votre premier taux horaire pour débloquer les scénarios.</p>
+        <h2 id="adv-title" style="margin:0; color:var(--gold);">Analyse Juridique</h2>
+        <p id="adv-text" style="font-size: 18px; line-height: 1.5;">Saisissez vos heures supplémentaires pour débloquer les conseils.</p>
         <small id="adv-ref" style="color: var(--accent);"></small>
     </div>
 
     <div class="card">
-        <h3>MUR DES TROPHÉES DE LIGUE</h3>
-        <div class="trophy-wall" id="trophy-wall"></div>
+        <label>Réalisations Débloquées</label>
+        <div class="trophy-grid" id="trophy-wall"></div>
     </div>
 
-    <div id="log-console"></div>
+    <div id="console"></div>
 </main>
 
 <script>
-/* --- EXTENSION MASSIVE DE LA BASE DE CONNAISSANCES (LIGNES 600 - 5000+) --- */
-
-const KNOWLEDGE_BASE = [
-    // --- CATEGORIE : CONVENTION COLLECTIVE GROS (1-30) ---
-    { t: "JURIDIQUE", h: "Ancienneté 3 ans", c: "Dans le Commerce de Gros, après 3 ans, une prime d'ancienneté de 3% s'ajoute au minimum conventionnel.", r: "CCN Gros Art. 22" },
-    { t: "JURIDIQUE", h: "Ancienneté 6 ans", c: "Votre fidélité est récompensée : la prime d'ancienneté passe à 6% après 6 ans de présence.", r: "CCN Gros Art. 22" },
-    { t: "JURIDIQUE", h: "Ancienneté 9 ans", c: "Palier majeur : 9% de prime d'ancienneté calculée sur le salaire de base conventionnel.", r: "CCN Gros Art. 22" },
-    { t: "JURIDIQUE", h: "Ancienneté 12 ans", c: "Le taux de prime d'ancienneté atteint 12% pour les salariés ayant 12 ans de maison.", r: "CCN Gros Art. 22" },
-    { t: "JURIDIQUE", h: "Ancienneté 15 ans", c: "Plafond de la prime d'ancienneté : 15% après 15 ans d'appartenance à l'entreprise.", r: "CCN Gros Art. 22" },
-    { t: "JURIDIQUE", h: "Préavis Employé", c: "Le préavis de démission pour un employé est de 1 mois après la période d'essai.", r: "Art. 15 CCN" },
-    { t: "JURIDIQUE", h: "Préavis Cadre", c: "Le personnel d'encadrement doit respecter un préavis de 3 mois en cas de rupture de contrat.", r: "Art. 15 CCN" },
-    { t: "JURIDIQUE", h: "Congés Mariage", c: "4 jours de congés exceptionnels payés pour votre propre mariage ou PACS.", r: "Art. 25 CCN" },
-    { t: "JURIDIQUE", h: "Décès Conjoint", c: "Droit à 3 jours d'absence autorisée payée en cas de perte du conjoint.", r: "Art. 25 CCN" },
-    { t: "JURIDIQUE", h: "Décès Enfant", c: "La convention et la loi prévoient désormais 12 jours (ou plus selon l'âge) pour ce deuil.", r: "Loi Soan" },
-    { t: "JURIDIQUE", h: "Décès Parent", c: "3 jours de congés exceptionnels pour le décès d'un parent ou d'un beau-parent.", r: "Art. 25 CCN" },
-    { t: "JURIDIQUE", h: "Indemnité Retraite", c: "Après 10 ans d'ancienneté, l'indemnité est de 1 mois de salaire moyen.", r: "Art. 34 CCN" },
-    { t: "JURIDIQUE", h: "Retraite 20 ans", c: "Après 20 ans d'ancienneté, l'indemnité de départ en retraite passe à 2 mois.", r: "Art. 34 CCN" },
-    { t: "JURIDIQUE", h: "Retraite 30 ans", c: "Sommet de carrière : 3 mois d'indemnité de départ après 30 ans d'ancienneté.", r: "Art. 34 CCN" },
-    { t: "JURIDIQUE", h: "Heures de Nuit", c: "Le travail entre 21h et 6h du matin ouvre droit à une majoration de 20%.", r: "Accord Branche" },
-    { t: "JURIDIQUE", h: "Garantie de Salaire", c: "Maintien de salaire à 100% pendant 30 jours après 1 an d'ancienneté en cas de maladie.", r: "Art. 28 CCN" },
-    { t: "JURIDIQUE", h: "Maladie (Suite)", c: "Après les 30 jours à 100%, maintien à 75% du salaire pendant les 30 jours suivants.", r: "Art. 28 CCN" },
-    { t: "JURIDIQUE", h: "Chômage Intempéries", c: "Dispositif spécifique pour les personnels de dépôt en cas de conditions extrêmes.", r: "CCN Gros" },
-    { t: "JURIDIQUE", h: "Heures Sup Semaine", c: "Les 8 premières heures sup (36h à 43h) sont payées avec 25% de majoration.", r: "L3121-36" },
-    { t: "JURIDIQUE", h: "Heures Sup 50%", c: "Toute heure effectuée au-delà de la 43ème heure hebdomadaire est majorée à 50%.", r: "L3121-36" },
-    { t: "JURIDIQUE", h: "Repos Hebdo", c: "Le repos hebdomadaire doit durer au moins 35 heures consécutives (24h + 11h).", r: "L3132-2" },
-    { t: "JURIDIQUE", h: "Travail Dimanche", c: "Majoration de 100% du salaire horaire pour le travail dominical exceptionnel.", r: "Usage Branche" },
-    { t: "JURIDIQUE", h: "Prime Transport", c: "Remboursement obligatoire de 50% de l'abonnement de transport en commun.", r: "L3261-2" },
-    { t: "JURIDIQUE", h: "Forfait Mobilité", c: "Possibilité de toucher jusqu'à 700€/an pour les trajets en vélo ou covoiturage.", r: "Loi LOM" },
-    { t: "JURIDIQUE", h: "Congés Payés", c: "Acquisition de 2,08 jours par mois (ouvrables) ou 2,5 selon la méthode de calcul.", r: "L3141-3" },
-    { t: "JURIDIQUE", h: "Frais de Bouche", c: "Les paniers repas sont exonérés de cotisations s'ils ne dépassent pas le plafond URSSAF.", r: "Guide URSSAF" },
-    { t: "JURIDIQUE", h: "Formation CPF", c: "Alimentation de 500€ par an sur votre compte personnel de formation.", r: "L6323-1" },
-    { t: "JURIDIQUE", h: "Visite Médicale", c: "Obligatoire tous les 5 ans, ou 3 ans pour les travailleurs de nuit.", r: "R4624-10" },
-    { t: "JURIDIQUE", h: "Entretien Pro", c: "Bilan obligatoire tous les 6 ans sur le parcours professionnel du salarié.", r: "L6315-1" },
-    { t: "JURIDIQUE", h: "Droit d'Alerte", c: "Le salarié peut quitter son poste s'il craint un danger grave et imminent.", r: "L4131-1" },
-
-    // --- CATEGORIE : CONSEILS PERSO & BIEN-ÊTRE (31-60) ---
-    { t: "BIEN-ÊTRE", h: "Pause Écran", c: "Sois pas trop fatigué, pense à toi : la règle 20-20-20 pour tes yeux est cruciale.", r: "Note Perso" },
-    { t: "BIEN-ÊTRE", h: "Hydratation", c: "Boire de l'eau permet de maintenir la concentration lors des calculs de cotisations.", r: "Note Santé" },
-    { t: "BIEN-ÊTRE", h: "Posture Assise", c: "Ajuste ton siège. Tes pieds doivent toucher le sol à plat pour protéger ton dos.", r: "Ergonomie" },
-    { t: "BIEN-ÊTRE", h: "Micro-sieste", c: "Une pause de 10 minutes sans écran permet de régénérer tes capacités cognitives.", r: "Note Perso" },
-    { t: "BIEN-ÊTRE", h: "Étirement Poignets", c: "Évite le canal carpien : étire tes mains après chaque session de saisie.", r: "Ergonomie" },
-    { t: "BIEN-ÊTRE", h: "Lumière Naturelle", c: "Travaille près d'une fenêtre si possible pour réguler ton rythme circadien.", r: "Note Santé" },
-    { t: "BIEN-ÊTRE", h: "Respiration 4-7-8", c: "Inspire 4s, bloque 7s, expire 8s. Idéal pour gérer le stress des clôtures de paie.", r: "Note Perso" },
-    { t: "BIEN-ÊTRE", h: "Déconnexion", c: "Le soir, coupe les notifications. Ton cerveau a besoin de silence pour récupérer.", r: "Santé Mentale" },
-    { t: "BIEN-ÊTRE", h: "Marche Active", c: "15 minutes de marche après manger stabilisent ta glycémie et ton énergie.", r: "Note Perso" },
-    { t: "BIEN-ÊTRE", h: "Organisation", c: "Traite les tâches les plus complexes le matin quand ton cerveau est frais.", r: "Productivité" },
-    { t: "BIEN-ÊTRE", h: "Écran & Sommeil", c: "Pas d'écran 1h avant de dormir pour garantir un sommeil profond.", r: "Note Perso" },
-    { t: "BIEN-ÊTRE", h: "Caféine", c: "Évite le café après 14h pour ne pas impacter ta phase de sommeil paradoxal.", r: "Note Santé" },
-    { t: "BIEN-ÊTRE", h: "Bruit Ambiant", c: "Utilise des bruits blancs ou du Lo-Fi pour t'isoler dans les calculs denses.", r: "Note Perso" },
-    { t: "BIEN-ÊTRE", h: "Optimisme", c: "Célèbre chaque mois validé. La gestion de paie est un métier de précision fier.", r: "Mental" },
-    { t: "BIEN-ÊTRE", h: "Bureau Propre", c: "Un espace dégagé égale un esprit dégagé. Range tes dossiers chaque soir.", r: "Efficacité" },
-
-    // --- CATEGORIE : DROIT GÉNÉRAL & ÉVOLUTION (61-100) ---
-    { t: "ÉVOLUTION", h: "Certification VAE", c: "Transforme tes années d'expérience en diplôme officiel via la VAE.", r: "L6411-1" },
-    { t: "ÉVOLUTION", h: "Rupture Co", c: "La rupture conventionnelle doit être homologuée par la DREETS pour être valide.", r: "L1237-14" },
-    { t: "ÉVOLUTION", h: "Télétravail", c: "L'accident survenu à domicile pendant le travail est un accident du travail.", r: "L1222-9" },
-    { t: "ÉVOLUTION", h: "Égalité Pro", c: "L'index égalité homme-femme doit être publié chaque année sur le site de l'entreprise.", r: "L1142-8" },
-    { t: "ÉVOLUTION", h: "Lanceur d'Alerte", c: "Protection totale contre les sanctions si vous signalez un crime ou délit pro.", r: "Loi Waserman" },
-    { t: "ÉVOLUTION", h: "CUMUL EMPLOI", c: "Interdiction de dépasser la durée maximale légale de 48h par semaine au total.", r: "L8261-1" },
-    { t: "ÉVOLUTION", h: "Secret Pro", c: "Le gestionnaire de paie est tenu à une discrétion absolue sur les rémunérations.", r: "Éthique" },
-    { t: "ÉVOLUTION", h: "Bulletin Dématérialisé", c: "L'employeur peut l'imposer, sauf si le salarié exprime son désaccord.", r: "L3243-2" },
-    { t: "ÉVOLUTION", h: "Saisie Salaire", c: "La part insaisissable doit toujours être égale au montant du RSA.", r: "L3252-3" },
-    { t: "ÉVOLUTION", h: "Journée Solidarité", c: "7 heures de travail offertes par an pour financer l'autonomie.", r: "L3133-7" },
-    { t: "ÉVOLUTION", h: "Astreinte", c: "Le temps d'attente à domicile est indemnisé mais n'est pas du travail effectif.", r: "L3121-9" },
-    { t: "ÉVOLUTION", h: "Habillage", c: "Si la tenue est imposée, le temps d'habillage doit être compensé (repos/prime).", r: "L3121-3" },
-    { t: "ÉVOLUTION", h: "Grève", c: "L'exercice du droit de grève suspend le contrat mais ne peut justifier un licenciement.", r: "L2511-1" },
-    { t: "ÉVOLUTION", h: "Mise à Pied", c: "Dispositif disciplinaire qui suspend le salaire pendant la durée de la sanction.", r: "L1332-3" },
-    { t: "ÉVOLUTION", h: "Avertissement", c: "Une sanction qui s'efface du dossier au bout de 3 ans sans nouvelle faute.", r: "L1332-5" },
-    { t: "ÉVOLUTION", h: "Mutuelle Famille", c: "L'employeur n'est pas obligé de financer la part des ayants droit (enfants/conjoint).", r: "Règle Urssaf" },
-    { t: "ÉVOLUTION", h: "Prime Partage Valeur", c: "Exonération de cotisations sociales sous réserve de plafonds annuels.", r: "Loi 2022" },
-    { t: "ÉVOLUTION", h: "PEE / PER", c: "L'abondement de l'entreprise est limité à 300% de votre versement personnel.", r: "Code Travail" },
-    { t: "ÉVOLUTION", h: "Prévoyance Cadre", c: "Obligation de verser 1,50% de la tranche A pour la prévoyance des cadres.", r: "Convention 1947" },
-    { t: "ÉVOLUTION", h: "Réduction Fillon", c: "Allègement massif des charges patronales sur les salaires proches du SMIC.", r: "L241-13" },
-    { t: "ÉVOLUTION", h: "Versement Mobilité", c: "Taxe due si l'entreprise emploie plus de 11 salariés en zone urbaine.", r: "L2333-64" },
-    { t: "ÉVOLUTION", h: "Taxe Apprentissage", c: "Contribution unique à la formation professionnelle (CUFPA).", r: "L6131-1" },
-    { t: "ÉVOLUTION", h: "Prélèvement Source", c: "L'employeur est collecteur de l'impôt mais ignore le détail de vos revenus.", r: "CGI" },
-    { t: "ÉVOLUTION", h: "Fiche de Poste", c: "Document contractuel définissant vos responsabilités et missions.", r: "Note Interne" },
-    { t: "ÉVOLUTION", h: "Télétravail (Frais)", c: "L'employeur peut verser une allocation forfaitaire pour les frais de domicile.", r: "Urssaf" },
-    { t: "ÉVOLUTION", h: "Bilan Compétences", c: "Droit à 24 heures de temps de travail pour faire le point sur sa carrière.", r: "L6313-4" },
-    { t: "ÉVOLUTION", h: "Validation Acquis", c: "La VAE est accessible après seulement 1 an d'expérience.", r: "Loi Travail" },
-    { t: "ÉVOLUTION", h: "Congé Parental", c: "Suspension du contrat jusqu'aux 3 ans de l'enfant (indemnisé par la CAF).", r: "L1225-47" },
-    { t: "ÉVOLUTION", h: "Proche Aidant", c: "Congé spécifique pour s'occuper d'un parent en perte d'autonomie.", r: "L3142-16" },
-    { t: "ÉVOLUTION", h: "Don de Jours", c: "Possibilité de donner ses RTT à un collègue dont l'enfant est malade.", r: "L1225-65-1" },
-    { t: "ÉVOLUTION", h: "Action Logement", c: "Aide à la mobilité et au dépôt de garantie pour les salariés.", r: "1% Logement" },
-    { t: "ÉVOLUTION", h: "Inaptitude", c: "Si le médecin du travail vous déclare inapte, le reclassement est obligatoire.", r: "L1226-2" },
-    { t: "ÉVOLUTION", h: "Heures Complémentaires", c: "Pour les temps partiels, elles ne peuvent pas atteindre 35h.", r: "L3123-9" },
-    { t: "ÉVOLUTION", h: "Droit d'Expression", c: "Réunions autorisées pour discuter des conditions de travail.", r: "L2281-1" },
-    { t: "ÉVOLUTION", h: "Protection Maternité", c: "Interdiction de licenciement pendant la grossesse et le congé.", r: "L1225-4" },
-    { t: "ÉVOLUTION", h: "Mémoire Technique", c: "Documentez vos processus de paie pour devenir indispensable.", r: "Conseil Pro" },
-    { t: "ÉVOLUTION", h: "Rigueur Paie", c: "Une erreur de 1 centime peut bloquer une DSN. Sois précis.", r: "Note Métier" },
-    { t: "ÉVOLUTION", h: "Droit au Repos", c: "Les congés payés sont un droit à la santé, pas seulement du temps libre.", r: "Jurisprudence" },
-    { t: "ÉVOLUTION", h: "Veille Juridique", c: "Le droit change chaque 1er janvier et 1er juillet. Reste aux aguets.", r: "Note Métier" },
-    { t: "ÉVOLUTION", h: "Ligue Légende", c: "Atteindre 10 ans de simulation prouve une maîtrise totale du cycle de paie.", r: "Système" }
+/**
+ * BASE DE CONNAISSANCES TECHNIQUE (SANS MONTANTS)
+ */
+const DATABASE = [
+    { t: "JURIDIQUE", h: "Majoration HS", c: "Les heures supplémentaires au-delà de 35h ouvrent droit à un repos compensateur ou une majoration.", r: "L3121-36" },
+    { t: "BIEN-ÊTRE", h: "Gestion Fatigue", c: "Sois pas trop fatigué, pense à toi : trop d'heures sup impactent la vigilance en paie.", r: "Note Perso" },
+    { t: "JURIDIQUE", h: "Contingent Annuel", c: "Dans le Commerce de Gros, le contingent annuel d'heures sup est fixé à 220h.", r: "Accord Branche" },
+    { t: "JURIDIQUE", h: "Repos Obligatoire", c: "Toute heure sup effectuée au-delà du contingent ouvre droit à une contrepartie en repos.", r: "L3121-30" },
+    { t: "BIEN-ÊTRE", h: "Déconnexion", c: "Même avec un gros volume d'heures, respecte tes 11h de repos quotidien.", r: "Santé Travail" },
+    { t: "JURIDIQUE", h: "Ancienneté", c: "Votre ancienneté dans l'entreprise se calcule de date à date, incluant les périodes de suspension.", r: "Code Travail" },
+    { t: "JURIDIQUE", h: "Heures de Nuit", c: "Le travail de nuit est encadré : il nécessite des contreparties en repos ou majoration.", r: "CCN Gros" },
+    { t: "BIEN-ÊTRE", h: "Ergonomie", c: "Vérifie l'assise de ton siège après une longue série d'heures supplémentaires.", r: "Note Perso" },
+    { t: "JURIDIQUE", h: "Dépassement", c: "La durée hebdomadaire absolue ne peut pas dépasser 48h sur une seule semaine.", r: "L3121-20" },
+    { t: "JURIDIQUE", h: "Moyenne 12 sem.", c: "La durée hebdomadaire moyenne ne peut pas dépasser 44h sur 12 semaines consécutives.", r: "L3121-22" },
+    { t: "JURIDIQUE", h: "Pause Légale", c: "Dès que le temps de travail atteint 6h, une pause de 20 minutes est obligatoire.", r: "L3121-16" },
+    { t: "JURIDIQUE", h: "HS & Congés", c: "Les heures supplémentaires sont prises en compte pour le calcul de l'indemnité de congés payés.", r: "Règle du 10ème" },
+    { t: "BIEN-ÊTRE", h: "Récupération", c: "Utilise tes repos compensateurs pour maintenir ton efficacité sur le long terme.", r: "Note Perso" }
 ];
-// Remplissage massif du reste de la DB pour garantir le volume
-for(let i=26; i<=200; i++) {
-    KNOWLEDGE_BASE.push({
-        t: "EVOLUTION", h: `Scénario de Carrière n°${i}`, 
-        c: `Analyse profonde de la conformité n°${i} pour le secteur logistique et commerce de gros. Vérification des paliers d'expérience.`,
-        r: `LOG-${i*10}`
-    });
-}
 
 const TROPHIES = [
-    { id: 0, icon: '🐣', name: 'Premier Pas' }, { id: 1, icon: '📅', name: '1 An Révolu' },
-    { id: 2, icon: '🔥', name: 'Surchargé' }, { id: 3, icon: '🤝', name: 'Fidélité' },
-    { id: 4, icon: '💎', name: 'Expert Paie' }, { id: 5, icon: '👑', name: 'Légende' },
-    { id: 6, icon: '💼', name: 'Cadre Pro' }, { id: 7, icon: '⚡', name: 'Vitesse Max' },
-    { id: 8, icon: '🌙', name: 'Noctambule' }, { id: 9, icon: '🛡️', name: 'Sécurisé' }
+    {id:0, icon:'🐣'}, {id:1, icon:'📅'}, {id:2, icon:'🔥'}, {id:3, icon:'🤝'}, {id:4, icon:'💎'},
+    {id:5, icon:'👑'}, {id:6, icon:'💼'}, {id:7, icon:'⚡'}, {id:8, icon:'🌙'}, {id:9, icon:'🛡️'}
 ];
 
-const Core = (() => {
-    let state = { xp: 0, months: 0, years: 0, badges: [], league: 'bronze', history: [150] };
+const App = {
+    state: { xp: 0, months: 0, years: 0, totalHS: 0, badges: [], league: 'bronze', history: [120] },
 
-    const updateGraph = () => {
-        const path = document.getElementById('graph-path');
-        const points = state.history.map((y, i) => `${(i * 40)} ${y}`).join(' L ');
-        path.setAttribute('d', `M ${points}`);
-    };
+    init() {
+        const saved = localStorage.getItem('PAIE_HS_V9');
+        if(saved) this.state = JSON.parse(saved);
+        this.render();
+        this.log("SYSTEME INITIALISÉ : MODE HEURES SUP UNIQUEMENT.");
+    },
 
-    const process = () => {
-        const rate = document.getElementById('user-rate').value;
-        if(!rate) return alert("Saisissez un taux !");
+    process() {
+        const hs = parseFloat(document.getElementById('hs-input').value) || 0;
         
-        state.months++;
-        state.xp += 120;
-        state.years = Math.floor(state.months / 12);
-        state.history.push(150 - (Math.min(state.xp / 50, 140)));
-        if(state.history.length > 11) state.history.shift();
+        this.state.months++;
+        this.state.totalHS += hs;
+        this.state.xp += 50 + (hs * 2); // L'XP augmente plus vite avec les HS
+        this.state.years = Math.floor(this.state.months / 12);
+        
+        // Graphique basé sur le volume HS mensuel
+        this.state.history.push(120 - (Math.min(hs * 3, 110)));
+        if(this.state.history.length > 10) this.state.history.shift();
 
-        checkUnlocks();
-        render();
-        log(`Mois ${state.months} validé. XP +120. Taux: ${rate}€/h`);
-    };
+        this.checkLeagues();
+        this.checkBadges(hs);
+        this.render();
+        this.save();
+        this.log(`Mois enregistré. +${hs}h supplémentaires. Total: ${this.state.totalHS}h`);
+    },
 
-    const fullSimulation = async () => {
-        log("LANCEMENT DE LA SIMULATION 10 ANS...");
+    async simulateTenYears() {
+        this.log("SIMULATION DÉCENNALE EN COURS...");
         for(let i=1; i<=120; i++) {
-            state.months++;
-            state.xp += 150;
-            state.years = Math.floor(state.months / 12);
-            state.history.push(150 - (Math.min(state.xp / 100, 140)));
-            if(state.history.length > 11) state.history.shift();
+            const hsAlea = Math.floor(Math.random() * 20); // Simule entre 0 et 20h sup par mois
+            this.state.months++;
+            this.state.totalHS += hsAlea;
+            this.state.xp += 60 + (hsAlea * 2);
+            this.state.years = Math.floor(this.state.months / 12);
             
-            checkUnlocks();
+            this.state.history.push(120 - (Math.min(hsAlea * 3, 110)));
+            if(this.state.history.length > 10) this.state.history.shift();
+            
+            this.checkLeagues();
+            this.checkBadges(hsAlea);
             if(i % 12 === 0) {
-                render();
+                this.render();
                 await new Promise(r => setTimeout(r, 40));
-                log(`Année ${state.years} : Mise à jour des acquis.`);
             }
         }
-        log("CARRIÈRE TERMINÉE. STATUT LÉGENDE.");
-    };
+        this.save();
+        this.log("SIMULATION TERMINÉE. RANG LÉGENDE ATTEINT.");
+    },
 
-    const checkUnlocks = () => {
-        if(state.xp > 2000) state.league = 'silver';
-        if(state.xp > 8000) state.league = 'gold';
-        if(state.xp > 20000) state.league = 'legend';
+    checkLeagues() {
+        if(this.state.xp > 1500) this.state.league = 'silver';
+        if(this.state.xp > 6000) this.state.league = 'gold';
+        if(this.state.xp > 15000) this.state.league = 'legend';
+    },
 
-        if(state.months >= 1 && !state.badges.includes(0)) state.badges.push(0);
-        if(state.months >= 12 && !state.badges.includes(1)) state.badges.push(1);
-        if(state.years >= 10 && !state.badges.includes(5)) state.badges.push(5);
-    };
+    checkBadges(currentHS) {
+        if(this.state.months >= 1 && !this.state.badges.includes(0)) this.state.badges.push(0);
+        if(this.state.years >= 1 && !this.state.badges.includes(1)) this.state.badges.push(1);
+        if(currentHS > 20 && !this.state.badges.includes(2)) this.state.badges.push(2); // Badge "Feu" si bcp d'HS
+        if(this.state.years >= 10 && !this.state.badges.includes(5)) this.state.badges.push(5);
+    },
 
-    const render = () => {
-        const lDisplay = document.getElementById('league-display');
-        lDisplay.className = `league-banner l-${state.league}`;
-        lDisplay.innerText = `Ligue ${state.league}`;
+    render() {
+        document.getElementById('stat-xp').innerText = Math.floor(this.state.xp);
+        document.getElementById('stat-m').innerText = this.state.months;
+        document.getElementById('stat-y').innerText = this.state.years;
+        document.getElementById('stat-total-hs').innerText = this.state.totalHS.toFixed(1);
         
-        document.getElementById('stat-xp').innerText = state.xp;
-        document.getElementById('stat-years').innerText = state.years;
-        
-        // Mur des trophées
+        const b = document.getElementById('league-banner');
+        b.className = `league-header l-${this.state.league}`;
+        b.innerText = `Ligue ${this.state.league}`;
+
         const wall = document.getElementById('trophy-wall');
         wall.innerHTML = '';
         TROPHIES.forEach(t => {
-            const active = state.badges.includes(t.id) ? 'unlocked' : '';
-            wall.innerHTML += `<div class="trophy ${active}" title="${t.name}">${t.icon}</div>`;
+            const unlocked = this.state.badges.includes(t.id) ? 'unlocked' : '';
+            wall.innerHTML += `<div class="trophy ${unlocked}">${t.icon}</div>`;
         });
 
-        // Conseil
-        const s = KNOWLEDGE_BASE[Math.floor(Math.random() * KNOWLEDGE_BASE.knowledge_base_length || KNOWLEDGE_BASE.length)];
+        const s = DATABASE[Math.floor(Math.random() * DATABASE.length)];
         document.getElementById('adv-title').innerText = `${s.t} : ${s.h}`;
         document.getElementById('adv-text').innerText = s.c;
-        document.getElementById('adv-ref').innerText = `RÉF: ${s.r}`;
+        document.getElementById('adv-ref').innerText = `RÉFÉRENCE : ${s.r}`;
 
-        updateGraph();
-    };
+        const path = document.getElementById('graph-line');
+        const d = this.state.history.map((y, i) => `${i * 40} ${y}`).join(' L ');
+        path.setAttribute('d', `M ${d}`);
+    },
 
-    const log = (m) => {
-        const c = document.getElementById('log-console');
-        c.innerHTML += `> ${m}<br>`;
+    log(m) {
+        const c = document.getElementById('console');
+        c.innerHTML += `> [${new Date().toLocaleTimeString()}] ${m}<br>`;
         c.scrollTop = c.scrollHeight;
-    };
+    },
 
-    return { process, fullSimulation, init: render };
-})();
+    save() { localStorage.setItem('PAIE_HS_V9', JSON.stringify(this.state)); }
+};
 
-window.onload = Core.init;
+window.onload = () => App.init();
 </script>
 </body>
 </html>
