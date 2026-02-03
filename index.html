@@ -1,212 +1,402 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>PAIE PERFORMANCE SYSTEM - HOURS ONLY EDITION</title>
-    <style>
-        :root {
-            --bg: #010409; --panel: #0d1117; --border: #30363d;
-            --text: #c9d1d9; --accent: #58a6ff; --gold: #d29922;
-            --bronze: #8b4513; --legend: #ab7df8; --success: #238636;
-        }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
-        
-        #sidebar { width: 400px; background: var(--panel); border-right: 1px solid var(--border); padding: 25px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; }
-        #main { flex: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 25px; }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Barre XP - PWA Gamification</title>
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --track:#e9eef6;
+      --fill-start:#ffb347;
+      --fill-end:#ff7b7b;
+      --accent:#0078d4;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --success:#2a7f62;
+      --gold:#ffd700;
+      font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    }
 
-        .league-header { padding: 25px; border-radius: 12px; text-align: center; font-size: 28px; font-weight: 900; text-transform: uppercase; border: 2px solid rgba(255,255,255,0.1); }
-        .l-bronze { background: linear-gradient(135deg, #3d2311, #8b4513); }
-        .l-silver { background: linear-gradient(135deg, #2c2c2c, #c0c0c0); color: #000; }
-        .l-gold { background: linear-gradient(135deg, #bf953f, #fcf6ba); color: #000; }
-        .l-legend { background: linear-gradient(135deg, #1a1c2c, #ab7df8); box-shadow: 0 0 20px var(--legend); }
+    body{
+      margin:0;
+      min-height:100vh;
+      background:linear-gradient(180deg,#f8fbff 0%,var(--bg) 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      color:#0f1724;
+    }
 
-        .card { background: #161b22; border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-        label { display: block; font-size: 11px; color: #8b949e; text-transform: uppercase; margin-bottom: 5px; font-weight: bold; }
-        input { width: 100%; background: #010409; border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 8px; font-size: 16px; margin-bottom: 15px; }
-        
-        .btn { width: 100%; padding: 15px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-bottom: 10px; transition: 0.2s; }
-        .btn-calc { background: var(--success); color: white; }
-        .btn-sim { background: var(--accent); color: white; }
+    .container{
+      width:100%;
+      max-width:760px;
+      background:var(--card);
+      border-radius:14px;
+      box-shadow:0 8px 30px rgba(12,20,40,0.08);
+      padding:18px;
+      box-sizing:border-box;
+    }
 
-        #graph-box { width: 100%; height: 120px; background: #000; border-radius: 8px; border: 1px solid var(--border); margin-top: 10px; }
-        .graph-path { fill: none; stroke: var(--accent); stroke-width: 3; transition: 1s; }
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
 
-        .trophy-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-        .trophy { aspect-ratio: 1; background: #21262d; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; opacity: 0.1; filter: grayscale(1); transition: 0.5s; }
-        .trophy.unlocked { opacity: 1; filter: grayscale(0); border: 1px solid var(--gold); background: #30363d; }
+    .level{
+      display:flex;
+      flex-direction:column;
+    }
+    .level .label{ font-size:13px; color:var(--muted); }
+    .level .value{ font-weight:700; font-size:18px; }
 
-        #console { background: #000; color: #3fb950; font-family: 'Consolas', monospace; padding: 15px; border-radius: 8px; height: 150px; overflow-y: auto; font-size: 11px; border: 1px solid var(--border); }
-    </style>
+    .xp-info{ font-weight:600; color:var(--muted); }
+
+    /* Track */
+    .xp-track{
+      position:relative;
+      height:44px;
+      background:var(--track);
+      border-radius:22px;
+      overflow:hidden;
+      margin-bottom:10px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    .xp-fill{
+      position:absolute;
+      left:0; top:0; bottom:0;
+      width:0%;
+      background:linear-gradient(90deg,var(--fill-start),var(--fill-end));
+      transition:width 900ms cubic-bezier(.2,.9,.3,1);
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      padding-right:12px;
+      color:#fff;
+      font-weight:700;
+      text-shadow:0 1px 2px rgba(0,0,0,0.18);
+    }
+
+    .xp-percent{
+      position:absolute;
+      right:12px;
+      top:8px;
+      font-weight:700;
+      color:#fff;
+      text-shadow:0 1px 2px rgba(0,0,0,0.18);
+      pointer-events:none;
+    }
+
+    /* Milestones */
+    .milestone{
+      position:absolute;
+      top:0;
+      width:6px;
+      height:100%;
+      transform:translateX(-50%);
+      background:rgba(255,255,255,0.6);
+      box-shadow:inset 0 0 0 2px rgba(0,0,0,0.03);
+      border-radius:3px;
+    }
+    .milestone.reached{ background:var(--gold); box-shadow:0 0 8px rgba(255,215,0,0.25); }
+
+    .footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .btn{
+      background:var(--accent);
+      color:#fff;
+      border:none;
+      padding:8px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .btn.secondary{
+      background:#eef2f8;
+      color:var(--accent);
+      border:1px solid rgba(0,120,212,0.08);
+    }
+
+    /* Popup */
+    .popup-backdrop{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(6,12,24,0.35);
+      z-index:1200;
+    }
+    .popup{
+      width:360px;
+      max-width:92%;
+      background:var(--card);
+      border-radius:12px;
+      padding:14px;
+      box-shadow:0 18px 40px rgba(6,12,24,0.25);
+      color:#0f1724;
+    }
+    .popup h3{ margin:0 0 8px 0; font-size:16px; }
+    .popup p{ margin:6px 0; color:var(--muted); font-size:14px; line-height:1.35; }
+    .badge-chip{
+      display:inline-block;
+      margin-top:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:linear-gradient(90deg,#f0f7ff,#eaf8f1);
+      color:var(--success);
+      font-weight:700;
+      font-size:13px;
+    }
+    .popup .actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:12px; }
+
+    /* small */
+    @media (max-width:480px){
+      .xp-track{ height:36px; }
+      .xp-fill{ padding-right:8px; }
+      .header{ gap:8px; flex-direction:column; align-items:flex-start; }
+    }
+  </style>
 </head>
 <body>
-
-<aside id="sidebar">
-    <div id="league-banner" class="league-header l-bronze">Ligue Bronze</div>
-    
-    <div class="card">
-        <label>Volume Heures Supplémentaires</label>
-        <input type="number" id="hs-input" placeholder="Nombre d'heures" value="0">
-        
-        <button class="btn btn-calc" onclick="App.process()">Enregistrer le Mois</button>
-        <button class="btn btn-sim" onclick="App.simulateTenYears()">Simuler Carrière (10 ans)</button>
+  <div class="container" id="app">
+    <div class="header">
+      <div class="level">
+        <div class="label">Niveau</div>
+        <div class="value" id="levelValue">3</div>
+      </div>
+      <div class="xp-info" id="xpInfo">120 XP / 200 XP</div>
     </div>
 
-    <div class="card">
-        <label>Productivité (Courbe HS)</label>
-        <svg id="graph-box" viewBox="0 0 400 120">
-            <path id="graph-line" class="graph-path" d="M 0 120 L 400 120" />
-        </svg>
+    <div class="xp-track" id="xpTrack" role="progressbar" aria-label="Progression vers le niveau suivant" aria-valuemin="0" aria-valuemax="200" aria-valuenow="120" tabindex="0">
+      <div class="xp-fill" id="xpFill" aria-hidden="true"></div>
+      <div class="xp-percent" id="xpPercent">60%</div>
+      <!-- Milestones will be injected here -->
     </div>
 
-    <div class="card">
-        <p>Ancienneté : <span id="stat-y">0</span> ans / <span id="stat-m">0</span> mois</p>
-        <p>Cumul HS : <span id="stat-total-hs">0</span> h</p>
-        <p>XP Système : <span id="stat-xp">0</span></p>
+    <div class="footer">
+      <div>
+        <button class="btn" id="addXpBtn">+ Ajouter 10 XP</button>
+        <button class="btn secondary" id="simulateBtn">Simuler saisie d'heures</button>
+      </div>
+      <div>
+        <button class="btn secondary" id="adviceBtn">Conseil</button>
+      </div>
     </div>
-</aside>
+  </div>
 
-<main id="main">
-    <div class="card" style="border-left: 10px solid var(--gold);">
-        <h2 id="adv-title" style="margin:0; color:var(--gold);">Analyse Juridique</h2>
-        <p id="adv-text" style="font-size: 18px; line-height: 1.5;">Saisissez vos heures supplémentaires pour débloquer les conseils.</p>
-        <small id="adv-ref" style="color: var(--accent);"></small>
+  <!-- Popup template (hidden by default) -->
+  <template id="popupTpl">
+    <div class="popup-backdrop" role="dialog" aria-modal="true">
+      <div class="popup">
+        <h3 class="popup-title"></h3>
+        <p class="popup-legal"></p>
+        <p class="popup-well"></p>
+        <div class="badge-chip" style="display:none;"></div>
+        <div class="actions">
+          <button class="btn secondary close-btn">Fermer</button>
+        </div>
+      </div>
     </div>
+  </template>
 
-    <div class="card">
-        <label>Réalisations Débloquées</label>
-        <div class="trophy-grid" id="trophy-wall"></div>
-    </div>
+  <script>
+    // Simple XP bar logic with milestones, level up and advice popup.
+    (function(){
+      // Config (could come from backend)
+      const xpForNextLevel = 200;
+      const milestones = [40, 80, 120, 160]; // XP thresholds visible on bar
+      const levelStart = 3;
 
-    <div id="console"></div>
-</main>
+      // State
+      let currentXp = 120;
+      let level = levelStart;
 
-<script>
-/**
- * BASE DE CONNAISSANCES TECHNIQUE (SANS MONTANTS)
- */
-const DATABASE = [
-    { t: "JURIDIQUE", h: "Majoration HS", c: "Les heures supplémentaires au-delà de 35h ouvrent droit à un repos compensateur ou une majoration.", r: "L3121-36" },
-    { t: "BIEN-ÊTRE", h: "Gestion Fatigue", c: "Sois pas trop fatigué, pense à toi : trop d'heures sup impactent la vigilance en paie.", r: "Note Perso" },
-    { t: "JURIDIQUE", h: "Contingent Annuel", c: "Dans le Commerce de Gros, le contingent annuel d'heures sup est fixé à 220h.", r: "Accord Branche" },
-    { t: "JURIDIQUE", h: "Repos Obligatoire", c: "Toute heure sup effectuée au-delà du contingent ouvre droit à une contrepartie en repos.", r: "L3121-30" },
-    { t: "BIEN-ÊTRE", h: "Déconnexion", c: "Même avec un gros volume d'heures, respecte tes 11h de repos quotidien.", r: "Santé Travail" },
-    { t: "JURIDIQUE", h: "Ancienneté", c: "Votre ancienneté dans l'entreprise se calcule de date à date, incluant les périodes de suspension.", r: "Code Travail" },
-    { t: "JURIDIQUE", h: "Heures de Nuit", c: "Le travail de nuit est encadré : il nécessite des contreparties en repos ou majoration.", r: "CCN Gros" },
-    { t: "BIEN-ÊTRE", h: "Ergonomie", c: "Vérifie l'assise de ton siège après une longue série d'heures supplémentaires.", r: "Note Perso" },
-    { t: "JURIDIQUE", h: "Dépassement", c: "La durée hebdomadaire absolue ne peut pas dépasser 48h sur une seule semaine.", r: "L3121-20" },
-    { t: "JURIDIQUE", h: "Moyenne 12 sem.", c: "La durée hebdomadaire moyenne ne peut pas dépasser 44h sur 12 semaines consécutives.", r: "L3121-22" },
-    { t: "JURIDIQUE", h: "Pause Légale", c: "Dès que le temps de travail atteint 6h, une pause de 20 minutes est obligatoire.", r: "L3121-16" },
-    { t: "JURIDIQUE", h: "HS & Congés", c: "Les heures supplémentaires sont prises en compte pour le calcul de l'indemnité de congés payés.", r: "Règle du 10ème" },
-    { t: "BIEN-ÊTRE", h: "Récupération", c: "Utilise tes repos compensateurs pour maintenir ton efficacité sur le long terme.", r: "Note Perso" }
-];
+      // Elements
+      const xpFill = document.getElementById('xpFill');
+      const xpPercent = document.getElementById('xpPercent');
+      const xpInfo = document.getElementById('xpInfo');
+      const levelValue = document.getElementById('levelValue');
+      const xpTrack = document.getElementById('xpTrack');
+      const addXpBtn = document.getElementById('addXpBtn');
+      const simulateBtn = document.getElementById('simulateBtn');
+      const adviceBtn = document.getElementById('adviceBtn');
+      const popupTpl = document.getElementById('popupTpl');
 
-const TROPHIES = [
-    {id:0, icon:'🐣'}, {id:1, icon:'📅'}, {id:2, icon:'🔥'}, {id:3, icon:'🤝'}, {id:4, icon:'💎'},
-    {id:5, icon:'👑'}, {id:6, icon:'💼'}, {id:7, icon:'⚡'}, {id:8, icon:'🌙'}, {id:9, icon:'🛡️'}
-];
-
-const App = {
-    state: { xp: 0, months: 0, years: 0, totalHS: 0, badges: [], league: 'bronze', history: [120] },
-
-    init() {
-        const saved = localStorage.getItem('PAIE_HS_V9');
-        if(saved) this.state = JSON.parse(saved);
-        this.render();
-        this.log("SYSTEME INITIALISÉ : MODE HEURES SUP UNIQUEMENT.");
-    },
-
-    process() {
-        const hs = parseFloat(document.getElementById('hs-input').value) || 0;
-        
-        this.state.months++;
-        this.state.totalHS += hs;
-        this.state.xp += 50 + (hs * 2); // L'XP augmente plus vite avec les HS
-        this.state.years = Math.floor(this.state.months / 12);
-        
-        // Graphique basé sur le volume HS mensuel
-        this.state.history.push(120 - (Math.min(hs * 3, 110)));
-        if(this.state.history.length > 10) this.state.history.shift();
-
-        this.checkLeagues();
-        this.checkBadges(hs);
-        this.render();
-        this.save();
-        this.log(`Mois enregistré. +${hs}h supplémentaires. Total: ${this.state.totalHS}h`);
-    },
-
-    async simulateTenYears() {
-        this.log("SIMULATION DÉCENNALE EN COURS...");
-        for(let i=1; i<=120; i++) {
-            const hsAlea = Math.floor(Math.random() * 20); // Simule entre 0 et 20h sup par mois
-            this.state.months++;
-            this.state.totalHS += hsAlea;
-            this.state.xp += 60 + (hsAlea * 2);
-            this.state.years = Math.floor(this.state.months / 12);
-            
-            this.state.history.push(120 - (Math.min(hsAlea * 3, 110)));
-            if(this.state.history.length > 10) this.state.history.shift();
-            
-            this.checkLeagues();
-            this.checkBadges(hsAlea);
-            if(i % 12 === 0) {
-                this.render();
-                await new Promise(r => setTimeout(r, 40));
-            }
+      // Initialize UI
+      function renderBar(animate=true){
+        const percent = Math.max(0, Math.min(100, Math.round((currentXp / xpForNextLevel) * 100)));
+        if(animate){
+          // trigger CSS transition
+          requestAnimationFrame(()=> xpFill.style.width = percent + '%');
+        } else {
+          xpFill.style.transition = 'none';
+          xpFill.style.width = percent + '%';
+          // restore transition
+          setTimeout(()=> xpFill.style.transition = '', 20);
         }
-        this.save();
-        this.log("SIMULATION TERMINÉE. RANG LÉGENDE ATTEINT.");
-    },
+        xpPercent.textContent = percent + '%';
+        xpInfo.textContent = `${currentXp} XP / ${xpForNextLevel} XP`;
+        xpTrack.setAttribute('aria-valuenow', String(currentXp));
+        levelValue.textContent = level;
+        // render milestones
+        renderMilestones();
+      }
 
-    checkLeagues() {
-        if(this.state.xp > 1500) this.state.league = 'silver';
-        if(this.state.xp > 6000) this.state.league = 'gold';
-        if(this.state.xp > 15000) this.state.league = 'legend';
-    },
+      function renderMilestones(){
+        // remove existing milestone nodes
+        const existing = xpTrack.querySelectorAll('.milestone');
+        existing.forEach(n => n.remove());
+        milestones.forEach(ms => {
+          const left = Math.min(100, Math.round((ms / xpForNextLevel) * 100));
+          const div = document.createElement('div');
+          div.className = 'milestone' + (currentXp >= ms ? ' reached' : '');
+          div.style.left = left + '%';
+          div.title = `Palier ${ms} XP`;
+          xpTrack.appendChild(div);
+        });
+      }
 
-    checkBadges(currentHS) {
-        if(this.state.months >= 1 && !this.state.badges.includes(0)) this.state.badges.push(0);
-        if(this.state.years >= 1 && !this.state.badges.includes(1)) this.state.badges.push(1);
-        if(currentHS > 20 && !this.state.badges.includes(2)) this.state.badges.push(2); // Badge "Feu" si bcp d'HS
-        if(this.state.years >= 10 && !this.state.badges.includes(5)) this.state.badges.push(5);
-    },
+      // Advice fetcher (stub). In production, call backend endpoint POST /api/advice/trigger
+      async function fetchAdvice({ trigger, meta }){
+        // Simulate logic: return different messages based on trigger/meta
+        // Keep messages short: 1 legal sentence + 1 wellbeing sentence
+        await new Promise(r => setTimeout(r, 220)); // simulate latency
+        if(trigger === 'level_up'){
+          return {
+            title: `Niveau ${level} atteint !`,
+            legal: `Rappel: la durée légale est de 35 h/semaine; vérifiez la validation RH pour la paie.`,
+            wellbeing: `Félicitations — pensez à prendre une pause de 20 minutes pour récupérer.`,
+            badge: `Ligue ${Math.min(10, Math.ceil(level/1))}`
+          };
+        }
+        if(trigger === 'milestone'){
+          const ms = meta;
+          if(ms >= 160){
+            return {
+              title: `Palier ${ms} franchi`,
+              legal: `Alerte: vous approchez des seuils de plafond; contactez RH si nécessaire.`,
+              wellbeing: `Essayez une micro-pause de 10 minutes et hydratez-vous.`,
+              badge: `Endurance ${ms}`
+            };
+          }
+          return {
+            title: `Palier ${ms} atteint`,
+            legal: `Les heures supplémentaires doivent être tracées et validées pour la paie.`,
+            wellbeing: `Respirez profondément 3 fois et faites une courte marche.`,
+            badge: `Palier ${ms}`
+          };
+        }
+        // manual check or default
+        return {
+          title: `Conseil rapide`,
+          legal: `Conservez un historique horodaté; la validation manager est requise pour l'export paie.`,
+          wellbeing: `Si vous travaillez tard, limitez l'écran 30 minutes avant le coucher.`,
+          badge: null
+        };
+      }
 
-    render() {
-        document.getElementById('stat-xp').innerText = Math.floor(this.state.xp);
-        document.getElementById('stat-m').innerText = this.state.months;
-        document.getElementById('stat-y').innerText = this.state.years;
-        document.getElementById('stat-total-hs').innerText = this.state.totalHS.toFixed(1);
-        
-        const b = document.getElementById('league-banner');
-        b.className = `league-header l-${this.state.league}`;
-        b.innerText = `Ligue ${this.state.league}`;
+      // Popup helper
+      function showPopup(advice){
+        const tpl = popupTpl.content.cloneNode(true);
+        const backdrop = tpl.querySelector('.popup-backdrop');
+        const title = tpl.querySelector('.popup-title');
+        const legal = tpl.querySelector('.popup-legal');
+        const well = tpl.querySelector('.popup-well');
+        const badgeChip = tpl.querySelector('.badge-chip');
+        const closeBtn = tpl.querySelector('.close-btn');
 
-        const wall = document.getElementById('trophy-wall');
-        wall.innerHTML = '';
-        TROPHIES.forEach(t => {
-            const unlocked = this.state.badges.includes(t.id) ? 'unlocked' : '';
-            wall.innerHTML += `<div class="trophy ${unlocked}">${t.icon}</div>`;
+        title.textContent = advice.title || 'Conseil';
+        legal.textContent = advice.legal || '';
+        well.textContent = advice.wellbeing || '';
+        if(advice.badge){
+          badgeChip.style.display = 'inline-block';
+          badgeChip.textContent = 'Badge débloqué: ' + advice.badge;
+        } else {
+          badgeChip.style.display = 'none';
+        }
+
+        closeBtn.addEventListener('click', ()=> {
+          backdrop.remove();
         });
 
-        const s = DATABASE[Math.floor(Math.random() * DATABASE.length)];
-        document.getElementById('adv-title').innerText = `${s.t} : ${s.h}`;
-        document.getElementById('adv-text').innerText = s.c;
-        document.getElementById('adv-ref').innerText = `RÉFÉRENCE : ${s.r}`;
+        // close on backdrop click
+        backdrop.addEventListener('click', (e)=>{
+          if(e.target === backdrop) backdrop.remove();
+        });
 
-        const path = document.getElementById('graph-line');
-        const d = this.state.history.map((y, i) => `${i * 40} ${y}`).join(' L ');
-        path.setAttribute('d', `M ${d}`);
-    },
+        document.body.appendChild(backdrop);
+        // focus for accessibility
+        closeBtn.focus();
+      }
 
-    log(m) {
-        const c = document.getElementById('console');
-        c.innerHTML += `> [${new Date().toLocaleTimeString()}] ${m}<br>`;
-        c.scrollTop = c.scrollHeight;
-    },
+      // Event handlers
+      addXpBtn.addEventListener('click', async ()=>{
+        // Add 10 XP and check milestones/level up
+        const prevXp = currentXp;
+        currentXp = Math.min(xpForNextLevel * 2, currentXp + 10); // allow overflow for demo
+        renderBar(true);
 
-    save() { localStorage.setItem('PAIE_HS_V9', JSON.stringify(this.state)); }
-};
+        // detect milestones crossed
+        milestones.forEach(ms => {
+          if(prevXp < ms && currentXp >= ms){
+            // milestone crossed
+            fetchAdvice({ trigger:'milestone', meta:ms }).then(showPopup);
+          }
+        });
 
-window.onload = () => App.init();
-</script>
+        // detect level up
+        if(prevXp < xpForNextLevel && currentXp >= xpForNextLevel){
+          level += 1;
+          // reset XP for next level demo (or subtract xpForNextLevel)
+          currentXp = currentXp - xpForNextLevel;
+          renderBar(true);
+          fetchAdvice({ trigger:'level_up' }).then(showPopup);
+        }
+      });
+
+      simulateBtn.addEventListener('click', async ()=>{
+        // Simulate a timesheet submission scenario: e.g., user logged 2h overtime at night
+        // For demo, add 20 XP and show a tailored advice
+        const prevXp = currentXp;
+        currentXp = Math.min(xpForNextLevel * 2, currentXp + 20);
+        renderBar(true);
+
+        // If crossing a high threshold, escalate
+        if(prevXp < 160 && currentXp >= 160){
+          fetchAdvice({ trigger:'milestone', meta:160 }).then(showPopup);
+        } else {
+          fetchAdvice({ trigger:'manual', meta:{hours:2, time:'22:30'} }).then(showPopup);
+        }
+      });
+
+      adviceBtn.addEventListener('click', async ()=>{
+        const advice = await fetchAdvice({ trigger:'manual' });
+        showPopup(advice);
+      });
+
+      // Keyboard accessibility: space/enter on track opens advice
+      xpTrack.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          adviceBtn.click();
+        }
+      });
+
+      // Initial render
+      renderBar(false);
+    })();
+  </script>
 </body>
 </html>
