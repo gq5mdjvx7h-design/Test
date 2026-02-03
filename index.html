@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Scénarios & alertes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{background:#0f1115;color:#e6e6e6;font-family:Arial;margin:0}
+.scenario-card{background:#1c1f26;margin:10px;padding:12px;border-radius:10px}
+.info{border-left:4px solid #6c757d}
+.warning{border-left:4px solid #f39c12}
+.critical{border-left:4px solid #c0392b}
+</style>
+</head>
+<body>
+<h1 style="text-align:center">Scénarios & alertes</h1>
+<div id="scenarioList"></div>
+<div style="padding:10px">
+  <label>HS mensuelles :
+    <input type="number" id="mhs" value="12">
+  </label>
+  <br><br>
+  <label>HS annuelles :
+    <input type="number" id="ahs" value="180">
+  </label>
+  <br><br>
+  <button onclick="reload()">Tester</button>
+</div>
+
+<script>
+const MONTHLY_DATA={totalHS:12};
+const ANNUAL_DATA={yearTotal:180};
+
+const MONTHLY_SCENARIOS=[
+{
+  level:"info",
+  title:"Scénario paie mensuelle #1",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=1,
+  message:d=>`Analyse mensuelle #1 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #2",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=2,
+  message:d=>`Analyse mensuelle #2 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #3",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=3,
+  message:d=>`Analyse mensuelle #3 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #4",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=4,
+  message:d=>`Analyse mensuelle #4 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #5",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=5,
+  message:d=>`Analyse mensuelle #5 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #6",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=6,
+  message:d=>`Analyse mensuelle #6 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #7",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=7,
+  message:d=>`Analyse mensuelle #7 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #8",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=8,
+  message:d=>`Analyse mensuelle #8 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #9",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=9,
+  message:d=>`Analyse mensuelle #9 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #10",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=0,
+  message:d=>`Analyse mensuelle #10 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #11",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=1,
+  message:d=>`Analyse mensuelle #11 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #12",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=2,
+  message:d=>`Analyse mensuelle #12 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #13",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=3,
+  message:d=>`Analyse mensuelle #13 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #14",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=4,
+  message:d=>`Analyse mensuelle #14 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #15",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=5,
+  message:d=>`Analyse mensuelle #15 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #16",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=6,
+  message:d=>`Analyse mensuelle #16 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #17",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=7,
+  message:d=>`Analyse mensuelle #17 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #18",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=8,
+  message:d=>`Analyse mensuelle #18 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #19",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=9,
+  message:d=>`Analyse mensuelle #19 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #20",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=0,
+  message:d=>`Analyse mensuelle #20 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #21",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=1,
+  message:d=>`Analyse mensuelle #21 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #22",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=2,
+  message:d=>`Analyse mensuelle #22 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #23",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=3,
+  message:d=>`Analyse mensuelle #23 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #24",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=4,
+  message:d=>`Analyse mensuelle #24 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #25",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=5,
+  message:d=>`Analyse mensuelle #25 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #26",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=6,
+  message:d=>`Analyse mensuelle #26 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #27",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=7,
+  message:d=>`Analyse mensuelle #27 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #28",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=8,
+  message:d=>`Analyse mensuelle #28 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #29",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=9,
+  message:d=>`Analyse mensuelle #29 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #30",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=0,
+  message:d=>`Analyse mensuelle #30 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #31",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=1,
+  message:d=>`Analyse mensuelle #31 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #32",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=2,
+  message:d=>`Analyse mensuelle #32 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"info",
+  title:"Scénario paie mensuelle #33",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=3,
+  message:d=>`Analyse mensuelle #33 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #34",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=4,
+  message:d=>`Analyse mensuelle #34 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #35",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=5,
+  message:d=>`Analyse mensuelle #35 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #36",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=6,
+  message:d=>`Analyse mensuelle #36 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #37",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=7,
+  message:d=>`Analyse mensuelle #37 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #38",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=8,
+  message:d=>`Analyse mensuelle #38 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #39",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=9,
+  message:d=>`Analyse mensuelle #39 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #40",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=0,
+  message:d=>`Analyse mensuelle #40 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #41",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=1,
+  message:d=>`Analyse mensuelle #41 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #42",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=2,
+  message:d=>`Analyse mensuelle #42 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #43",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=3,
+  message:d=>`Analyse mensuelle #43 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #44",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=4,
+  message:d=>`Analyse mensuelle #44 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #45",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=5,
+  message:d=>`Analyse mensuelle #45 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #46",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=6,
+  message:d=>`Analyse mensuelle #46 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #47",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=7,
+  message:d=>`Analyse mensuelle #47 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #48",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=8,
+  message:d=>`Analyse mensuelle #48 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #49",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=9,
+  message:d=>`Analyse mensuelle #49 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #50",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=0,
+  message:d=>`Analyse mensuelle #50 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #51",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=1,
+  message:d=>`Analyse mensuelle #51 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #52",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=2,
+  message:d=>`Analyse mensuelle #52 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #53",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=3,
+  message:d=>`Analyse mensuelle #53 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #54",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=4,
+  message:d=>`Analyse mensuelle #54 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #55",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=5,
+  message:d=>`Analyse mensuelle #55 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #56",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=6,
+  message:d=>`Analyse mensuelle #56 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #57",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=7,
+  message:d=>`Analyse mensuelle #57 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #58",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=8,
+  message:d=>`Analyse mensuelle #58 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #59",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=9,
+  message:d=>`Analyse mensuelle #59 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #60",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=0,
+  message:d=>`Analyse mensuelle #60 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #61",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=1,
+  message:d=>`Analyse mensuelle #61 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #62",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=2,
+  message:d=>`Analyse mensuelle #62 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #63",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=3,
+  message:d=>`Analyse mensuelle #63 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #64",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=4,
+  message:d=>`Analyse mensuelle #64 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #65",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=5,
+  message:d=>`Analyse mensuelle #65 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"warning",
+  title:"Scénario paie mensuelle #66",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=6,
+  message:d=>`Analyse mensuelle #66 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #67",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=7,
+  message:d=>`Analyse mensuelle #67 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #68",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=8,
+  message:d=>`Analyse mensuelle #68 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #69",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=9,
+  message:d=>`Analyse mensuelle #69 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #70",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=0,
+  message:d=>`Analyse mensuelle #70 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #71",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=1,
+  message:d=>`Analyse mensuelle #71 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #72",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=2,
+  message:d=>`Analyse mensuelle #72 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #73",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=3,
+  message:d=>`Analyse mensuelle #73 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #74",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=4,
+  message:d=>`Analyse mensuelle #74 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #75",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=5,
+  message:d=>`Analyse mensuelle #75 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #76",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=6,
+  message:d=>`Analyse mensuelle #76 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #77",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=7,
+  message:d=>`Analyse mensuelle #77 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #78",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=8,
+  message:d=>`Analyse mensuelle #78 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #79",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=9,
+  message:d=>`Analyse mensuelle #79 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #80",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=0,
+  message:d=>`Analyse mensuelle #80 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #81",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=1,
+  message:d=>`Analyse mensuelle #81 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #82",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=2,
+  message:d=>`Analyse mensuelle #82 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #83",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=3,
+  message:d=>`Analyse mensuelle #83 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #84",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=4,
+  message:d=>`Analyse mensuelle #84 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #85",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=5,
+  message:d=>`Analyse mensuelle #85 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #86",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=6,
+  message:d=>`Analyse mensuelle #86 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #87",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=7,
+  message:d=>`Analyse mensuelle #87 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #88",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=8,
+  message:d=>`Analyse mensuelle #88 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #89",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=9,
+  message:d=>`Analyse mensuelle #89 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #90",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=0,
+  message:d=>`Analyse mensuelle #90 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #91",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=1,
+  message:d=>`Analyse mensuelle #91 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #92",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=2,
+  message:d=>`Analyse mensuelle #92 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #93",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=3,
+  message:d=>`Analyse mensuelle #93 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #94",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=4,
+  message:d=>`Analyse mensuelle #94 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #95",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=5,
+  message:d=>`Analyse mensuelle #95 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #96",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=6,
+  message:d=>`Analyse mensuelle #96 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #97",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=7,
+  message:d=>`Analyse mensuelle #97 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #98",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=8,
+  message:d=>`Analyse mensuelle #98 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #99",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=9,
+  message:d=>`Analyse mensuelle #99 : ${d.totalHS} h supplémentaires ce mois.`
+},
+{
+  level:"critical",
+  title:"Scénario paie mensuelle #100",
+  legal:"Code du travail – art. L3121-28 à L3121-36",
+  test:d=>d.totalHS>=0,
+  message:d=>`Analyse mensuelle #100 : ${d.totalHS} h supplémentaires ce mois.`
+}
+];
+
+const ANNUAL_SCENARIOS=[
+{
+  level:"info",
+  title:"Scénario compteur annuel #1",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=2,
+  message:d=>`Analyse annuelle #1 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #2",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=4,
+  message:d=>`Analyse annuelle #2 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #3",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=6,
+  message:d=>`Analyse annuelle #3 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #4",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=8,
+  message:d=>`Analyse annuelle #4 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #5",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=10,
+  message:d=>`Analyse annuelle #5 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #6",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=12,
+  message:d=>`Analyse annuelle #6 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #7",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=14,
+  message:d=>`Analyse annuelle #7 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #8",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=16,
+  message:d=>`Analyse annuelle #8 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #9",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=18,
+  message:d=>`Analyse annuelle #9 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #10",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=20,
+  message:d=>`Analyse annuelle #10 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #11",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=22,
+  message:d=>`Analyse annuelle #11 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #12",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=24,
+  message:d=>`Analyse annuelle #12 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #13",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=26,
+  message:d=>`Analyse annuelle #13 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #14",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=28,
+  message:d=>`Analyse annuelle #14 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #15",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=30,
+  message:d=>`Analyse annuelle #15 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #16",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=32,
+  message:d=>`Analyse annuelle #16 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #17",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=34,
+  message:d=>`Analyse annuelle #17 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #18",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=36,
+  message:d=>`Analyse annuelle #18 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #19",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=38,
+  message:d=>`Analyse annuelle #19 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #20",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=40,
+  message:d=>`Analyse annuelle #20 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #21",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=42,
+  message:d=>`Analyse annuelle #21 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #22",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=44,
+  message:d=>`Analyse annuelle #22 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #23",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=46,
+  message:d=>`Analyse annuelle #23 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #24",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=48,
+  message:d=>`Analyse annuelle #24 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #25",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=50,
+  message:d=>`Analyse annuelle #25 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #26",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=52,
+  message:d=>`Analyse annuelle #26 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #27",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=54,
+  message:d=>`Analyse annuelle #27 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #28",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=56,
+  message:d=>`Analyse annuelle #28 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #29",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=58,
+  message:d=>`Analyse annuelle #29 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #30",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=60,
+  message:d=>`Analyse annuelle #30 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #31",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=62,
+  message:d=>`Analyse annuelle #31 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #32",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=64,
+  message:d=>`Analyse annuelle #32 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"info",
+  title:"Scénario compteur annuel #33",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=66,
+  message:d=>`Analyse annuelle #33 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #34",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=68,
+  message:d=>`Analyse annuelle #34 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #35",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=70,
+  message:d=>`Analyse annuelle #35 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #36",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=72,
+  message:d=>`Analyse annuelle #36 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #37",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=74,
+  message:d=>`Analyse annuelle #37 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #38",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=76,
+  message:d=>`Analyse annuelle #38 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #39",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=78,
+  message:d=>`Analyse annuelle #39 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #40",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=80,
+  message:d=>`Analyse annuelle #40 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #41",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=82,
+  message:d=>`Analyse annuelle #41 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #42",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=84,
+  message:d=>`Analyse annuelle #42 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #43",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=86,
+  message:d=>`Analyse annuelle #43 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #44",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=88,
+  message:d=>`Analyse annuelle #44 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #45",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=90,
+  message:d=>`Analyse annuelle #45 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #46",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=92,
+  message:d=>`Analyse annuelle #46 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #47",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=94,
+  message:d=>`Analyse annuelle #47 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #48",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=96,
+  message:d=>`Analyse annuelle #48 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #49",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=98,
+  message:d=>`Analyse annuelle #49 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #50",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=100,
+  message:d=>`Analyse annuelle #50 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #51",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=102,
+  message:d=>`Analyse annuelle #51 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #52",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=104,
+  message:d=>`Analyse annuelle #52 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #53",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=106,
+  message:d=>`Analyse annuelle #53 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #54",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=108,
+  message:d=>`Analyse annuelle #54 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #55",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=110,
+  message:d=>`Analyse annuelle #55 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #56",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=112,
+  message:d=>`Analyse annuelle #56 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #57",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=114,
+  message:d=>`Analyse annuelle #57 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #58",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=116,
+  message:d=>`Analyse annuelle #58 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #59",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=118,
+  message:d=>`Analyse annuelle #59 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #60",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=120,
+  message:d=>`Analyse annuelle #60 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #61",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=122,
+  message:d=>`Analyse annuelle #61 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #62",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=124,
+  message:d=>`Analyse annuelle #62 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #63",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=126,
+  message:d=>`Analyse annuelle #63 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #64",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=128,
+  message:d=>`Analyse annuelle #64 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #65",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=130,
+  message:d=>`Analyse annuelle #65 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"warning",
+  title:"Scénario compteur annuel #66",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=132,
+  message:d=>`Analyse annuelle #66 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #67",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=134,
+  message:d=>`Analyse annuelle #67 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #68",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=136,
+  message:d=>`Analyse annuelle #68 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #69",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=138,
+  message:d=>`Analyse annuelle #69 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #70",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=140,
+  message:d=>`Analyse annuelle #70 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #71",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=142,
+  message:d=>`Analyse annuelle #71 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #72",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=144,
+  message:d=>`Analyse annuelle #72 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #73",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=146,
+  message:d=>`Analyse annuelle #73 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #74",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=148,
+  message:d=>`Analyse annuelle #74 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #75",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=150,
+  message:d=>`Analyse annuelle #75 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #76",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=152,
+  message:d=>`Analyse annuelle #76 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #77",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=154,
+  message:d=>`Analyse annuelle #77 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #78",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=156,
+  message:d=>`Analyse annuelle #78 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #79",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=158,
+  message:d=>`Analyse annuelle #79 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #80",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=160,
+  message:d=>`Analyse annuelle #80 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #81",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=162,
+  message:d=>`Analyse annuelle #81 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #82",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=164,
+  message:d=>`Analyse annuelle #82 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #83",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=166,
+  message:d=>`Analyse annuelle #83 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #84",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=168,
+  message:d=>`Analyse annuelle #84 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #85",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=170,
+  message:d=>`Analyse annuelle #85 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #86",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=172,
+  message:d=>`Analyse annuelle #86 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #87",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=174,
+  message:d=>`Analyse annuelle #87 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #88",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=176,
+  message:d=>`Analyse annuelle #88 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #89",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=178,
+  message:d=>`Analyse annuelle #89 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #90",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=180,
+  message:d=>`Analyse annuelle #90 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #91",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=182,
+  message:d=>`Analyse annuelle #91 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #92",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=184,
+  message:d=>`Analyse annuelle #92 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #93",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=186,
+  message:d=>`Analyse annuelle #93 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #94",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=188,
+  message:d=>`Analyse annuelle #94 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #95",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=190,
+  message:d=>`Analyse annuelle #95 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #96",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=192,
+  message:d=>`Analyse annuelle #96 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #97",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=194,
+  message:d=>`Analyse annuelle #97 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #98",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=196,
+  message:d=>`Analyse annuelle #98 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #99",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=198,
+  message:d=>`Analyse annuelle #99 : cumul annuel ${d.yearTotal} h.`
+},
+{
+  level:"critical",
+  title:"Scénario compteur annuel #100",
+  legal:"Code du travail – art. D3121-24",
+  test:d=>d.yearTotal>=200,
+  message:d=>`Analyse annuelle #100 : cumul annuel ${d.yearTotal} h.`
+}
+];
+
+function run(data, scenarios){
+ return scenarios.filter(s=>s.test(data)).map(s=>s);
+}
+
+const list=[
+ ...run(MONTHLY_DATA,MONTHLY_SCENARIOS),
+ ...run(ANNUAL_DATA,ANNUAL_SCENARIOS)
+];
+
+const root=document.getElementById("scenarioList");
+list.forEach(s=>{
+ const d=document.createElement("div");
+ d.className="scenario-card "+s.level;
+ const data = s.title.includes("annuel")
+  ? ANNUAL_DATA
+  : MONTHLY_DATA;
+
+d.innerHTML = `
+  <strong>${s.title}</strong><br>
+  ${s.message(data)}<br>
+  <small>${s.legal}</small>
+`;
+ root.appendChild(d);
+});
+function reload() {
+  const m = Number(document.getElementById("mhs").value);
+  const a = Number(document.getElementById("ahs").value);
+
+  MONTHLY_DATA.totalHS = m;
+  ANNUAL_DATA.yearTotal = a;
+
+  document.getElementById("scenarioList").innerHTML = "";
+  const list = [
+    ...run(MONTHLY_DATA, MONTHLY_SCENARIOS),
+    ...run(ANNUAL_DATA, ANNUAL_SCENARIOS)
+  ];
+
+  list.forEach(s => {
+    const d = document.createElement("div");
+    d.className = "scenario-card " + s.level;
+    const data = s.title.includes("annuel") ? ANNUAL_DATA : MONTHLY_DATA;
+    d.innerHTML = `
+      <strong>${s.title}</strong><br>
+      ${s.message(data)}<br>
+      <small>${s.legal}</small>
+    `;
+    scenarioList.appendChild(d);
+  });
+}
+</script>
+</body>
+</html>
