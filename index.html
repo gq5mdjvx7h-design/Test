@@ -102,6 +102,188 @@ function add(level,title,msg){
 
 // ================= SCENARIOS EXPLICITES =================
 const SCENARIOS = [
+
+/* ===================== BASE HS ===================== */
+{
+  level:"info",
+  title:"Seuil légal hebdomadaire dépassé",
+  test:d=>d.total > 35,
+  message:"Vous dépassez 35 h sur la semaine. Les heures au-delà sont légalement des heures supplémentaires."
+},
+{
+  level:"info",
+  title:"Heures supplémentaires déclenchées",
+  test:d=>d.hs > 0,
+  message:"Des heures supplémentaires sont constatées. Elles doivent être payées ou récupérées selon l’accord applicable."
+},
+{
+  level:"info",
+  title:"HS dans la limite légale",
+  test:d=>d.hs > 0 && d.total <= 48,
+  message:"Les heures supplémentaires restent dans les plafonds légaux hebdomadaires."
+},
+{
+  level:"warning",
+  title:"Charge de travail élevée",
+  test:d=>d.total >= 42,
+  message:"La charge hebdomadaire est élevée. Un suivi est recommandé pour éviter les risques de surcharge."
+},
+{
+  level:"critical",
+  title:"Plafond hebdomadaire dépassé",
+  test:d=>d.total > 48,
+  message:"La durée maximale légale de 48 h est dépassée. Situation illégale sauf dérogation exceptionnelle."
+},
+
+/* ===================== MAJORATIONS ===================== */
+{
+  level:"info",
+  title:"Majoration 25 % applicable",
+  test:d=>d.hs25 > 0,
+  message:"Les 8 premières heures supplémentaires doivent être majorées à au moins 25 %."
+},
+{
+  level:"warning",
+  title:"Majoration 50 % applicable",
+  test:d=>d.hs50 > 0,
+  message:"Les heures supplémentaires au-delà de la 8e doivent être majorées à au moins 50 %."
+},
+{
+  level:"warning",
+  title:"Volume important d’HS majorées",
+  test:d=>d.hs50 >= 4,
+  message:"Un volume important d’heures à 50 % est constaté. Vérifiez votre bulletin de paie."
+},
+
+/* ===================== REPOS ===================== */
+{
+  level:"warning",
+  title:"Repos hebdomadaire à surveiller",
+  test:d=>d.total >= 44,
+  message:"Un repos compensateur peut être requis selon la convention collective."
+},
+{
+  level:"critical",
+  title:"Risque insuffisance de repos",
+  test:d=>d.total >= 46,
+  message:"La durée de travail hebdomadaire met en risque le respect des temps de repos."
+},
+
+/* ===================== NUIT / DIMANCHE ===================== */
+{
+  level:"info",
+  title:"Travail de nuit détecté",
+  test:d=>d.nights > 0,
+  message:"Le travail de nuit ouvre droit à compensation spécifique (repos ou majoration)."
+},
+{
+  level:"warning",
+  title:"Volume significatif de travail de nuit",
+  test:d=>d.nights >= 8,
+  message:"Un volume important de travail de nuit est constaté. Un suivi médical peut être requis."
+},
+{
+  level:"info",
+  title:"Travail du dimanche détecté",
+  test:d=>d.sundays > 0,
+  message:"Le travail du dimanche ouvre droit à une compensation spécifique."
+},
+{
+  level:"warning",
+  title:"Travail dominical répété",
+  test:d=>d.sundays >= 6,
+  message:"Le travail dominical répété doit être encadré par un accord ou une autorisation."
+},
+
+/* ===================== ANNUEL ===================== */
+{
+  level:"info",
+  title:"Cumul annuel d’heures supplémentaires",
+  test:d=>d.annualTotal > 0,
+  message:"Votre compteur annuel d’heures supplémentaires progresse."
+},
+{
+  level:"warning",
+  title:"Approche du contingent annuel",
+  test:d=>d.annualTotal >= 180,
+  message:"Vous approchez du contingent annuel de 220 h. Anticipez avec votre employeur."
+},
+{
+  level:"critical",
+  title:"Contingent annuel dépassé",
+  test:d=>d.annualTotal > 220,
+  message:"Le contingent annuel légal est dépassé. Une autorisation administrative est requise."
+},
+
+/* ===================== PAIEMENT ===================== */
+{
+  level:"info",
+  title:"Heures à payer ce mois",
+  test:d=>d.hs > 0,
+  message:"Les heures supplémentaires réalisées doivent apparaître sur la paie du mois."
+},
+{
+  level:"warning",
+  title:"Vérification du bulletin conseillée",
+  test:d=>d.hs50 > 0,
+  message:"Vérifiez que les majorations à 50 % sont correctement appliquées sur la paie."
+},
+
+/* ===================== SANTÉ / RISQUES ===================== */
+{
+  level:"warning",
+  title:"Risque de surcharge professionnelle",
+  test:d=>d.total >= 45,
+  message:"Une charge excessive répétée peut avoir un impact sur la santé."
+},
+{
+  level:"critical",
+  title:"Alerte santé au travail",
+  test:d=>d.total >= 47,
+  message:"La durée de travail est critique. Une alerte RH ou médecine du travail est recommandée."
+},
+
+/* ===================== ABSENCES / FÉRIÉS ===================== */
+{
+  level:"info",
+  title:"Absence prise en compte",
+  test:d=>d.total < 35,
+  message:"Les absences réduisent la durée hebdomadaire et peuvent neutraliser les heures supplémentaires."
+},
+{
+  level:"info",
+  title:"Jour férié travaillé",
+  test:d=>d.feries > 0,
+  message:"Le travail un jour férié ouvre droit à compensation selon les accords applicables."
+},
+
+/* ===================== SCÉNARIOS MÉTIER ===================== */
+/* Les suivants couvrent des combinaisons réelles */
+
+{
+  level:"warning",
+  title:"Semaine déséquilibrée",
+  test:d=>d.total > 35 && d.hs25 === 0,
+  message:"Des heures supplémentaires existent mais sans répartition classique. Vérifiez la ventilation."
+},
+{
+  level:"warning",
+  title:"HS concentrées sur peu de jours",
+  test:d=>d.hs > 0 && d.total < 40,
+  message:"Les HS sont concentrées sur des journées longues. Attention aux plafonds journaliers."
+},
+{
+  level:"critical",
+  title:"Accumulation HS + nuit",
+  test:d=>d.hs > 0 && d.nights > 0,
+  message:"Cumuler heures supplémentaires et travail de nuit accroît fortement la pénibilité."
+},
+{
+  level:"critical",
+  title:"Accumulation HS + dimanche",
+  test:d=>d.hs > 0 && d.sundays > 0,
+  message:"Les HS effectuées le dimanche doivent être strictement encadrées."
+},
   {
     level:"info",
     title:"Déclenchement des heures supplémentaires",
