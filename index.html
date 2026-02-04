@@ -1,402 +1,289 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Barre XP - PWA Gamification</title>
-  <style>
-    :root{
-      --bg:#f6f8fb;
-      --track:#e9eef6;
-      --fill-start:#ffb347;
-      --fill-end:#ff7b7b;
-      --accent:#0078d4;
-      --muted:#6b7280;
-      --card:#ffffff;
-      --success:#2a7f62;
-      --gold:#ffd700;
-      font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
-    }
+<meta charset="UTF-8">
+<title>Module 3 – Moteur Heures Sup</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body{
-      margin:0;
-      min-height:100vh;
-      background:linear-gradient(180deg,#f8fbff 0%,var(--bg) 100%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-      color:#0f1724;
-    }
-
-    .container{
-      width:100%;
-      max-width:760px;
-      background:var(--card);
-      border-radius:14px;
-      box-shadow:0 8px 30px rgba(12,20,40,0.08);
-      padding:18px;
-      box-sizing:border-box;
-    }
-
-    .header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:12px;
-    }
-
-    .level{
-      display:flex;
-      flex-direction:column;
-    }
-    .level .label{ font-size:13px; color:var(--muted); }
-    .level .value{ font-weight:700; font-size:18px; }
-
-    .xp-info{ font-weight:600; color:var(--muted); }
-
-    /* Track */
-    .xp-track{
-      position:relative;
-      height:44px;
-      background:var(--track);
-      border-radius:22px;
-      overflow:hidden;
-      margin-bottom:10px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,0.6);
-    }
-
-    .xp-fill{
-      position:absolute;
-      left:0; top:0; bottom:0;
-      width:0%;
-      background:linear-gradient(90deg,var(--fill-start),var(--fill-end));
-      transition:width 900ms cubic-bezier(.2,.9,.3,1);
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      padding-right:12px;
-      color:#fff;
-      font-weight:700;
-      text-shadow:0 1px 2px rgba(0,0,0,0.18);
-    }
-
-    .xp-percent{
-      position:absolute;
-      right:12px;
-      top:8px;
-      font-weight:700;
-      color:#fff;
-      text-shadow:0 1px 2px rgba(0,0,0,0.18);
-      pointer-events:none;
-    }
-
-    /* Milestones */
-    .milestone{
-      position:absolute;
-      top:0;
-      width:6px;
-      height:100%;
-      transform:translateX(-50%);
-      background:rgba(255,255,255,0.6);
-      box-shadow:inset 0 0 0 2px rgba(0,0,0,0.03);
-      border-radius:3px;
-    }
-    .milestone.reached{ background:var(--gold); box-shadow:0 0 8px rgba(255,215,0,0.25); }
-
-    .footer{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-top:10px;
-    }
-
-    .btn{
-      background:var(--accent);
-      color:#fff;
-      border:none;
-      padding:8px 12px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:600;
-    }
-    .btn.secondary{
-      background:#eef2f8;
-      color:var(--accent);
-      border:1px solid rgba(0,120,212,0.08);
-    }
-
-    /* Popup */
-    .popup-backdrop{
-      position:fixed;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(6,12,24,0.35);
-      z-index:1200;
-    }
-    .popup{
-      width:360px;
-      max-width:92%;
-      background:var(--card);
-      border-radius:12px;
-      padding:14px;
-      box-shadow:0 18px 40px rgba(6,12,24,0.25);
-      color:#0f1724;
-    }
-    .popup h3{ margin:0 0 8px 0; font-size:16px; }
-    .popup p{ margin:6px 0; color:var(--muted); font-size:14px; line-height:1.35; }
-    .badge-chip{
-      display:inline-block;
-      margin-top:8px;
-      padding:6px 10px;
-      border-radius:999px;
-      background:linear-gradient(90deg,#f0f7ff,#eaf8f1);
-      color:var(--success);
-      font-weight:700;
-      font-size:13px;
-    }
-    .popup .actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:12px; }
-
-    /* small */
-    @media (max-width:480px){
-      .xp-track{ height:36px; }
-      .xp-fill{ padding-right:8px; }
-      .header{ gap:8px; flex-direction:column; align-items:flex-start; }
-    }
-  </style>
+<style>
+/* ===============================
+   UI / THEME
+================================ */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f1115;
+  color: #e6e6e6;
+}
+header {
+  background: #151922;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+section {
+  padding: 12px;
+}
+.card {
+  background: #1c1f26;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+label {
+  display: block;
+  margin-top: 8px;
+}
+input, select, button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: none;
+  box-sizing: border-box;
+}
+button {
+  background: #4FB3C2;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+.result {
+  font-size: 14px;
+  margin-top: 10px;
+}
+.hidden {
+  display: none;
+}
+.debug {
+  background: #2b0000;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+</style>
 </head>
+
 <body>
-  <div class="container" id="app">
-    <div class="header">
-      <div class="level">
-        <div class="label">Niveau</div>
-        <div class="value" id="levelValue">3</div>
-      </div>
-      <div class="xp-info" id="xpInfo">120 XP / 200 XP</div>
-    </div>
 
-    <div class="xp-track" id="xpTrack" role="progressbar" aria-label="Progression vers le niveau suivant" aria-valuemin="0" aria-valuemax="200" aria-valuenow="120" tabindex="0">
-      <div class="xp-fill" id="xpFill" aria-hidden="true"></div>
-      <div class="xp-percent" id="xpPercent">60%</div>
-      <!-- Milestones will be injected here -->
-    </div>
+<header>
+MODULE 3 – MOTEUR CENTRAL HEURES SUP
+</header>
 
-    <div class="footer">
-      <div>
-        <button class="btn" id="addXpBtn">+ Ajouter 10 XP</button>
-        <button class="btn secondary" id="simulateBtn">Simuler saisie d'heures</button>
-      </div>
-      <div>
-        <button class="btn secondary" id="adviceBtn">Conseil</button>
-      </div>
-    </div>
-  </div>
+<section>
 
-  <!-- Popup template (hidden by default) -->
-  <template id="popupTpl">
-    <div class="popup-backdrop" role="dialog" aria-modal="true">
-      <div class="popup">
-        <h3 class="popup-title"></h3>
-        <p class="popup-legal"></p>
-        <p class="popup-well"></p>
-        <div class="badge-chip" style="display:none;"></div>
-        <div class="actions">
-          <button class="btn secondary close-btn">Fermer</button>
-        </div>
-      </div>
-    </div>
-  </template>
+<!-- ===============================
+     MODE
+================================ -->
+<div class="card">
+  <label>Méthode de gestion
+    <select id="method">
+      <option value="monthly">Paie mensuelle</option>
+      <option value="annual">Compteur annuel</option>
+    </select>
+  </label>
+</div>
 
-  <script>
-    // Simple XP bar logic with milestones, level up and advice popup.
-    (function(){
-      // Config (could come from backend)
-      const xpForNextLevel = 200;
-      const milestones = [40, 80, 120, 160]; // XP thresholds visible on bar
-      const levelStart = 3;
+<!-- ===============================
+     PARAMÈTRES PÉRIODE
+================================ -->
+<div class="card">
+  <label>Date du jour analysé
+    <input type="date" id="workDate">
+  </label>
 
-      // State
-      let currentXp = 120;
-      let level = levelStart;
+  <label>Jour de clôture mensuelle
+    <input type="number" id="monthlyClose" min="1" max="31" value="31">
+  </label>
+</div>
 
-      // Elements
-      const xpFill = document.getElementById('xpFill');
-      const xpPercent = document.getElementById('xpPercent');
-      const xpInfo = document.getElementById('xpInfo');
-      const levelValue = document.getElementById('levelValue');
-      const xpTrack = document.getElementById('xpTrack');
-      const addXpBtn = document.getElementById('addXpBtn');
-      const simulateBtn = document.getElementById('simulateBtn');
-      const adviceBtn = document.getElementById('adviceBtn');
-      const popupTpl = document.getElementById('popupTpl');
+<!-- ===============================
+     SAISIE JOURNALIÈRE
+================================ -->
+<div class="card">
+  <label>Heures normales
+    <input type="number" id="normalHours" step="0.25" value="7">
+  </label>
 
-      // Initialize UI
-      function renderBar(animate=true){
-        const percent = Math.max(0, Math.min(100, Math.round((currentXp / xpForNextLevel) * 100)));
-        if(animate){
-          // trigger CSS transition
-          requestAnimationFrame(()=> xpFill.style.width = percent + '%');
-        } else {
-          xpFill.style.transition = 'none';
-          xpFill.style.width = percent + '%';
-          // restore transition
-          setTimeout(()=> xpFill.style.transition = '', 20);
-        }
-        xpPercent.textContent = percent + '%';
-        xpInfo.textContent = `${currentXp} XP / ${xpForNextLevel} XP`;
-        xpTrack.setAttribute('aria-valuenow', String(currentXp));
-        levelValue.textContent = level;
-        // render milestones
-        renderMilestones();
-      }
+  <label>Heures supplémentaires
+    <input type="number" id="extraHours" step="0.25" value="2">
+  </label>
 
-      function renderMilestones(){
-        // remove existing milestone nodes
-        const existing = xpTrack.querySelectorAll('.milestone');
-        existing.forEach(n => n.remove());
-        milestones.forEach(ms => {
-          const left = Math.min(100, Math.round((ms / xpForNextLevel) * 100));
-          const div = document.createElement('div');
-          div.className = 'milestone' + (currentXp >= ms ? ' reached' : '');
-          div.style.left = left + '%';
-          div.title = `Palier ${ms} XP`;
-          xpTrack.appendChild(div);
-        });
-      }
+  <label>
+    <input type="checkbox" id="isWeekend">
+    Samedi / Dimanche
+  </label>
 
-      // Advice fetcher (stub). In production, call backend endpoint POST /api/advice/trigger
-      async function fetchAdvice({ trigger, meta }){
-        // Simulate logic: return different messages based on trigger/meta
-        // Keep messages short: 1 legal sentence + 1 wellbeing sentence
-        await new Promise(r => setTimeout(r, 220)); // simulate latency
-        if(trigger === 'level_up'){
-          return {
-            title: `Niveau ${level} atteint !`,
-            legal: `Rappel: la durée légale est de 35 h/semaine; vérifiez la validation RH pour la paie.`,
-            wellbeing: `Félicitations — pensez à prendre une pause de 20 minutes pour récupérer.`,
-            badge: `Ligue ${Math.min(10, Math.ceil(level/1))}`
-          };
-        }
-        if(trigger === 'milestone'){
-          const ms = meta;
-          if(ms >= 160){
-            return {
-              title: `Palier ${ms} franchi`,
-              legal: `Alerte: vous approchez des seuils de plafond; contactez RH si nécessaire.`,
-              wellbeing: `Essayez une micro-pause de 10 minutes et hydratez-vous.`,
-              badge: `Endurance ${ms}`
-            };
-          }
-          return {
-            title: `Palier ${ms} atteint`,
-            legal: `Les heures supplémentaires doivent être tracées et validées pour la paie.`,
-            wellbeing: `Respirez profondément 3 fois et faites une courte marche.`,
-            badge: `Palier ${ms}`
-          };
-        }
-        // manual check or default
-        return {
-          title: `Conseil rapide`,
-          legal: `Conservez un historique horodaté; la validation manager est requise pour l'export paie.`,
-          wellbeing: `Si vous travaillez tard, limitez l'écran 30 minutes avant le coucher.`,
-          badge: null
-        };
-      }
+  <label>
+    <input type="checkbox" id="isHoliday">
+    Jour férié
+  </label>
 
-      // Popup helper
-      function showPopup(advice){
-        const tpl = popupTpl.content.cloneNode(true);
-        const backdrop = tpl.querySelector('.popup-backdrop');
-        const title = tpl.querySelector('.popup-title');
-        const legal = tpl.querySelector('.popup-legal');
-        const well = tpl.querySelector('.popup-well');
-        const badgeChip = tpl.querySelector('.badge-chip');
-        const closeBtn = tpl.querySelector('.close-btn');
+  <label>
+    <input type="checkbox" id="isAbsent">
+    Absence
+  </label>
+</div>
 
-        title.textContent = advice.title || 'Conseil';
-        legal.textContent = advice.legal || '';
-        well.textContent = advice.wellbeing || '';
-        if(advice.badge){
-          badgeChip.style.display = 'inline-block';
-          badgeChip.textContent = 'Badge débloqué: ' + advice.badge;
-        } else {
-          badgeChip.style.display = 'none';
-        }
+<button onclick="runEngine()">Analyser</button>
 
-        closeBtn.addEventListener('click', ()=> {
-          backdrop.remove();
-        });
+<div id="output" class="card result"></div>
 
-        // close on backdrop click
-        backdrop.addEventListener('click', (e)=>{
-          if(e.target === backdrop) backdrop.remove();
-        });
+<div id="debug" class="debug hidden"></div>
 
-        document.body.appendChild(backdrop);
-        // focus for accessibility
-        closeBtn.focus();
-      }
+</section>
 
-      // Event handlers
-      addXpBtn.addEventListener('click', async ()=>{
-        // Add 10 XP and check milestones/level up
-        const prevXp = currentXp;
-        currentXp = Math.min(xpForNextLevel * 2, currentXp + 10); // allow overflow for demo
-        renderBar(true);
+<script>
+/* ===============================
+   CONSTANTES / SÉCURITÉ
+================================ */
+const DEBUG_CODE = "1234";
 
-        // detect milestones crossed
-        milestones.forEach(ms => {
-          if(prevXp < ms && currentXp >= ms){
-            // milestone crossed
-            fetchAdvice({ trigger:'milestone', meta:ms }).then(showPopup);
-          }
-        });
+/* ===============================
+   OUTILS DE BASE
+================================ */
+function roundQuarter(v) {
+  return Math.round(v * 4) / 4;
+}
 
-        // detect level up
-        if(prevXp < xpForNextLevel && currentXp >= xpForNextLevel){
-          level += 1;
-          // reset XP for next level demo (or subtract xpForNextLevel)
-          currentXp = currentXp - xpForNextLevel;
-          renderBar(true);
-          fetchAdvice({ trigger:'level_up' }).then(showPopup);
-        }
-      });
+function openDebug() {
+  const code = prompt("Code debug ?");
+  if (code === DEBUG_CODE) {
+    document.getElementById("debug").classList.remove("hidden");
+  }
+}
 
-      simulateBtn.addEventListener('click', async ()=>{
-        // Simulate a timesheet submission scenario: e.g., user logged 2h overtime at night
-        // For demo, add 20 XP and show a tailored advice
-        const prevXp = currentXp;
-        currentXp = Math.min(xpForNextLevel * 2, currentXp + 20);
-        renderBar(true);
+/* ===============================
+   SNAPSHOT / RECOVERY
+================================ */
+function saveSnapshot(state) {
+  localStorage.setItem("module3_snapshot", JSON.stringify(state));
+}
 
-        // If crossing a high threshold, escalate
-        if(prevXp < 160 && currentXp >= 160){
-          fetchAdvice({ trigger:'milestone', meta:160 }).then(showPopup);
-        } else {
-          fetchAdvice({ trigger:'manual', meta:{hours:2, time:'22:30'} }).then(showPopup);
-        }
-      });
+function loadSnapshot() {
+  const s = localStorage.getItem("module3_snapshot");
+  return s ? JSON.parse(s) : null;
+}
 
-      adviceBtn.addEventListener('click', async ()=>{
-        const advice = await fetchAdvice({ trigger:'manual' });
-        showPopup(advice);
-      });
+/* ===============================
+   MOTEUR CENTRAL
+================================ */
+function runEngine() {
 
-      // Keyboard accessibility: space/enter on track opens advice
-      xpTrack.addEventListener('keydown', (e)=>{
-        if(e.key === 'Enter' || e.key === ' '){
-          e.preventDefault();
-          adviceBtn.click();
-        }
-      });
+  const config = {
+    method: document.getElementById("method").value,
+    date: document.getElementById("workDate").value,
+    monthlyClose: Number(document.getElementById("monthlyClose").value)
+  };
 
-      // Initial render
-      renderBar(false);
-    })();
-  </script>
+  const day = {
+    normal: roundQuarter(Number(document.getElementById("normalHours").value)),
+    extra: roundQuarter(Number(document.getElementById("extraHours").value)),
+    weekend: document.getElementById("isWeekend").checked,
+    holiday: document.getElementById("isHoliday").checked,
+    absent: document.getElementById("isAbsent").checked
+  };
+
+  const result = {
+    countedExtra: 0,
+    payableExtra: 0,
+    annualCounter: null,
+    warnings: []
+  };
+
+  if (!config.date) {
+    renderError("Veuillez sélectionner une date.");
+    return;
+  }
+
+  if (day.absent) {
+    result.warnings.push("Jour d'absence : aucune heure comptabilisée.");
+    render(result, config, day);
+    return;
+  }
+
+  result.countedExtra = day.extra;
+
+  if (day.weekend) {
+    result.warnings.push("Travail le week-end.");
+  }
+
+  if (day.holiday) {
+    result.warnings.push("Jour férié travaillé.");
+  }
+
+  if (config.method === "monthly") {
+    result.payableExtra = result.countedExtra;
+  }
+
+  if (config.method === "annual") {
+    const year = new Date(config.date).getFullYear();
+    const key = "annual_counter_" + year;
+    const current = Number(localStorage.getItem(key)) || 0;
+    result.annualCounter = current + result.countedExtra;
+    localStorage.setItem(key, result.annualCounter);
+  }
+
+  saveSnapshot({ config, day, result });
+
+  /* ===============================
+     ZONE FUTURE SCÉNARIOS
+     (NE RIEN SUPPRIMER)
+  ================================ */
+  /*
+  runScenarios({
+    config,
+    day,
+    result
+  });
+  */
+
+  render(result, config, day);
+}
+
+/* ===============================
+   RENDER
+================================ */
+function render(result, config, day) {
+  const out = document.getElementById("output");
+
+  let html = "<b>Résultat moteur</b><br><br>";
+  html += "Méthode : " + config.method + "<br>";
+  html += "HS comptabilisées : " + result.countedExtra + " h<br>";
+
+  if (config.method === "monthly") {
+    html += "HS payables : " + result.payableExtra + " h<br>";
+    html += "Clôture mensuelle : jour " + config.monthlyClose + "<br>";
+  } else {
+    html += "Compteur annuel : " + result.annualCounter + " h<br>";
+  }
+
+  if (result.warnings.length) {
+    html += "<br><b>Infos :</b><br>" + result.warnings.join("<br>");
+  }
+
+  out.innerHTML = html;
+
+  document.getElementById("debug").innerText =
+    JSON.stringify({ config, day, result }, null, 2);
+}
+
+function renderError(msg) {
+  document.getElementById("output").innerHTML = msg;
+}
+
+/* ===============================
+   AUTO-RECOVERY
+================================ */
+const snap = loadSnapshot();
+if (snap) {
+  document.getElementById("debug").classList.remove("hidden");
+  document.getElementById("debug").innerText =
+    "Snapshot restauré :\n" + JSON.stringify(snap, null, 2);
+}
+</script>
+
 </body>
 </html>
