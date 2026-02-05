@@ -357,6 +357,40 @@ const MODULE1_API = {
     const diff = day === 0 ? 0 : day;
     lastDay.setDate(lastDay.getDate() - diff);
     return lastDay.getDate();
+  },
+
+  getIndividualDays() {
+    try {
+      const STORAGE_PREFIX = "CA_HS_TRACKER_V1";
+      const currentYear = new Date().getFullYear();
+      const yearKey = `${STORAGE_PREFIX}_DATA_${currentYear}`;
+      const rawData = localStorage.getItem(yearKey);
+
+      if (!rawData) return [];
+
+      const yearData = JSON.parse(rawData);
+      const days = [];
+
+      Object.entries(yearData)
+        .filter(([key]) => /^\d{4}-\d{2}$/.test(key))
+        .forEach(([monthKey, monthData]) => {
+          const [y, m] = monthKey.split("-").map(Number);
+          Object.entries(monthData.days || {}).forEach(([day, hours]) => {
+            const h = parseFloat(hours);
+            if (h > 0) {
+              days.push({
+                date: `${y}-${String(m).padStart(2, "0")}-${String(parseInt(day)).padStart(2, "0")}`,
+                hours: h
+              });
+            }
+          });
+        });
+
+      return days;
+    } catch (e) {
+      console.warn("Erreur lecture jours Module 1:", e);
+      return [];
+    }
   }
 };
 
@@ -848,9 +882,20 @@ function confirmProfileMode(mode) {
   
   document.getElementById("profileSetupModal").classList.add("hidden");
   document.getElementById("mainInterface").classList.remove("hidden");
-  
+
+  STATE = getDefaultState();
   initializeWithModule(mode);
-  
+
+  renderDaysList();
+  renderBadges();
+  renderMilestones();
+  toggleWorkMode();
+  checkBadges();
+  checkMilestones();
+  displayModulesData();
+  updateProfileDisplay();
+  save();
+
   showAchievement(
     "🎮 PROFIL CRÉÉ !",
     mode === "monthly" ? "Mode Mensualisé" : "Mode Annualisé",
@@ -1149,11 +1194,18 @@ function performAutoImport(mode, moduleData) {
   }
   
   calculateInitialXP();
-  
+
+  if (mode === "monthly") {
+    localStorage.setItem(`M1_LAST_SYNC_${moduleData.year}`, String(parseFloat(moduleData.totalHours) || 0));
+  } else {
+    const syncStats = MODULE_BRIDGES.module2.getExerciseStats();
+    localStorage.setItem(`M2_LAST_SYNC_${moduleData.exercise}`, String(parseInt(syncStats.daysWorked) || 0));
+  }
+
   save();
-  
+
   debugLog("✅ Import terminé", "success");
-  debugLog(`📊 Cumul importé : ${STATE.totalDays}j • ${STATE.totalHours}h`, "success");
+  debugLog(`📊 Cumul importé : ${STATE.totalDays}j • ${STATE.totalHours.toFixed(1)}h`, "success");
   debugLog(`🎮 XP calculé : ${STATE.totalXP} (Niveau ${STATE.level})`, "success");
   debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "success");
   
@@ -1163,7 +1215,14 @@ function performAutoImport(mode, moduleData) {
   
   updateUI();
   updateProfileDisplay();
-  
+  renderDaysList();
+  renderBadges();
+  renderMilestones();
+  toggleWorkMode();
+  checkBadges();
+  checkMilestones();
+  displayModulesData();
+
   showAchievement(
     "✅ IMPORT RÉUSSI !",
     `Mode ${mode === "monthly" ? "Mensualisé" : "Annualisé"}`,
@@ -1180,69 +1239,79 @@ function selectModuleFromDual(mode) {
 
 function importFromModule1(m1Data) {
   debugLog("📅 Import depuis Module 1...", "info");
-  
-  STATE.totalHours = parseFloat(m1Data.totalHours) || 0;
-  STATE.totalDays = Math.floor(STATE.totalHours / 7);
-  
-  m1Data.months.forEach(month => {
-    STATE.calculations++;
-    
-    if (month.periodHours > 40) {
-      const extraHours = month.periodHours - 35;
-      STATE.nightShifts += Math.floor(extraHours * 0.05);
-      STATE.weekendDays += Math.floor(extraHours * 0.05);
-    }
-  });
-  
-  debugLog(`✅ ${STATE.totalHours}h importées`, "success");
-  debugLog(`✅ ${STATE.totalDays} jours calculés`, "success");
+
+  const individualDays = MODULE1_API.getIndividualDays();
+
+  if (individualDays.length > 0) {
+    individualDays.forEach(d => {
+      const date = new Date(d.date);
+      const dow = date.getDay();
+      let type = "normal";
+      if (dow === 0) type = "sunday";
+      else if (dow === 6) type = "saturday";
+
+      STATE.days.push({
+        id: Date.now() + Math.random(),
+        date: d.date,
+        hours: d.hours,
+        type: type
+      });
+    });
+  } else {
+    debugLog("Pas de jours individuels, import agrege", "warn");
+    STATE.totalHours = parseFloat(m1Data.totalHours) || 0;
+  }
+
+  STATE.calculations = m1Data.months.length;
+  recalculateFromDays();
+
+  debugLog(`✅ ${STATE.totalHours.toFixed(1)}h importées`, "success");
+  debugLog(`✅ ${STATE.totalDays} jours importés`, "success");
 }
 
 function importFromModule2(m2Data) {
   debugLog("📊 Import depuis Module 2...", "info");
-  
-  const stats = MODULE_BRIDGES.module2.getExerciseStats();
-  
-  STATE.totalDays = parseInt(stats.daysWorked) || 0;
-  STATE.totalHours = parseFloat(stats.totalExtra) || 0;
-  STATE.calculations = m2Data.closures.length;
-  
+
   Object.entries(m2Data.data).forEach(([date, day]) => {
-    if (day.extra > 0) {
+    const hours = parseFloat(day.extra) || 0;
+    if (hours > 0) {
       const d = new Date(date);
       const dow = d.getDay();
-      
-      if (dow === 0) STATE.weekendDays++;
-      if (dow === 6) STATE.weekendDays++;
+      let type = "normal";
+      if (dow === 0) type = "sunday";
+      else if (dow === 6) type = "saturday";
+
+      STATE.days.push({
+        id: Date.now() + Math.random(),
+        date: date,
+        hours: hours,
+        type: type
+      });
     }
   });
-  
-  STATE.nightShifts = Math.floor(STATE.totalDays * 0.1);
-  
+
+  STATE.calculations = m2Data.closures.length;
+  recalculateFromDays();
+
   debugLog(`✅ ${STATE.totalDays} jours importés`, "success");
-  debugLog(`✅ ${STATE.totalHours}h importées`, "success");
+  debugLog(`✅ ${STATE.totalHours.toFixed(1)}h importées`, "success");
 }
 
 function calculateInitialXP() {
   debugLog("🎮 Calcul XP initial...", "info");
-  
-  let initialXP = 0;
-  
-  initialXP += STATE.totalDays * 10;
-  initialXP += Math.floor(STATE.totalHours / 10);
-  initialXP += STATE.nightShifts * 10;
-  initialXP += STATE.weekendDays * 15;
-  initialXP += STATE.calculations * 50;
-  
-  STATE.totalXP = initialXP;
-  STATE.xp = initialXP;
-  
+
+  let baseXP = 0;
+  baseXP += STATE.totalDays * 10;
+  baseXP += Math.floor(STATE.totalHours / 10);
+  baseXP += STATE.nightShifts * 10;
+  baseXP += STATE.weekendDays * 15;
+  baseXP += STATE.calculations * 50;
+
   let currentLevel = 1;
-  let xpRemaining = initialXP;
-  
+  let xpRemaining = baseXP;
+
   while (xpRemaining > 0 && currentLevel < 200) {
     const xpForLevel = getXPForLevel(currentLevel);
-    
     if (xpRemaining >= xpForLevel) {
       xpRemaining -= xpForLevel;
       currentLevel++;
@@ -1250,11 +1319,12 @@ function calculateInitialXP() {
       break;
     }
   }
-  
+
   STATE.level = currentLevel;
   STATE.xp = xpRemaining;
-  
-  debugLog(`✅ ${initialXP} XP calculés → Niveau ${currentLevel}`, "success");
+  STATE.totalXP = baseXP;
+
+  debugLog(`✅ ${baseXP} XP calculés → Niveau ${currentLevel} (reste ${xpRemaining} XP)`, "success");
 }
 function loadAnnualThresholds() {
   const saved = localStorage.getItem("MODULE3_ANNUAL_THRESHOLDS");
@@ -1556,37 +1626,63 @@ document.getElementById("importFile").addEventListener("change", (e) => {
   reader.onload = () => {
     try {
       const data = JSON.parse(reader.result);
-      
+
       if (!data.STATE || !data.version) {
-        alert("❌ Fichier invalide");
+        alert("❌ Fichier invalide : STATE ou version manquant");
         return;
       }
-      
+
+      const s = data.STATE;
+      const requiredFields = ["level", "xp", "totalXP", "totalDays", "totalHours", "days", "unlockedBadges", "trophies"];
+      const missing = requiredFields.filter(f => s[f] === undefined);
+      if (missing.length > 0) {
+        alert("❌ Fichier corrompu : champs manquants (" + missing.join(", ") + ")");
+        return;
+      }
+
+      if (typeof s.level !== "number" || typeof s.xp !== "number" || !Array.isArray(s.days) || !Array.isArray(s.unlockedBadges)) {
+        alert("❌ Fichier corrompu : types de donnees invalides");
+        return;
+      }
+
       snapshot("avant import");
-      
-      STATE = data.STATE;
+
+      STATE = s;
+
+      if (!STATE.dayTypesWorked || Array.isArray(STATE.dayTypesWorked)) {
+        STATE.dayTypesWorked = new Set(Array.isArray(STATE.dayTypesWorked) ? STATE.dayTypesWorked : []);
+      }
+      if (!STATE.trophies || typeof STATE.trophies !== "object") {
+        STATE.trophies = { gold: 0, silver: 0, bronze: 0 };
+      }
+      if (typeof STATE.calculations !== "number") STATE.calculations = 0;
+      if (typeof STATE.nightShifts !== "number") STATE.nightShifts = 0;
+      if (typeof STATE.weekendDays !== "number") STATE.weekendDays = 0;
+      if (typeof STATE.currentStreak !== "number") STATE.currentStreak = 0;
+      if (typeof STATE.maxStreak !== "number") STATE.maxStreak = 0;
+      if (typeof STATE.exports !== "number") STATE.exports = 0;
+
       if (data.PROFILE) PROFILE = data.PROFILE;
       if (data.ANNUAL_THRESHOLDS) ANNUAL_THRESHOLDS = data.ANNUAL_THRESHOLDS;
-      
-      if (Array.isArray(STATE.dayTypesWorked)) {
-        STATE.dayTypesWorked = new Set(STATE.dayTypesWorked);
-      }
-      
+
+      recalculateFromDays();
+      recalculateTrophies();
+
       save();
       saveProfile();
       saveAnnualThresholds();
-      
+
       updateUI();
       renderDaysList();
       renderBadges();
       renderMilestones();
       updateProfileDisplay();
-      
+
       debugLog("✅ Import réussi", "success");
       alert("✅ Import réussi !");
     } catch (e) {
       debugLog("❌ Import échoué : " + e.message, "error");
-      alert("❌ Erreur lors de l'import");
+      alert("❌ Erreur lors de l'import : " + e.message);
     }
   };
   reader.readAsText(file);
@@ -1861,9 +1957,11 @@ function syncFromModule1(m1Data) {
 
     if (delta > 0) {
       STATE.totalHours += delta;
-      
+      STATE.calculations++;
+
       const xpGain = Math.floor(delta / 10);
       addXP(xpGain, "Sync Module 1");
+      checkBadges();
     }
 
     localStorage.setItem(lastSyncKey, String(currentTotal));
@@ -1885,9 +1983,11 @@ function syncFromModule2(m2Data) {
 
     if (delta > 0) {
       STATE.totalDays += delta;
-      
+      STATE.calculations++;
+
       const xpGain = delta * 10;
       addXP(xpGain, "Sync Module 2");
+      checkBadges();
     }
 
     localStorage.setItem(lastSyncKey, String(currentDays));
@@ -1975,14 +2075,16 @@ function addDay() {
   if (type === "saturday" || type === "sunday") STATE.weekendDays++;
   
   STATE.dayTypesWorked.add(type);
-  
+  STATE.calculations++;
+  recalculateStreak();
+
   let xp = 10;
   if (hours >= 8) xp += 5;
   if (type === "nuit") xp += 10;
   if (type === "sunday") xp += 15;
-  
+
   addXP(xp, "Journée ajoutée");
-  
+
   checkBadges();
   
   document.getElementById("inputDate").value = "";
@@ -2016,12 +2118,14 @@ function deleteDay(id) {
   STATE.days = STATE.days.filter(d => d.id !== id);
   STATE.totalDays--;
   STATE.totalHours -= day.hours;
-  
+
   if (day.type === "nuit") STATE.nightShifts--;
   if (day.type === "saturday" || day.type === "sunday") STATE.weekendDays--;
-  
+
+  recalculateStreak();
+
   removeXP(xpToRemove, "Suppression journée");
-  
+
   renderDaysList();
   
   debugLog(`XP actuel APRÈS: ${STATE.xp} | Niveau: ${STATE.level}`, 'success');
@@ -2132,6 +2236,68 @@ function calculateStats() {
     dayTypes: STATE.dayTypesWorked.size,
     trophies: STATE.trophies
   };
+}
+
+function recalculateFromDays() {
+  STATE.totalDays = STATE.days.length;
+  STATE.totalHours = STATE.days.reduce((sum, d) => sum + (d.hours || 0), 0);
+  STATE.nightShifts = STATE.days.filter(d => d.type === "nuit").length;
+  STATE.weekendDays = STATE.days.filter(d => d.type === "saturday" || d.type === "sunday").length;
+  STATE.dayTypesWorked = new Set(STATE.days.map(d => d.type));
+  recalculateStreak();
+}
+
+function recalculateStreak() {
+  if (!STATE.days || STATE.days.length === 0) {
+    STATE.currentStreak = 0;
+    return;
+  }
+
+  const timestamps = [...new Set(
+    STATE.days.map(d => {
+      const dt = new Date(d.date);
+      dt.setHours(0, 0, 0, 0);
+      return dt.getTime();
+    })
+  )].sort((a, b) => a - b);
+
+  let streak = 1;
+  let maxStreak = 1;
+
+  for (let i = 1; i < timestamps.length; i++) {
+    const diffDays = (timestamps[i] - timestamps[i - 1]) / 86400000;
+    if (diffDays === 1) {
+      streak++;
+      maxStreak = Math.max(maxStreak, streak);
+    } else if (diffDays > 1) {
+      streak = 1;
+    }
+  }
+
+  const lastDay = timestamps[timestamps.length - 1];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const diffToday = (today.getTime() - lastDay) / 86400000;
+
+  if (diffToday > 1) {
+    streak = 0;
+  }
+
+  STATE.currentStreak = streak;
+  STATE.maxStreak = Math.max(STATE.maxStreak, maxStreak);
+}
+
+function recalculateTrophies() {
+  STATE.trophies = { gold: 0, silver: 0, bronze: 0 };
+
+  STATE.unlockedBadges.forEach(badgeId => {
+    const badge = BADGES.find(b => b.id === badgeId);
+    if (!badge) return;
+
+    if (badge.rarity === "legendary") STATE.trophies.gold++;
+    else if (badge.rarity === "epic") STATE.trophies.silver++;
+    else STATE.trophies.bronze++;
+  });
 }
 
 function checkBadges() {
@@ -2408,25 +2574,25 @@ function initScenarios() {
 SCENARIOS = BASE_SCENARIOS;
 }
 window.addEventListener("load", function() {
+  debugLog("📦 Module 3 - Fichier chargé", "info");
   debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "info");
   debugLog("🚀 DÉMARRAGE MODULE 3", "info");
   debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "info");
   
   loadProfile();
-  
+  loadAnnualThresholds();
+  initCheatCode();
+  initScenarios();
+  initBadges();
+  initMilestones();
+
   if (!PROFILE.initialized) {
     debugLog("ℹ️ Premier démarrage - Configuration requise", "info");
     handleInitialSetup();
     return;
   }
-  
-  loadAnnualThresholds();
+
   checkAnnualReset();
-  
-  initCheatCode();
-  initScenarios();
-  initBadges();
-  initMilestones();
   
   load();
   
@@ -2450,8 +2616,6 @@ window.addEventListener("load", function() {
   debugLog(`📊 Niveau ${STATE.level} • ${STATE.totalDays}j • ${STATE.totalHours.toFixed(0)}h`, "success");
   debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "success");
 });
-
-debugLog("📦 Module 3 - Fichier chargé", "info");
 </script>
 </body>
 </html>
