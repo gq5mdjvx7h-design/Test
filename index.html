@@ -117,6 +117,24 @@ button.danger{background:var(--crit);color:#fff}
 .milestone-reward{font-size:12px;opacity:0.8}
 .milestone-status{font-size:12px;padding:6px 12px;border-radius:20px;background:rgba(0,0,0,0.3)}
 .milestone-status.unlocked{background:var(--ok);color:#000;font-weight:bold}
+/* AI Dashboard Styles */
+.ai-dashboard{margin:15px 0}
+.ai-gauge{margin:12px 0}
+.ai-gauge-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.ai-gauge-label{font-size:13px;font-weight:500}
+.ai-gauge-value{font-size:13px;font-weight:bold}
+.ai-gauge-bar{height:12px;background:rgba(0,0,0,0.3);border-radius:6px;overflow:hidden;position:relative}
+.ai-gauge-fill{height:100%;transition:width 0.5s ease,background 0.5s ease;border-radius:6px}
+.ai-gauge-fill.low{background:linear-gradient(90deg,var(--ok),#58d68d)}
+.ai-gauge-fill.medium{background:linear-gradient(90deg,var(--warn),#f5b041)}
+.ai-gauge-fill.high{background:linear-gradient(90deg,var(--crit),#e74c3c)}
+.ai-gauge-fill.stable{background:linear-gradient(90deg,var(--info),var(--accent))}
+.ai-message{background:rgba(0,0,0,0.3);padding:12px 15px;border-radius:8px;margin-top:15px;border-left:4px solid var(--accent);font-size:13px;line-height:1.5}
+.ai-message.warning{border-left-color:var(--warn);background:rgba(243,156,18,0.1)}
+.ai-message.critical{border-left-color:var(--crit);background:rgba(192,57,43,0.1)}
+.ai-message-title{font-weight:bold;margin-bottom:5px}
+.ai-scenario-match{background:rgba(79,179,194,0.1);padding:10px 15px;border-radius:8px;margin-top:10px;font-size:12px}
+.ai-scenario-match strong{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -181,6 +199,25 @@ button.danger{background:var(--crit);color:#fff}
 <div class="stat-box"><div class="stat-value" id="statHours">0h</div><div class="stat-label">Heures totales</div></div>
 <div class="stat-box"><div class="stat-value" id="statStreak">0</div><div class="stat-label">Série active</div></div>
 <div class="stat-box"><div class="stat-value" id="statCalcs">0</div><div class="stat-label">Calculs</div></div>
+</div>
+</div>
+<div id="aiDashboard" class="card hidden">
+<h3>🤖 Intelligence Artificielle</h3>
+<div class="ai-dashboard">
+<div class="ai-gauge">
+<div class="ai-gauge-header"><span class="ai-gauge-label">😓 Fatigue</span><span class="ai-gauge-value" id="aiFatigueValue">0%</span></div>
+<div class="ai-gauge-bar"><div class="ai-gauge-fill low" id="aiFatigueFill" style="width:0%"></div></div>
+</div>
+<div class="ai-gauge">
+<div class="ai-gauge-header"><span class="ai-gauge-label">⚠️ Risque Burnout</span><span class="ai-gauge-value" id="aiOverloadValue">0%</span></div>
+<div class="ai-gauge-bar"><div class="ai-gauge-fill low" id="aiOverloadFill" style="width:0%"></div></div>
+</div>
+<div class="ai-gauge">
+<div class="ai-gauge-header"><span class="ai-gauge-label">📊 Stabilité</span><span class="ai-gauge-value" id="aiStabilityValue">100%</span></div>
+<div class="ai-gauge-bar"><div class="ai-gauge-fill stable" id="aiStabilityFill" style="width:100%"></div></div>
+</div>
+<div id="aiMessage" class="ai-message hidden"></div>
+<div id="aiScenarioMatch" class="ai-scenario-match hidden"></div>
 </div>
 </div>
 <div class="card">
@@ -1895,6 +1932,11 @@ function updateUI() {
   document.getElementById("trophyBronze").textContent = STATE.trophies.bronze;
   
   document.getElementById("badgeCount").textContent = STATE.unlockedBadges.length;
+
+  // Mise à jour dashboard IA (si disponible)
+  if (typeof updateAIDashboard === "function") {
+    updateAIDashboard();
+  }
 }
 
 function toggleWorkMode() {
@@ -2122,6 +2164,7 @@ function addDay() {
   document.getElementById("inputHours").value = "";
 
   renderDaysList();
+  updateUI();
 
   debugLog(`✅ Journée ajoutée : ${date} - ${hours}h (${type})`, "success");
 }
@@ -2166,6 +2209,7 @@ function deleteDay(id) {
   removeXP(xpToRemove, "Suppression journée");
 
   renderDaysList();
+  updateUI();
 
   debugLog(`XP actuel APRÈS: ${STATE.xp} | Niveau: ${STATE.level}`, 'success');
   debugLog(`━━━ FIN SUPPRESSION ━━━`, 'success');
@@ -3130,6 +3174,262 @@ function AI_dashboard() {
   return { ai: ai, prediction: pred };
 }
 
+// ── Comparaison IA + Scénarios ──────────────────────────────
+
+function AI_findClosestScenario() {
+  if (!AI_ENABLED || typeof SCENARIOS === "undefined" || !SCENARIOS.length) return null;
+
+  // Récupérer les 7 derniers jours
+  const sortedDays = (STATE.days || []).slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+  const last7 = sortedDays.slice(0, 7);
+  if (last7.length < 3) return null; // Pas assez de données
+
+  const weekHours = last7.map(d => d.hours || 0);
+  const weekTypes = last7.map(d => d.type || "normal");
+  const totalHours = weekHours.reduce((s, h) => s + h, 0);
+  const avgHours = totalHours / last7.length;
+  const hasNight = weekTypes.includes("nuit");
+  const hasWeekend = weekTypes.includes("saturday") || weekTypes.includes("sunday");
+
+  let bestMatch = null;
+  let bestScore = Infinity;
+
+  SCENARIOS.forEach(scenario => {
+    if (!scenario.days || !scenario.days.length) return;
+
+    const scenarioTotal = scenario.days.reduce((s, d) => s + (d.h || 0), 0);
+    const scenarioAvg = scenarioTotal / scenario.days.length;
+    const scenarioHasNight = scenario.days.some(d => d.type === "nuit");
+    const scenarioHasWeekend = scenario.days.some(d => d.type === "saturday" || d.type === "sunday");
+
+    // Score de similarité (plus bas = meilleur)
+    let score = 0;
+    score += Math.abs(totalHours - scenarioTotal) * 0.5;
+    score += Math.abs(avgHours - scenarioAvg) * 2;
+    score += Math.abs(last7.length - scenario.days.length) * 3;
+    if (hasNight !== scenarioHasNight) score += 10;
+    if (hasWeekend !== scenarioHasWeekend) score += 5;
+
+    if (score < bestScore) {
+      bestScore = score;
+      bestMatch = scenario;
+    }
+  });
+
+  // Seuil de pertinence
+  if (bestScore > 30) return null;
+
+  return {
+    scenario: bestMatch,
+    score: Math.max(0, 100 - bestScore * 2).toFixed(0),
+    risk: bestMatch?.risk || "inconnu",
+    conseil: bestMatch?.conseil || null
+  };
+}
+
+// ── Message intelligent du jour ─────────────────────────────
+
+function AI_getIntelligentMessage() {
+  if (!AI_ENABLED) return null;
+  AI_initState(STATE);
+
+  const ai = STATE.ai;
+  if (!ai) return null;
+
+  const warnings = AI_evaluateWarnings(STATE);
+  const criticalWarnings = warnings.filter(w => w.level === "critical");
+  const highWarnings = warnings.filter(w => w.level === "high");
+
+  // Message critique prioritaire
+  if (criticalWarnings.length > 0) {
+    return {
+      level: "critical",
+      title: "⛔ Alerte Critique",
+      message: criticalWarnings[0].message,
+      actions: ["Repos immédiat conseillé", "Réduisez votre charge de travail", "Consultez si nécessaire"]
+    };
+  }
+
+  // Avertissements importants
+  if (highWarnings.length > 0) {
+    return {
+      level: "warning",
+      title: "⚠️ Attention",
+      message: highWarnings[0].message,
+      actions: ["Planifiez du repos", "Surveillez votre rythme"]
+    };
+  }
+
+  // Messages positifs basés sur l'état
+  if (ai.fatigue < 0.25 && ai.stability > 0.7) {
+    return {
+      level: "good",
+      title: "💚 Excellent équilibre",
+      message: "Votre rythme de travail est sain et régulier. Continuez ainsi !",
+      actions: null
+    };
+  }
+
+  if (ai.stability > 0.8) {
+    return {
+      level: "good",
+      title: "📊 Rythme stable",
+      message: "Votre organisation est très régulière. Bonne discipline !",
+      actions: null
+    };
+  }
+
+  if (ai.fatigue > 0.5 && ai.fatigue < 0.7) {
+    return {
+      level: "info",
+      title: "😓 Fatigue modérée",
+      message: "Un peu de repos vous ferait du bien. Pensez à prendre une pause.",
+      actions: ["Évitez les heures supplémentaires", "Dormez suffisamment"]
+    };
+  }
+
+  return null;
+}
+
+// ── Garbage Collector localStorage ──────────────────────────
+
+function AI_garbageCollect() {
+  const keysToClean = [
+    { prefix: "SNAPSHOT_", keep: 20 },
+    { prefix: "MODULE3_ARCHIVE_", keep: 12 },
+    { prefix: "M1_LAST_SYNC_", keep: 5 },
+    { prefix: "M2_LAST_SYNC_", keep: 5 }
+  ];
+
+  let totalCleaned = 0;
+
+  keysToClean.forEach(({ prefix, keep }) => {
+    const keys = Object.keys(localStorage)
+      .filter(k => k.startsWith(prefix))
+      .sort()
+      .reverse();
+
+    if (keys.length > keep) {
+      const toDelete = keys.slice(keep);
+      toDelete.forEach(k => {
+        localStorage.removeItem(k);
+        totalCleaned++;
+      });
+    }
+  });
+
+  // Nettoyer les entrées IA trop anciennes dans l'historique
+  if (STATE.aiHistory && STATE.aiHistory.length > AI_HISTORY_MAX) {
+    STATE.aiHistory = STATE.aiHistory.slice(-AI_HISTORY_MAX);
+  }
+
+  if (totalCleaned > 0) {
+    debugLog(`🗑️ Garbage collector: ${totalCleaned} entrées nettoyées`, "info");
+  }
+
+  return totalCleaned;
+}
+
+// ── Mise à jour UI Dashboard IA ─────────────────────────────
+
+function updateAIDashboard() {
+  const dashboard = document.getElementById("aiDashboard");
+  if (!dashboard) return;
+
+  if (!AI_ENABLED || !STATE.ai) {
+    dashboard.classList.add("hidden");
+    return;
+  }
+
+  AI_initState(STATE);
+  const ai = STATE.ai;
+
+  // Afficher le dashboard
+  dashboard.classList.remove("hidden");
+
+  // Fatigue
+  const fatiguePercent = Math.round(ai.fatigue * 100);
+  const fatigueFill = document.getElementById("aiFatigueFill");
+  const fatigueValue = document.getElementById("aiFatigueValue");
+  if (fatigueFill && fatigueValue) {
+    fatigueFill.style.width = fatiguePercent + "%";
+    fatigueFill.className = "ai-gauge-fill " + (fatiguePercent < 40 ? "low" : fatiguePercent < 70 ? "medium" : "high");
+    fatigueValue.textContent = fatiguePercent + "%";
+  }
+
+  // Risque burnout
+  const overloadPercent = Math.round(ai.overloadRisk * 100);
+  const overloadFill = document.getElementById("aiOverloadFill");
+  const overloadValue = document.getElementById("aiOverloadValue");
+  if (overloadFill && overloadValue) {
+    overloadFill.style.width = overloadPercent + "%";
+    overloadFill.className = "ai-gauge-fill " + (overloadPercent < 30 ? "low" : overloadPercent < 60 ? "medium" : "high");
+    overloadValue.textContent = overloadPercent + "%";
+  }
+
+  // Stabilité
+  const stabilityPercent = Math.round(ai.stability * 100);
+  const stabilityFill = document.getElementById("aiStabilityFill");
+  const stabilityValue = document.getElementById("aiStabilityValue");
+  if (stabilityFill && stabilityValue) {
+    stabilityFill.style.width = stabilityPercent + "%";
+    stabilityFill.className = "ai-gauge-fill stable";
+    stabilityValue.textContent = stabilityPercent + "%";
+  }
+
+  // Message intelligent
+  const messageBox = document.getElementById("aiMessage");
+  const message = AI_getIntelligentMessage();
+  if (messageBox) {
+    if (message) {
+      messageBox.classList.remove("hidden", "warning", "critical");
+      if (message.level === "critical") messageBox.classList.add("critical");
+      else if (message.level === "warning") messageBox.classList.add("warning");
+
+      let html = `<div class="ai-message-title">${message.title}</div>`;
+      html += `<div>${message.message}</div>`;
+      if (message.actions && message.actions.length) {
+        html += `<ul style="margin:8px 0 0;padding-left:20px;font-size:12px">`;
+        message.actions.forEach(a => html += `<li>${a}</li>`);
+        html += `</ul>`;
+      }
+      messageBox.innerHTML = html;
+    } else {
+      messageBox.classList.add("hidden");
+    }
+  }
+
+  // Scénario le plus proche
+  const scenarioBox = document.getElementById("aiScenarioMatch");
+  const match = AI_findClosestScenario();
+  if (scenarioBox) {
+    if (match && match.scenario) {
+      scenarioBox.classList.remove("hidden");
+      let riskIcon = match.risk === "aucun" ? "✅" : match.risk === "modéré" ? "⚠️" : "⛔";
+      scenarioBox.innerHTML = `
+        <strong>📋 Scénario similaire:</strong> ${match.scenario.name} (${match.score}% de correspondance)<br>
+        <span style="opacity:0.8">${riskIcon} Risque: ${match.risk}</span>
+        ${match.conseil ? `<br><span style="opacity:0.8">💡 ${match.conseil.titre}</span>` : ""}
+      `;
+    } else {
+      scenarioBox.classList.add("hidden");
+    }
+  }
+
+  // Afficher alerte si warning critique
+  const warnings = AI_evaluateWarnings(STATE);
+  const critical = warnings.find(w => w.level === "critical");
+  if (critical && typeof showAchievement === "function") {
+    // Éviter spam: vérifier si déjà affiché récemment
+    const lastAlert = parseInt(localStorage.getItem("AI_LAST_CRITICAL_ALERT") || "0");
+    const now = Date.now();
+    if (now - lastAlert > 3600000) { // 1h entre alertes
+      localStorage.setItem("AI_LAST_CRITICAL_ALERT", now.toString());
+      showAchievement("⚠️ Alerte IA", critical.message, "Repos conseillé");
+    }
+  }
+}
+
 // ── API publique (window.AI) ────────────────────────────────
 
 window.AI = {
@@ -3140,6 +3440,10 @@ window.AI = {
   dashboard: AI_dashboard,
   state: function() { AI_initState(STATE); return STATE.ai; },
   history: function() { return STATE.aiHistory || []; },
+  findScenario: AI_findClosestScenario,
+  getMessage: AI_getIntelligentMessage,
+  gc: AI_garbageCollect,
+  updateUI: updateAIDashboard,
   version: AI_VERSION,
   enabled: function() { return AI_ENABLED; },
   help: function() {
@@ -3154,6 +3458,10 @@ window.AI = {
       "  AI.predictIfContinue(14)          \"Si tu continues...\"",
       "  AI.state()                        Scores actuels",
       "  AI.history()                      Historique IA",
+      "  AI.findScenario()                 Scenario le plus proche",
+      "  AI.getMessage()                   Message intelligent",
+      "  AI.gc()                           Nettoyage localStorage",
+      "  AI.updateUI()                     Rafraichir dashboard",
       "  AI.help()                         Cette aide",
       ""
     ].join("\n"));
@@ -3161,6 +3469,31 @@ window.AI = {
 };
 
 console.log("[IA] Moteur IA v" + AI_VERSION + " charge. Tapez AI.help() pour commencer.");
+
+// ── Initialisation IA au démarrage ──────────────────────────
+
+window.addEventListener("load", function() {
+  // Attendre que STATE soit chargé
+  setTimeout(function() {
+    if (!AI_ENABLED || typeof STATE === "undefined") return;
+
+    // Garbage collector
+    AI_garbageCollect();
+
+    // Recalculer IA sur toutes les journées si historique vide
+    if (STATE.days && STATE.days.length > 0 && (!STATE.aiHistory || STATE.aiHistory.length === 0)) {
+      AI_initState(STATE);
+      const sortedDays = STATE.days.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+      sortedDays.forEach(d => AI_processDay(d, STATE));
+      debugLog(`🤖 IA initialisée sur ${sortedDays.length} jours existants`, 'info');
+    }
+
+    // Mettre à jour le dashboard
+    updateAIDashboard();
+
+    debugLog("✅ Moteur IA opérationnel", "success");
+  }, 100);
+});
 </script>
 </body>
 </html>
