@@ -848,9 +848,20 @@ function confirmProfileMode(mode) {
   
   document.getElementById("profileSetupModal").classList.add("hidden");
   document.getElementById("mainInterface").classList.remove("hidden");
-  
+
+  STATE = getDefaultState();
   initializeWithModule(mode);
-  
+
+  renderDaysList();
+  renderBadges();
+  renderMilestones();
+  toggleWorkMode();
+  checkBadges();
+  checkMilestones();
+  displayModulesData();
+  updateProfileDisplay();
+  save();
+
   showAchievement(
     "🎮 PROFIL CRÉÉ !",
     mode === "monthly" ? "Mode Mensualisé" : "Mode Annualisé",
@@ -1163,7 +1174,14 @@ function performAutoImport(mode, moduleData) {
   
   updateUI();
   updateProfileDisplay();
-  
+  renderDaysList();
+  renderBadges();
+  renderMilestones();
+  toggleWorkMode();
+  checkBadges();
+  checkMilestones();
+  displayModulesData();
+
   showAchievement(
     "✅ IMPORT RÉUSSI !",
     `Mode ${mode === "monthly" ? "Mensualisé" : "Annualisé"}`,
@@ -2413,20 +2431,19 @@ window.addEventListener("load", function() {
   debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "info");
   
   loadProfile();
-  
+  loadAnnualThresholds();
+  initCheatCode();
+  initScenarios();
+  initBadges();
+  initMilestones();
+
   if (!PROFILE.initialized) {
     debugLog("ℹ️ Premier démarrage - Configuration requise", "info");
     handleInitialSetup();
     return;
   }
-  
-  loadAnnualThresholds();
+
   checkAnnualReset();
-  
-  initCheatCode();
-  initScenarios();
-  initBadges();
-  initMilestones();
   
   load();
   
