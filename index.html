@@ -2617,5 +2617,511 @@ window.addEventListener("load", function() {
   debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "success");
 });
 </script>
+<script>
+// ============================================================
+//  MODULE 3 — MOTEUR IA-LIKE v1.0
+//  Fatigue · Stabilite · Risque · Prediction
+//  100% deterministe · 0 appel reseau · 0 modification existant
+// ============================================================
+
+const AI_ENABLED = true;
+const AI_VERSION = "1.0";
+const AI_HISTORY_MAX = 365;
+
+// ── Initialisation STATE (additive uniquement) ──────────────
+
+function AI_initState(state) {
+  if (!AI_ENABLED) return;
+  if (!state.ai) {
+    state.ai = {
+      fatigueScore: 0,
+      motivationScore: 1,
+      stabilityScore: 1,
+      overloadRiskScore: 0,
+      lastWarning: null
+    };
+  }
+  if (!state.aiHistory) {
+    state.aiHistory = [];
+  }
+}
+
+// ── Fatigue Score (0 = repose, 1 = epuise) ──────────────────
+
+function AI_computeFatigueScore(day, state) {
+  if (!AI_ENABLED) return 0;
+
+  let fatigue = 0;
+
+  // Facteur heures : 7h = baseline, au-dela augmente
+  const hoursFactor = Math.max(0, Math.min(1, (day.hours - 7) / 7));
+  fatigue += hoursFactor * 0.40;
+
+  // Facteur nuit
+  if (day.type === "nuit") fatigue += 0.20;
+
+  // Facteur weekend
+  if (day.type === "saturday") fatigue += 0.10;
+  if (day.type === "sunday") fatigue += 0.15;
+
+  // Facteur serie consecutive
+  const streak = state.currentStreak || 0;
+  fatigue += Math.min(1, streak / 14) * 0.25;
+
+  return Math.max(0, Math.min(1, fatigue));
+}
+
+function AI_updateFatigue(day, state) {
+  if (!AI_ENABLED) return;
+  AI_initState(state);
+
+  const dayFatigue = AI_computeFatigueScore(day, state);
+  let prevFatigue = state.ai.fatigueScore;
+
+  // Recuperation pour jours de repos ecoules depuis derniere entree
+  const history = state.aiHistory || [];
+  if (history.length > 0 && day.date) {
+    const lastEntry = history[history.length - 1];
+    if (lastEntry.date) {
+      const last = new Date(lastEntry.date);
+      const current = new Date(day.date);
+      last.setHours(0, 0, 0, 0);
+      current.setHours(0, 0, 0, 0);
+      const daysBetween = Math.floor((current - last) / 86400000);
+
+      if (daysBetween > 1) {
+        const restDays = daysBetween - 1;
+        const REST_DECAY = 0.12;
+        for (let i = 0; i < restDays; i++) {
+          prevFatigue *= (1 - REST_DECAY);
+        }
+      }
+    }
+  }
+
+  const DAILY_DECAY = 0.05;
+  const WEIGHT = 0.30;
+
+  state.ai.fatigueScore = Math.max(0, Math.min(1,
+    prevFatigue * (1 - DAILY_DECAY) + dayFatigue * WEIGHT
+  ));
+}
+
+// ── Stability Score (0 = chaotique, 1 = regulier) ───────────
+
+function AI_updateStability(day, state) {
+  if (!AI_ENABLED) return;
+  AI_initState(state);
+
+  const recentDays = (state.days || []).slice(-14);
+
+  if (recentDays.length < 2) {
+    state.ai.stabilityScore = 1;
+    return;
+  }
+
+  // Variance des heures travaillees
+  const hours = recentDays.map(function(d) { return d.hours || 0; });
+  const mean = hours.reduce(function(a, b) { return a + b; }, 0) / hours.length;
+  const variance = hours.reduce(function(sum, h) { return sum + Math.pow(h - mean, 2); }, 0) / hours.length;
+  const stddev = Math.sqrt(variance);
+  const stabilityFromVariance = Math.max(0, 1 - stddev / 4);
+
+  // Coherence des types de journees
+  var uniqueTypes = new Set(recentDays.map(function(d) { return d.type; })).size;
+  var typeConsistency = Math.max(0, 1 - (uniqueTypes - 1) * 0.15);
+
+  // Regularite des intervalles entre jours travailles
+  var intervalRegularity = 1;
+  if (recentDays.length >= 3) {
+    var dates = recentDays
+      .map(function(d) { var dt = new Date(d.date); dt.setHours(0,0,0,0); return dt.getTime(); })
+      .sort(function(a, b) { return a - b; });
+    var intervals = [];
+    for (var i = 1; i < dates.length; i++) {
+      intervals.push((dates[i] - dates[i - 1]) / 86400000);
+    }
+    if (intervals.length > 0) {
+      var meanInt = intervals.reduce(function(a, b) { return a + b; }, 0) / intervals.length;
+      var varInt = intervals.reduce(function(s, v) { return s + Math.pow(v - meanInt, 2); }, 0) / intervals.length;
+      intervalRegularity = Math.max(0, 1 - Math.sqrt(varInt) / 3);
+    }
+  }
+
+  state.ai.stabilityScore = Math.max(0, Math.min(1,
+    stabilityFromVariance * 0.40 + typeConsistency * 0.25 + intervalRegularity * 0.35
+  ));
+}
+
+// ── Overload / Burnout Risk (0 = safe, 1 = danger) ──────────
+
+function AI_updateOverloadRisk(state) {
+  if (!AI_ENABLED) return;
+  AI_initState(state);
+
+  var fatigue = state.ai.fatigueScore;
+  var stability = state.ai.stabilityScore;
+
+  // Velocite de la fatigue (acceleration)
+  var fatigueVelocity = 0;
+  var history = state.aiHistory || [];
+  if (history.length >= 2) {
+    var tail = history.slice(-5);
+    if (tail.length >= 2) {
+      fatigueVelocity = (tail[tail.length - 1].fatigueScore - tail[0].fatigueScore) / tail.length;
+    }
+  }
+
+  // Formule de risque composite
+  var fatigueContrib = fatigue * 0.45;
+  var instabilityContrib = (1 - stability) * 0.25;
+  var velocityContrib = Math.max(0, fatigueVelocity * 5) * 0.30;
+
+  state.ai.overloadRiskScore = Math.max(0, Math.min(1,
+    fatigueContrib + instabilityContrib + velocityContrib
+  ));
+
+  // Motivation (inverse pondere)
+  state.ai.motivationScore = Math.max(0, Math.min(1,
+    1 - (fatigue * 0.6 + (1 - stability) * 0.4)
+  ));
+}
+
+// ── Pipeline IA Quotidien (jamais appele automatiquement) ───
+
+function AI_processDay(day, state) {
+  if (!AI_ENABLED) return null;
+  AI_initState(state);
+
+  AI_updateFatigue(day, state);
+  AI_updateStability(day, state);
+  AI_updateOverloadRisk(state);
+
+  var snapshot = {
+    date: day.date || new Date().toISOString().slice(0, 10),
+    fatigueScore: +state.ai.fatigueScore.toFixed(4),
+    stabilityScore: +state.ai.stabilityScore.toFixed(4),
+    overloadRiskScore: +state.ai.overloadRiskScore.toFixed(4),
+    motivationScore: +state.ai.motivationScore.toFixed(4),
+    hours: day.hours,
+    type: day.type,
+    timestamp: Date.now()
+  };
+
+  state.aiHistory.push(snapshot);
+  if (state.aiHistory.length > AI_HISTORY_MAX) {
+    state.aiHistory = state.aiHistory.slice(-AI_HISTORY_MAX);
+  }
+
+  var warnings = AI_evaluateWarnings(state);
+  var avoided = AI_checkAvoidedScenario(state, day);
+
+  return { snapshot: snapshot, warnings: warnings, avoided: avoided };
+}
+
+// ── Warnings (alertes non bloquantes, seuils dynamiques) ────
+
+function AI_evaluateWarnings(state) {
+  if (!AI_ENABLED) return [];
+  AI_initState(state);
+
+  var warnings = [];
+  var ai = state.ai;
+
+  // Facteur adaptatif : plus indulgent en debut d'historique
+  var histLen = (state.aiHistory || []).length;
+  var adapt = Math.min(1, histLen / 30);
+
+  // --- Fatigue ---
+  var fatigueThreshold = 0.7 * adapt + 0.3 * (1 - adapt);
+  if (ai.fatigueScore > fatigueThreshold) {
+    warnings.push({
+      type: "fatigue_high",
+      level: ai.fatigueScore > 0.85 ? "critical" : "warning",
+      message: ai.fatigueScore > 0.85
+        ? "Fatigue critique. Repos fortement recommande."
+        : "Fatigue elevee. Journee allegee conseillee.",
+      score: +ai.fatigueScore.toFixed(3)
+    });
+  }
+
+  // --- Surcharge ---
+  if (ai.overloadRiskScore > 0.6) {
+    warnings.push({
+      type: "overload_risk",
+      level: ai.overloadRiskScore > 0.8 ? "critical" : "warning",
+      message: ai.overloadRiskScore > 0.8
+        ? "Risque de surcharge imminent."
+        : "Risque de surcharge en augmentation.",
+      score: +ai.overloadRiskScore.toFixed(3)
+    });
+  }
+
+  // --- Stabilite ---
+  if (ai.stabilityScore < 0.3) {
+    warnings.push({
+      type: "stability_low",
+      level: "info",
+      message: "Horaires tres irreguliers. La regularite favorise la recuperation.",
+      score: +ai.stabilityScore.toFixed(3)
+    });
+  }
+
+  // --- Serie consecutive ---
+  var streak = state.currentStreak || 0;
+  if (streak >= 6) {
+    warnings.push({
+      type: "streak_long",
+      level: streak >= 12 ? "critical" : "warning",
+      message: streak + " jours consecutifs. Repos hebdomadaire obligatoire.",
+      score: streak
+    });
+  }
+
+  // --- Heures hebdomadaires (7 derniers jours calendaires) ---
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+  var sevenAgo = new Date(today.getTime() - 7 * 86400000);
+  var last7 = (state.days || []).filter(function(d) {
+    var dt = new Date(d.date);
+    dt.setHours(0, 0, 0, 0);
+    return dt >= sevenAgo;
+  });
+  var weeklyH = last7.reduce(function(s, d) { return s + (d.hours || 0); }, 0);
+
+  if (weeklyH > 44) {
+    warnings.push({
+      type: "weekly_hours",
+      level: weeklyH > 48 ? "critical" : "warning",
+      message: weeklyH > 48
+        ? weeklyH.toFixed(1) + "h/sem : DEPASSEMENT maximum legal (48h)."
+        : weeklyH.toFixed(1) + "h/sem : proche limite legale.",
+      score: +weeklyH.toFixed(1)
+    });
+  }
+
+  if (warnings.length > 0) {
+    state.ai.lastWarning = {
+      date: new Date().toISOString(),
+      warnings: warnings
+    };
+  }
+
+  return warnings;
+}
+
+// ── Scenarios evites ────────────────────────────────────────
+
+function AI_checkAvoidedScenario(state, day) {
+  if (!AI_ENABLED) return null;
+  AI_initState(state);
+
+  var lastW = state.ai.lastWarning;
+  if (!lastW || !lastW.warnings) return null;
+
+  var wTypes = lastW.warnings.map(function(w) { return w.type; });
+  var avoided = [];
+
+  // Apres alerte fatigue : journee allegee
+  if (wTypes.indexOf("fatigue_high") !== -1 && day.hours <= 7) {
+    avoided.push({
+      type: "fatigue_corrected",
+      message: "Journee allegee apres alerte fatigue. Bon reflexe.",
+      original: "fatigue_high"
+    });
+  }
+
+  // Apres alerte surcharge : charge reduite
+  if (wTypes.indexOf("overload_risk") !== -1 && day.hours <= 7 && day.type === "normal") {
+    avoided.push({
+      type: "overload_avoided",
+      message: "Charge reduite apres risque surcharge. Prevention efficace.",
+      original: "overload_risk"
+    });
+  }
+
+  // Apres alerte heures hebdo : heures reduites
+  if (wTypes.indexOf("weekly_hours") !== -1 && day.hours <= 6) {
+    avoided.push({
+      type: "weekly_corrected",
+      message: "Heures reduites apres alerte hebdomadaire.",
+      original: "weekly_hours"
+    });
+  }
+
+  return avoided.length > 0 ? avoided : null;
+}
+
+// ── Prediction (simulation forward, lecture seule) ──────────
+
+function AI_predictOverloadRisk(futureDays) {
+  if (!AI_ENABLED) return { risk: 0, riskPercent: 0, verdict: "DESACTIVE", projection: [] };
+  if (!futureDays || futureDays.length === 0) {
+    return { risk: 0, riskPercent: 0, verdict: "AUCUNE_DONNEE", projection: [] };
+  }
+
+  // Clone etat actuel pour simulation read-only
+  var currentAi = (typeof STATE !== "undefined" && STATE.ai)
+    ? JSON.parse(JSON.stringify(STATE.ai))
+    : { fatigueScore: 0, motivationScore: 1, stabilityScore: 1, overloadRiskScore: 0, lastWarning: null };
+
+  var currentHistory = (typeof STATE !== "undefined" && STATE.aiHistory)
+    ? STATE.aiHistory.slice(-30).map(function(e) { return Object.assign({}, e); })
+    : [];
+
+  var currentDays = (typeof STATE !== "undefined" && STATE.days)
+    ? STATE.days.slice(-14).map(function(d) { return Object.assign({}, d); })
+    : [];
+
+  var vState = {
+    ai: currentAi,
+    aiHistory: currentHistory,
+    days: currentDays,
+    currentStreak: (typeof STATE !== "undefined" ? STATE.currentStreak : 0) || 0,
+    maxStreak: (typeof STATE !== "undefined" ? STATE.maxStreak : 0) || 0
+  };
+
+  var projection = [];
+
+  futureDays.forEach(function(day, i) {
+    vState.days.push(day);
+    vState.currentStreak++;
+
+    AI_updateFatigue(day, vState);
+    AI_updateStability(day, vState);
+    AI_updateOverloadRisk(vState);
+
+    projection.push({
+      day: i + 1,
+      date: day.date || ("J+" + (i + 1)),
+      fatigue: +vState.ai.fatigueScore.toFixed(3),
+      risk: +vState.ai.overloadRiskScore.toFixed(3),
+      stability: +vState.ai.stabilityScore.toFixed(3),
+      motivation: +vState.ai.motivationScore.toFixed(3)
+    });
+
+    vState.aiHistory.push({
+      date: day.date,
+      fatigueScore: vState.ai.fatigueScore,
+      overloadRiskScore: vState.ai.overloadRiskScore
+    });
+  });
+
+  var finalRisk = vState.ai.overloadRiskScore;
+
+  return {
+    risk: +finalRisk.toFixed(3),
+    riskPercent: Math.round(finalRisk * 100),
+    verdict: finalRisk > 0.8 ? "CRITIQUE"
+           : finalRisk > 0.6 ? "ELEVE"
+           : finalRisk > 0.4 ? "MODERE"
+           : "FAIBLE",
+    projection: projection
+  };
+}
+
+// ── Convenience : "Si tu continues comme ca..." ─────────────
+
+function AI_predictIfContinue(horizonDays) {
+  if (!AI_ENABLED) return AI_predictOverloadRisk([]);
+
+  horizonDays = horizonDays || 14;
+  var recentDays = (STATE.days || []).slice(-7);
+
+  if (recentDays.length === 0) {
+    return { risk: 0, riskPercent: 0, verdict: "AUCUNE_DONNEE", projection: [] };
+  }
+
+  var futureDays = [];
+  for (var i = 0; i < horizonDays; i++) {
+    var template = recentDays[i % recentDays.length];
+    var futureDate = new Date();
+    futureDate.setDate(futureDate.getDate() + i + 1);
+    futureDays.push({
+      date: futureDate.toISOString().slice(0, 10),
+      hours: template.hours,
+      type: template.type
+    });
+  }
+
+  return AI_predictOverloadRisk(futureDays);
+}
+
+// ── Dashboard Console ───────────────────────────────────────
+
+function AI_dashboard() {
+  if (!AI_ENABLED) { console.log("IA desactivee"); return; }
+  AI_initState(STATE);
+
+  var ai = STATE.ai;
+  var bar = function(v, len) {
+    len = len || 20;
+    var filled = Math.round(v * len);
+    var empty = len - filled;
+    var result = "[";
+    for (var i = 0; i < filled; i++) result += "\u2588";
+    for (var j = 0; j < empty; j++) result += "\u2591";
+    return result + "]";
+  };
+
+  console.log("");
+  console.log("\u2501".repeat(40));
+  console.log("  MOTEUR IA v" + AI_VERSION + " \u2014 TABLEAU DE BORD");
+  console.log("\u2501".repeat(40));
+  console.log("  Fatigue    " + bar(ai.fatigueScore) + " " + (ai.fatigueScore * 100).toFixed(1) + "%");
+  console.log("  Stabilite  " + bar(ai.stabilityScore) + " " + (ai.stabilityScore * 100).toFixed(1) + "%");
+  console.log("  Motivation " + bar(ai.motivationScore) + " " + (ai.motivationScore * 100).toFixed(1) + "%");
+  console.log("  Risque     " + bar(ai.overloadRiskScore) + " " + (ai.overloadRiskScore * 100).toFixed(1) + "%");
+  console.log("\u2501".repeat(40));
+  console.log("  Historique : " + (STATE.aiHistory || []).length + " entrees");
+
+  if (ai.lastWarning) {
+    console.log("  Dernier warning : " + ai.lastWarning.date);
+    ai.lastWarning.warnings.forEach(function(w) {
+      console.log("    [" + w.level.toUpperCase() + "] " + w.message);
+    });
+  }
+
+  var pred = AI_predictIfContinue(14);
+  console.log("\u2501".repeat(40));
+  console.log("  Prediction 14j : " + pred.riskPercent + "% (" + pred.verdict + ")");
+  console.log("\u2501".repeat(40));
+  console.log("");
+
+  return { ai: ai, prediction: pred };
+}
+
+// ── API publique (window.AI) ────────────────────────────────
+
+window.AI = {
+  process: function(day) { return AI_processDay(day, STATE); },
+  predict: AI_predictOverloadRisk,
+  predictIfContinue: AI_predictIfContinue,
+  warnings: function() { return AI_evaluateWarnings(STATE); },
+  dashboard: AI_dashboard,
+  state: function() { AI_initState(STATE); return STATE.ai; },
+  history: function() { return STATE.aiHistory || []; },
+  version: AI_VERSION,
+  enabled: function() { return AI_ENABLED; },
+  help: function() {
+    console.log([
+      "",
+      "MOTEUR IA v" + AI_VERSION + " \u2014 COMMANDES :",
+      "",
+      "  AI.process({date, hours, type})   Traite une journee",
+      "  AI.dashboard()                    Tableau de bord complet",
+      "  AI.warnings()                     Warnings actuels",
+      "  AI.predict([{hours,type}, ...])   Prediction custom",
+      "  AI.predictIfContinue(14)          \"Si tu continues...\"",
+      "  AI.state()                        Scores actuels",
+      "  AI.history()                      Historique IA",
+      "  AI.help()                         Cette aide",
+      ""
+    ].join("\n"));
+  }
+};
+
+console.log("[IA] Moteur IA v" + AI_VERSION + " charge. Tapez AI.help() pour commencer.");
+</script>
 </body>
 </html>
