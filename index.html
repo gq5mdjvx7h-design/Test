@@ -1298,6 +1298,13 @@ function importFromModule2(m2Data) {
 }
 
 function calculateInitialXP() {
+  // Éviter double comptage après import/reset
+  if (STATE.totalXPInitialized) {
+    debugLog("⏭️ XP déjà initialisé, skip", "info");
+    return;
+  }
+  STATE.totalXPInitialized = true;
+
   debugLog("🎮 Calcul XP initial...", "info");
 
   let baseXP = 0;
@@ -1661,12 +1668,24 @@ document.getElementById("importFile").addEventListener("change", (e) => {
       if (typeof STATE.currentStreak !== "number") STATE.currentStreak = 0;
       if (typeof STATE.maxStreak !== "number") STATE.maxStreak = 0;
       if (typeof STATE.exports !== "number") STATE.exports = 0;
+      if (!Array.isArray(STATE.completedMilestones)) STATE.completedMilestones = [];
+      STATE.ai = STATE.ai || null;
+      STATE.aiHistory = Array.isArray(STATE.aiHistory) ? STATE.aiHistory : [];
+      STATE.totalXPInitialized = false; // Permettre recalcul si nécessaire
 
       if (data.PROFILE) PROFILE = data.PROFILE;
       if (data.ANNUAL_THRESHOLDS) ANNUAL_THRESHOLDS = data.ANNUAL_THRESHOLDS;
 
       recalculateFromDays();
       recalculateTrophies();
+
+      // Recalculer l'IA sur toutes les journées importées
+      if (typeof AI !== "undefined" && AI.process) {
+        STATE.ai = null;
+        STATE.aiHistory = [];
+        STATE.days.slice().sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(d => AI.process(d));
+        debugLog(`🤖 IA recalculée sur ${STATE.days.length} jours importés`, 'info');
+      }
 
       save();
       saveProfile();
@@ -2086,12 +2105,24 @@ function addDay() {
   addXP(xp, "Journée ajoutée");
 
   checkBadges();
-  
+
+  // Pipeline IA automatique
+  if (typeof AI !== "undefined" && AI.process) {
+    const aiResult = AI.process(day);
+    if (aiResult?.warnings?.length) {
+      console.warn("⚠️ IA warnings :", aiResult.warnings);
+      const critical = aiResult.warnings.find(w => w.level === "critical");
+      if (critical) {
+        showAchievement("⚠️ Attention", critical.message, "Repos conseillé");
+      }
+    }
+  }
+
   document.getElementById("inputDate").value = "";
   document.getElementById("inputHours").value = "";
-  
+
   renderDaysList();
-  
+
   debugLog(`✅ Journée ajoutée : ${date} - ${hours}h (${type})`, "success");
 }
 
@@ -2124,10 +2155,18 @@ function deleteDay(id) {
 
   recalculateStreak();
 
+  // Recalculer l'IA depuis le début (aiHistory devient incohérent sinon)
+  if (typeof AI !== "undefined" && AI.process) {
+    STATE.ai = null;
+    STATE.aiHistory = [];
+    STATE.days.slice().sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(d => AI.process(d));
+    debugLog(`🤖 IA recalculée sur ${STATE.days.length} jours`, 'info');
+  }
+
   removeXP(xpToRemove, "Suppression journée");
 
   renderDaysList();
-  
+
   debugLog(`XP actuel APRÈS: ${STATE.xp} | Niveau: ${STATE.level}`, 'success');
   debugLog(`━━━ FIN SUPPRESSION ━━━`, 'success');
 }
