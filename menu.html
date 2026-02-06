@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Simulateur heures supplémentaires</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- PWA -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#4FB3C2">
+
+<!-- iOS -->
+<link rel="apple-touch-icon" href="/hs/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Compteur Heures & Paie">
+
+<style>
+html, body{
+  margin:0;
+  padding:0;
+  overscroll-behavior:none;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  background:#4FB3C2;
+  color:#fff;
+}
+
+body{
+  min-height:100svh;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding-top:40px;
+  padding-bottom:120px;
+  gap:20px;
+  overflow-y:auto;
+}
+
+/* Boutons principaux */
+.btn{
+  width:min(220px,90vw);
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  cursor:pointer;
+  transition:transform .15s ease;
+}
+
+.btn:active{
+  transform:scale(0.96);
+}
+
+.btn img{
+  width:100%;
+  display:block;
+}
+
+.title{
+  text-align:center;
+  font-weight:600;
+  margin-top:8px;
+  font-size:16px;
+}
+
+/* Bouton info */
+.info-btn{
+  background:transparent;
+  border:2px solid rgba(255,255,255,.9);
+  color:#fff;
+  padding:10px 18px;
+  border-radius:22px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.info-btn:active{
+  transform:scale(0.96);
+}
+
+/* Footer */
+footer{
+  margin-top:40px;
+  font-size:12px;
+  opacity:.85;
+}
+
+/* Conseil sauvegarde */
+.backup-advice{
+  max-width:320px;
+  text-align:center;
+  font-size:13px;
+  opacity:.9;
+}
+
+/* Overlay commun */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:10000;
+}
+
+/* Box popup */
+.popup{
+  background:#fff;
+  color:#000;
+  border-radius:16px;
+  padding:20px;
+  max-width:700px;
+  max-height:80vh;
+  overflow:auto;
+  font-size:14px;
+}
+
+.popup button{
+  margin-top:20px;
+  padding:10px 16px;
+  border:none;
+  border-radius:12px;
+  background:#4FB3C2;
+  color:#fff;
+  font-size:14px;
+  width:100%;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ⚠️ Avertissement sauvegarde -->
+<div id="backup-warning" class="overlay">
+  <div class="popup">
+    <h2>⚠️ Avertissement important</h2>
+    <p>Les données sont stockées <b>localement</b> sur votre appareil.</p>
+    <p>Suppression de l’app ou du navigateur = <b>perte possible des données</b>.</p>
+    <p>👉 Effectuez des <b>sauvegardes régulières</b>.</p>
+    <button onclick="acceptBackupRisk()">J’accepte ces risques</button>
+  </div>
+</div>
+
+<!-- 📄 Présentation -->
+<div id="presentationPopup" class="overlay" onclick="closePresentation()">
+  <div class="popup" onclick="event.stopPropagation()">
+    <h2>📦 Présentation du projet</h2>
+    <p><b>Simulateur d’heures supplémentaires</b><br>Outil personnel – usage indicatif</p>
+
+    <hr>
+
+    <h3>🎯 Objectif</h3>
+    <p>Suivi et compréhension des heures supplémentaires à titre personnel.</p>
+
+    <h3>⚠️ Important</h3>
+    <p><b>Aucune valeur officielle.</b> Seuls les documents employeur font foi.</p>
+
+    <h3>💾 Données</h3>
+    <ul>
+      <li>Stockage local uniquement</li>
+      <li>Aucun serveur</li>
+      <li>Sauvegardes manuelles recommandées</li>
+    </ul>
+
+    <button onclick="closePresentation()">Fermer</button>
+  </div>
+</div>
+
+<!-- 🦊 Boutons -->
+<div class="btn" onclick="go('heures')">
+  <img src="images/renard-annuel.png.jpg" alt="Annuel">
+  <div class="title">Simulateur de compteur annuel</div>
+</div>
+
+<div class="btn" onclick="go('paye')">
+  <img src="images/renard-mensuel.png.jpg" alt="Mensuel">
+  <div class="title">Simulateur d’heures mensualisées</div>
+</div>
+
+<button class="info-btn" onclick="openPresentation()">📄 Présentation du projet</button>
+
+<div class="backup-advice">
+  💾 <b>Conseil sauvegarde</b><br><br>
+  Exportez vos données régulièrement (fin de mois / période).
+</div>
+
+<footer>
+  Développé par C. Anthony
+</footer>
+
+<script>
+/* Service Worker */
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>{
+    navigator.serviceWorker.register("./sw.js");
+  });
+}
+
+/* Backup warning */
+if(localStorage.getItem("backupWarningAccepted")==="true"){
+  document.getElementById("backup-warning").style.display="none";
+}else{
+  document.getElementById("backup-warning").style.display="flex";
+}
+
+function acceptBackupRisk(){
+  localStorage.setItem("backupWarningAccepted","true");
+  document.getElementById("backup-warning").style.display="none";
+}
+
+/* Presentation */
+function openPresentation(){
+  document.getElementById("presentationPopup").style.display="flex";
+  document.body.style.overflow="hidden";
+}
+
+function closePresentation(){
+  document.getElementById("presentationPopup").style.display="none";
+  document.body.style.overflow="";
+}
+
+/* Navigation */
+function go(app){
+  localStorage.setItem("lastApp",app);
+  window.location.href = app + "/index.html";
+}
+</script>
+
+</body>
+</html>
