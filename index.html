@@ -2507,12 +2507,33 @@ function initScenarios() {
     {id:98,name:"Burn-out",category:"sante",tags:["épuisement"],days:[],desc:"Arrêt épuisement pro",legal:"⚠️ Arrêt maladie classique",risk:"moyen",conseil:{titre:"🏥 Épuisement Pro",message:"Burn-out = arrêt maladie standard actuellement.",actions:["Certificat médecin traitant","Pas reconnaissance MP automatique","Employeur doit évaluer risques psycho","Retour : entretien préalable recommandé"],alerte:{niveau:"warning",texte:"🏥 Burn-out : arrêt + évaluation risques"}}},
     {id:99,name:"Longue maladie",category:"sante",tags:["ALD"],days:[],desc:"Arrêt > 6 mois",legal:"⚠️ Affection longue durée",risk:"moyen",conseil:{titre:"🏥 Longue Maladie",message:"Arrêt > 6 mois : maintien emploi fragilisé.",actions:["Remplacement possible au-delà 1 an","Maintien salaire limité dans temps","ALD : prise charge 100% CPAM","Contact RH régulier conseillé"],alerte:{niveau:"warning",texte:"🏥 > 6 mois : risque remplacement"}}},
     {id:100,name:"Reprise après inaptitude",category:"sante",tags:["reprise"],days:[{h:4,type:"normal"},{h:5,type:"normal"},{h:6,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Reprise progressive",legal:"✅ Reprise adaptée",risk:"aucun",conseil:{titre:"🏥 Reprise Après Inaptitude",message:"Reprise = visite médicale obligatoire.",actions:["Visite reprise médecin travail obligatoire","Aménagement poste selon avis","Période adaptation possible","Suivi médical renforcé"],alerte:null}},
-  // SCÉNARIOS 101-200 : COMPLÉTION MODULE 3
-// Ton neutre et informatif · Références légales précises
-
-// SCÉNARIOS 101-120 : SANTÉ ET PRÉVENTION AVANCÉE
-
-{id:101,name:“Visite médicale embauche”,category:“sante”,tags:[“médecine travail”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Visite d’information et de prévention”,legal:“✅ Visite obligatoire”,risk:“aucun”,conseil:{titre:“🏥 Médecine du Travail”,message:“Visite d’information dans les 3 mois suivant l’embauche.”,actions:[“Organisée par l’employeur”,“Gratuite pour le salarié”,“Temps de travail effectif”,“Permet l’adaptation du poste si besoin”],alerte:null}},
+{
+  id: 101,
+  name: "Visite médicale embauche",
+  category: "sante",
+  tags: ["médecine travail"],
+  days: [
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" }
+  ],
+  desc: "Visite d'information et de prévention",
+  legal: "✅ Visite obligatoire",
+  risk: "aucun",
+  conseil: {
+    titre: "🏥 Médecine du Travail",
+    message: "Visite d'information dans les 3 mois suivant l'embauche.",
+    actions: [
+      "Organisée par l'employeur",
+      "Gratuite pour le salarié",
+      "Temps de travail effectif",
+      "Permet l'adaptation du poste si besoin"
+    ],
+    alerte: null
+  }
+},
 
 {id:102,name:“Visite périodique”,category:“sante”,tags:[“suivi médical”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Suivi médical régulier”,legal:“✅ Périodicité définie”,risk:“aucun”,conseil:{titre:“🏥 Suivi Médical”,message:“Visite tous les 5 ans (3 ans si risques).”,actions:[“Périodicité selon exposition aux risques”,“Organisée par l’employeur”,“Peut déboucher sur aménagements”,“Confidentialité médicale garantie”],alerte:null}},
 
