@@ -9129,7 +9129,15 @@ function initScenarios() {
       "message": "Le bien-être nécessite attention régulière.",
       "actions": ["Check-in quotidien : comment je vais vraiment?", "Ajustements proactifs si dérive", "Aide précoce plus efficace que tardive", "Bien-être = marathon pas sprint"],
       "alerte": null
-    }
+      }};
+
+  const el = document.getElementById("TON_ID");
+
+if (!el) {
+  alert("ELEMENT INTROUVABLE");
+  return; // ⛔️ STOP TOUT
+}
+window.__MODULE3_LOAD_BOUND__ = true;
 window.addEventListener("load", function() {
   // Vérifie si la console affiche bien l'ID 600 pour confirmer la liaison
   console.log("📦 Liaison Data ID:", MODULE_PREVENTION.id); 
