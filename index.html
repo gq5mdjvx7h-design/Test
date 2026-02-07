@@ -9129,45 +9129,7 @@ function initScenarios() {
       "message": "Le bien-être nécessite attention régulière.",
       "actions": ["Check-in quotidien : comment je vais vraiment?", "Ajustements proactifs si dérive", "Aide précoce plus efficace que tardive", "Bien-être = marathon pas sprint"],
       "alerte": null
-      }}
-
-  const el = document.getElementById("TON_ID");
-
-if (!el) {
-  alert("ELEMENT INTROUVABLE");
-  return; // ⛔️ STOP TOUT
-}
-window.__MODULE3_LOAD_BOUND__ = true;
-window.addEventListener("load", function() {
-  // Vérifie si la console affiche bien l'ID 600 pour confirmer la liaison
-  console.log("📦 Liaison Data ID:", MODULE_PREVENTION.id); 
-  
-  debugLog("🚀 DÉMARRAGE MODULE 3", "info");
-
-  // On passe MODULE_PREVENTION à tes fonctions si nécessaire
-  // ou on s'assure que displayModulesData() l'utilise
-  loadProfile();
-  
-  // ... reste du code ...
-  
-  displayModulesData(MODULE_PREVENTION); // Passe l'objet en paramètre ici
-  
-  document.getElementById("mainInterface").classList.remove("hidden");
-  debugLog("✅ Module 3 chargé", "success");
-});
-
-// ============================================================
-//  MODULE 3 — MOTEUR IA-LIKE v1.0
-//  Fatigue · Stabilite · Risque · Prediction
-//  100% deterministe · 0 appel reseau · 0 modification existant
-// ============================================================
-
-const AI_ENABLED = true;
-const AI_VERSION = "1.0";
-const AI_HISTORY_MAX = 365;
-
-// ── Initialisation STATE (additive uniquement) ──────────────
-
+      }
 function AI_initState(state) {
   if (!AI_ENABLED) return;
   if (!state.ai) {
@@ -9182,10 +9144,6 @@ function AI_initState(state) {
   if (!state.aiHistory) {
     state.aiHistory = [];
   }
-}
-
-// ── Fatigue Score (0 = repose, 1 = epuise) ──────────────────
-
 function AI_computeFatigueScore(day, state) {
   if (!AI_ENABLED) return 0;
 
