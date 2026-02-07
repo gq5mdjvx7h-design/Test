@@ -7420,7 +7420,37 @@ function initScenarios() {
       "alerte": null
     }
 // SCÉNARIOS 401-425 : SIGNAUX FAIBLES ET BIEN-ÊTRE
-{id:401,name:"Fatigue chronique matinale",category:"bien-etre",tags:["fatigue","signal"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Épuisement dès le réveil",legal:"⚠️ Signal d’alerte",risk:"moyen",conseil:{titre:"😴 Fatigue Persistante",message:"La fatigue matinale persistante est un signal d’alerte précoce.",actions:["Observer la durée : plus de 2 semaines = consulter","Vérifier la qualité du sommeil (réveils nocturnes, apnées)","Noter si les week-ends ne suffisent plus à récupérer","Échanger avec le médecin traitant ou le médecin du travail"],alerte:{niveau:"warning",texte:"⚠️ Fatigue chronique : signal précoce d'épuisement"}}},
+const fatigueData = {
+  id: 401,
+  name: "Fatigue chronique matinale",
+  category: "bien-etre",
+  tags: ["fatigue", "signal"],
+  days: [
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" }
+  ],
+  desc: "Épuisement dès le réveil",
+  legal: "⚠️ Signal d’alerte",
+  risk: "moyen",
+  conseil: {
+    titre: "😴 Fatigue Persistante",
+    message: "La fatigue matinale persistante est un signal d’alerte précoce.",
+    actions: [
+      "Observer la durée : plus de 2 semaines = consulter",
+      "Vérifier la qualité du sommeil (réveils nocturnes, apnées)",
+      "Noter si les week-ends ne suffisent plus à récupérer",
+      "Échanger avec le médecin traitant ou le médecin du travail"
+    ],
+    alerte: {
+      niveau: "warning",
+      texte: "⚠️ Fatigue chronique : signal précoce d'épuisement"
+    }
+  }
+}; // Utilise un point-virgule ici pour terminer l'instruction
+
 
 {id:402,name:"Démotivation progressive",category:"bien-etre",tags:["motivation","signal"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Perte d’intérêt pour le travail",legal:"⚠️ Signal engagement",risk:"moyen",conseil:{titre:"📉 Démotivation",message:"La perte d’intérêt progressive mérite attention.",actions:["Identifier ce qui a changé récemment (charge, reconnaissance, autonomie)","Distinguer lassitude temporaire et démotivation profonde","Échanger avec le manager sur les ressentis","Explorer les possibilités d'évolution ou de formation"],alerte:{niveau:"info",texte:"📉 Démotivation : identifier les causes"}}},
 
