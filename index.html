@@ -2591,208 +2591,1633 @@ function initScenarios() {
 
 
 
-{id:104,name:“Aménagement poste santé”,category:“sante”,tags:[“adaptation”],days:[{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”}],desc:“Poste adapté temporairement”,legal:“✅ Avis médecin travail”,risk:“aucun”,conseil:{titre:“🏥 Poste Adapté”,message:“Aménagement suite avis médecin du travail.”,actions:[“Prescription temporaire ou permanente”,“Maintien rémunération selon modalités”,“Réévaluation périodique”,“Recherche reclassement si permanent”],alerte:null}},
+[
+  {
+    "id": 104,
+    "name": "Aménagement poste santé",
+    "category": "sante",
+    "tags": ["adaptation"],
+    "days": [{"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}],
+    "desc": "Poste adapté temporairement",
+    "legal": "✅ Avis médecin travail",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏥 Poste Adapté",
+      "message": "Aménagement suite avis médecin du travail.",
+      "actions": ["Prescription temporaire ou permanente", "Maintien rémunération selon modalités", "Réévaluation périodique", "Recherche reclassement si permanent"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 105,
+    "name": "Grossesse déclarée",
+    "category": "sante",
+    "tags": ["maternité", "protection"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Travail pendant grossesse",
+    "legal": "✅ Protection renforcée",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "👶 Grossesse",
+      "message": "Protection spécifique dès déclaration.",
+      "actions": ["Autorisations absences examens médicaux", "Interdiction licenciement (sauf faute grave)", "Aménagements poste possibles", "Congé maternité : 16 semaines minimum"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 106,
+    "name": "Don de sang",
+    "category": "sante",
+    "tags": ["don", "autorisation"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Absence pour don du sang",
+    "legal": "✅ Autorisation légale",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💉 Don du Sang",
+      "message": "Absence autorisée pour don.",
+      "actions": ["Durée : temps nécessaire au don", "Non rémunéré sauf convention collective", "Justificatif EFS à fournir", "Ne peut être refusé"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 107,
+    "name": "Vaccination obligatoire",
+    "category": "sante",
+    "tags": ["obligation sanitaire"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Vaccination secteur santé",
+    "legal": "✅ Obligation secteur",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💉 Vaccination Obligatoire",
+      "message": "Certains secteurs imposent des vaccinations.",
+      "actions": ["Santé, petite enfance : vaccinations définies", "Prise en charge employeur", "Temps vaccination = temps travail", "Suspension possible si refus"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 108,
+    "name": "Évaluation risques pro",
+    "category": "sante",
+    "tags": ["DUERP", "prévention"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Participation Document Unique",
+    "legal": "✅ DUERP obligatoire",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📋 Document Unique",
+      "message": "Évaluation des risques professionnels.",
+      "actions": ["Document Unique obligatoire toutes entreprises", "Mise à jour annuelle minimum", "Consultation salariés prévue", "Actions prévention définies"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 109,
+    "name": "Formation sécurité",
+    "category": "sante",
+    "tags": ["SST", "formation"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Formation SST suivie",
+    "legal": "✅ Formation sécurité",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🚑 Formation SST",
+      "message": "Sauveteur Secouriste du Travail.",
+      "actions": ["Durée : 14h (2 jours)", "Recyclage tous les 2 ans", "Temps de travail effectif", "Certificat délivré"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 110,
+    "name": "Incendie évacuation",
+    "category": "sante",
+    "tags": ["exercice", "sécurité"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Exercice évacuation annuel",
+    "legal": "✅ Exercice obligatoire",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🔥 Exercice Évacuation",
+      "message": "2 exercices annuels minimum.",
+      "actions": ["Fréquence : semestrielle minimum", "Participation obligatoire", "Temps travail effectif", "Formation évacuateurs"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 111,
+    "name": "Équipement EPI",
+    "category": "sante",
+    "tags": ["protection", "équipement"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Port EPI obligatoire",
+    "legal": "✅ Fourniture employeur",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🦺 EPI",
+      "message": "Équipements Protection Individuelle fournis.",
+      "actions": ["Fourniture gratuite par employeur", "Port obligatoire si risque", "Vérification périodique", "Remplacement si défectueux"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 112,
+    "name": "Exposition amiante",
+    "category": "sante",
+    "tags": ["amiante", "traçabilité"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Travaux zone amiantée",
+    "legal": "⚠️ Suivi spécifique",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "⚠️ Exposition Amiante",
+      "message": "Suivi médical renforcé obligatoire.",
+      "actions": ["Attestation exposition délivrée", "Surveillance médicale post-exposition 50 ans", "Formation risques amiante", "Certification SS3 ou SS4 selon travaux"],
+      "alerte": {
+        "niveau": "warning",
+        "texte": "⚠️ Amiante : traçabilité exposition 50 ans"
+      }
+    }
+  },
+  {
+    "id": 113,
+    "name": "Travail isolé forêt",
+    "category": "sante",
+    "tags": ["isolement", "risque"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Travailleur isolé terrain",
+    "legal": "⚠️ Dispositif protection",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "👤 Travail Isolé",
+      "message": "Dispositifs de protection requis.",
+      "actions": ["DATI (Dispositif Alarme Travailleur Isolé)", "Vérifications régulières", "Moyens communication garantis", "Procédure alerte définie"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "👤 Isolement : dispositif protection obligatoire"
+      }
+    }
+  },
+  {
+    "id": 114,
+    "name": "Canicule organisation",
+    "category": "sante",
+    "tags": ["chaleur", "adaptation"],
+    "days": [{"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}],
+    "desc": "Fortes chaleurs",
+    "legal": "⚠️ Mesures adaptation",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🌡️ Fortes Chaleurs",
+      "message": "Adaptation organisation nécessaire.",
+      "actions": ["Mise à disposition eau fraîche", "Aménagement horaires si possible", "Pauses régulières", "Local climatisé ou ventilé"],
+      "alerte": {
+        "niveau": "warning",
+        "texte": "🌡️ Canicule : mesures adaptation obligatoires"
+      }
+    }
+  },
+  {
+    "id": 115,
+    "name": "Grand froid",
+    "category": "sante",
+    "tags": ["températures", "protection"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Travail températures négatives",
+    "legal": "⚠️ Protection spécifique",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "❄️ Grand Froid",
+      "message": "Travail par températures extrêmes.",
+      "actions": ["Vêtements adaptés fournis", "Pauses réchauffement régulières", "Boissons chaudes à disposition", "Surveillance santé renforcée"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "❄️ Froid : équipements protection fournis"
+      }
+    }
+  },
+  {
+    "id": 116,
+    "name": "Risque chimique",
+    "category": "sante",
+    "tags": ["produits", "exposition"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Manipulation produits chimiques",
+    "legal": "⚠️ Traçabilité expositions",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "☣️ Risque Chimique",
+      "message": "Exposition produits dangereux tracée.",
+      "actions": ["Fiche exposition individuelle", "Suivi médical renforcé", "Formation manipulation obligatoire", "EPI adaptés fournis"],
+      "alerte": {
+        "niveau": "warning",
+        "texte": "☣️ Chimique : traçabilité exposition"
+      }
+    }
+  },
+  {
+    "id": 117,
+    "name": "Bruit excessif",
+    "category": "sante",
+    "tags": ["nuisance", "audition"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Exposition >85dB",
+    "legal": "⚠️ Protection auditive",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🔊 Exposition Bruit",
+      "message": "Protection auditive au-delà 80dB.",
+      "actions": ["Protections auditives obligatoires >85dB", "Audiogramme régulier", "Aménagements acoustiques", "Formation risques auditifs"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "🔊 >85dB : protections auditives obligatoires"
+      }
+    }
+  },
+  {
+    "id": 118,
+    "name": "Vibrations machines",
+    "category": "sante",
+    "tags": ["TMS", "prévention"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Utilisation outils vibrants",
+    "legal": "⚠️ Valeurs limites",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "📳 Vibrations",
+      "message": "Exposition vibrations réglementée.",
+      "actions": ["Valeurs limites définies", "Surveillance médicale si dépassement", "Gants anti-vibrations", "Limitation temps exposition"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "📳 Vibrations : surveillance exposition"
+      }
+    }
+  },
+  {
+    "id": 119,
+    "name": "Écran quotidien",
+    "category": "sante",
+    "tags": ["informatique", "fatigue"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Travail écran >4h/jour",
+    "legal": "✅ Pause écran",
+    "risk": "faible",
+    "conseil": {
+      "titre": "💻 Travail Écran",
+      "message": "Pauses recommandées toutes les 2h.",
+      "actions": ["Pause 5-10min toutes les 2h conseillée", "Ergonomie poste vérifiée", "Visite ophtalmologique possible", "Règle 20-20-20 : pause visuelle"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 120,
+    "name": "Port charges lourdes",
+    "category": "sante",
+    "tags": ["manutention", "TMS"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Manutention manuelle",
+    "legal": "⚠️ Limites poids",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "📦 Port Charges",
+      "message": "Limites poids selon sexe et âge.",
+      "actions": ["Hommes adultes : 55kg max occasionnel", "Femmes adultes : 25kg max occasionnel", "Formation gestes et postures", "Aide mécanique si dépassement"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "📦 Charges lourdes : formation gestes obligatoire"
+      }
+    }
+  },
+  {
+    "id": 121,
+    "name": "Congés payés annuels",
+    "category": "conge",
+    "tags": ["CP", "acquisition"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Prise congés annuels",
+    "legal": "✅ Droit acquis",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏖️ Congés Payés",
+      "message": "2,5 jours ouvrables par mois travaillé.",
+      "actions": ["30 jours ouvrables = 5 semaines par an", "Période de référence : juin-mai", "Prise selon accord employeur", "Fractionnement possible"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 122,
+    "name": "Congés fractionnés",
+    "category": "conge",
+    "tags": ["fractionnement"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Congés pris en plusieurs fois",
+    "legal": "✅ Jours fractionnement",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏖️ Fractionnement",
+      "message": "Congés en plusieurs périodes.",
+      "actions": ["Congé principal : minimum 12 jours continus", "Jours fractionnement si <12j en été", "Accord employeur sur dates", "Planification anticipée"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 123,
+    "name": "Congé ancienneté",
+    "category": "conge",
+    "tags": ["ancienneté"],
+    "days": [],
+    "desc": "Jours supplémentaires ancienneté",
+    "legal": "⚠️ Selon convention",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📅 Ancienneté",
+      "message": "Jours supplémentaires selon convention.",
+      "actions": ["Vérifiez convention collective", "Généralement : +1j après 10-15 ans", "Cumul avec congés légaux", "Prise selon calendrier"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 124,
+    "name": "Congé sans solde",
+    "category": "conge",
+    "tags": ["non payé"],
+    "days": [],
+    "desc": "Absence non rémunérée",
+    "legal": "⚠️ Accord employeur",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📋 Congé Sans Solde",
+      "message": "Suspension contrat sans rémunération.",
+      "actions": ["Accord employeur nécessaire", "Durée définie à l’avance", "Pas d’acquisition droits pendant période", "Réintégration garantie"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 125,
+    "name": "Congé décès",
+    "category": "conge",
+    "tags": ["deuil"],
+    "days": [],
+    "desc": "Décès proche",
+    "legal": "✅ Congés pour événements",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🕊️ Congé Décès",
+      "message": "Jours selon lien familial.",
+      "actions": ["Conjoint/enfant/parent : 5 jours", "Frère/sœur : 3 jours", "Justificatif acte décès", "Rémunération maintenue"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 126,
+    "name": "Congé mariage",
+    "category": "conge",
+    "tags": ["mariage"],
+    "days": [],
+    "desc": "Mariage du salarié",
+    "legal": "✅ Congé événement",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💍 Mariage",
+      "message": "4 jours pour mariage salarié.",
+      "actions": ["Mariage salarié : 4 jours", "Mariage enfant : 1 jour (selon convention)", "PACS : selon convention collective", "Délai prévenance raisonnable"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 127,
+    "name": "Congé naissance",
+    "category": "conge",
+    "tags": ["naissance"],
+    "days": [],
+    "desc": "Naissance enfant",
+    "legal": "✅ Congé naissance",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "👶 Naissance",
+      "message": "3 jours naissance + congé paternité.",
+      "actions": ["Naissance : 3 jours dans 15 jours suivants", "+ Congé paternité : 28 jours calendaires", "Rémunération maintenue (3j)", "Justificatif acte naissance"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 128,
+    "name": "Congé déménagement",
+    "category": "conge",
+    "tags": ["déménagement"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Jour déménagement",
+    "legal": "⚠️ Selon convention",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🚚 Déménagement",
+      "message": "1-2 jours selon conventions collectives.",
+      "actions": ["Vérifiez convention collective", "Généralement 1-2 jours rémunérés", "Justificatif à fournir", "Délai prévenance"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 129,
+    "name": "Congé jury assises",
+    "category": "conge",
+    "tags": ["jury", "citoyen"],
+    "days": [],
+    "desc": "Convocation jury citoyen",
+    "legal": "✅ Autorisation légale",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "⚖️ Jury Assises",
+      "message": "Autorisation absence obligatoire.",
+      "actions": ["Convocation = obligation civique", "Indemnisation justice", "Employeur ne peut refuser", "Maintien emploi garanti"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 130,
+    "name": "Congé formation syndicale",
+    "category": "conge",
+    "tags": ["syndical", "formation"],
+    "days": [],
+    "desc": "Formation syndicale",
+    "legal": "✅ Droit syndical",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📚 Formation Syndicale",
+      "message": "Congés formation syndicale.",
+      "actions": ["12 jours maximum par an", "Non rémunéré (pris en charge syndicat)", "Autorisation préalable nécessaire", "Protection statut"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 131,
+    "name": "Absence maladie ordinaire",
+    "category": "absence",
+    "tags": ["arrêt"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Maladie courte",
+    "legal": "✅ Indemnisation CPAM",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏥 Maladie",
+      "message": "Indemnisation dès 4e jour.",
+      "actions": ["Certificat médical sous 48h", "IJSS à partir du 4e jour", "Maintien partiel employeur selon ancienneté", "Contre-visite patronale possible"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 132,
+    "name": "Absence consultation médicale",
+    "category": "absence",
+    "tags": ["médecin"],
+    "days": [{"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}],
+    "desc": "RDV médical ponctuel",
+    "legal": "⚠️ Tolérance usuelle",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏥 RDV Médical",
+      "message": "Autorisations selon usage entreprise.",
+      "actions": ["Privilégier hors horaires travail", "Justificatif médical", "Selon usage : rémunéré ou non", "Prévenir à l’avance"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 133,
+    "name": "Absence examen permis",
+    "category": "absence",
+    "tags": ["permis conduire"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Passage permis de conduire",
+    "legal": "⚠️ Selon convention",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🚗 Permis Conduire",
+      "message": "Autorisation selon convention collective.",
+      "actions": ["Vérifiez convention collective", "Généralement : 1 jour autorisé", "Non rémunéré sauf disposition", "Convocation à présenter"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 134,
+    "name": "Absence convocation préfecture",
+    "category": "absence",
+    "tags": ["administratif"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Convocation administrative",
+    "legal": "✅ Selon nature convocation",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📋 Convocation Admin",
+      "message": "Autorisation selon nature.",
+      "actions": ["Convocation obligatoire : autorisation due", "Justificatif convocation à présenter", "Rémunération : selon nature", "Prévenir employeur"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 135,
+    "name": "Grève participation",
+    "category": "absence",
+    "tags": ["grève", "droit"],
+    "days": [],
+    "desc": "Journée de grève",
+    "legal": "✅ Droit de grève",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "✊ Droit de Grève",
+      "message": "Droit constitutionnel, non rémunéré.",
+      "actions": ["Exercice libre sans autorisation", "Non rémunération (retenue 1/30e)", "Protection contre sanctions", "Préavis dans services publics"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 136,
+    "name": "Lock-out",
+    "category": "absence",
+    "tags": ["fermeture", "conflit"],
+    "days": [],
+    "desc": "Fermeture exceptionnelle",
+    "legal": "⚠️ Maintien salaire",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🔒 Lock-Out",
+      "message": "Fermeture temporaire entreprise.",
+      "actions": ["Maintien rémunération si décision employeur", "Chômage partiel possible", "Situation exceptionnelle", "Information instances représentatives"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 137,
+    "name": "Intempéries BTP",
+    "category": "absence",
+    "tags": ["météo", "chômage"],
+    "days": [],
+    "desc": "Arrêt travail intempéries",
+    "legal": "✅ Chômage intempéries",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🌧️ Intempéries",
+      "message": "Indemnisation chômage intempéries.",
+      "actions": ["Spécifique secteur BTP", "Indemnisation caisse congés", "Conditions météo définies", "Reprise dès conditions permettent"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 138,
+    "name": "Panne transport public",
+    "category": "absence",
+    "tags": ["transport", "retard"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Grève transports",
+    "legal": "⚠️ Pas force majeure automatique",
+    "risk": "faible",
+    "conseil": {
+      "titre": "🚇 Grève Transports",
+      "message": "Grève transports : justification absence.",
+      "actions": ["Recherche solutions alternatives", "Télétravail si possible", "Justificatifs perturbations", "Retenue salaire possible selon circonstances"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "🚇 Grève transports : solutions alternatives"
+      }
+    }
+  },
+  {
+    "id": 139,
+    "name": "Garde enfant imprévue",
+    "category": "absence",
+    "tags": ["enfant", "urgence"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Absence garde enfant",
+    "legal": "⚠️ Congé enfant malade",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "👶 Garde Enfant",
+      "message": "Congé enfant malade selon conditions.",
+      "actions": ["3-5 jours selon âge et nombre enfants", "Certificat médical obligatoire", "Non rémunéré sauf convention", "Protection emploi si conditions"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 140,
+    "name": "Examens médicaux obligatoires",
+    "category": "absence",
+    "tags": ["prévention", "grossesse"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Examens médicaux légaux",
+    "legal": "✅ Autorisation légale",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏥 Examens Obligatoires",
+      "message": "Examens prévus par la loi.",
+      "actions": ["Grossesse : 7 examens obligatoires", "Médecine du travail : visites réglementaires", "Temps travail effectif", "Rémunération maintenue"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 141,
+    "name": "Période essai standard",
+    "category": "contrat",
+    "tags": ["essai", "évaluation"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "En période d’essai",
+    "legal": "✅ Période probatoire",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📝 Période Essai",
+      "message": "Évaluation réciproque des parties.",
+      "actions": ["Durée selon qualification (2-4 mois)", "Rupture libre avec préavis réduit", "Renouvellement possible si prévu au contrat", "Évaluation régulière"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 142,
+    "name": "Fin période essai",
+    "category": "contrat",
+    "tags": ["rupture", "essai"],
+    "days": [],
+    "desc": "Rupture période essai",
+    "legal": "✅ Rupture simplifiée",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📝 Fin Essai",
+      "message": "Rupture possible pendant période essai.",
+      "actions": ["Préavis : 24h à 2 semaines selon durée", "Pas indemnité rupture", "Chômage : droits maintenus", "Pas obligation motivation"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 143,
+    "name": "CDD saisonnier",
+    "category": "contrat",
+    "tags": ["saison", "temporaire"],
+    "days": [{"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}],
+    "desc": "Contrat emploi saisonnier",
+    "legal": "✅ CDD spécifique",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🌞 CDD Saisonnier",
+      "message": "Contrat lié activité saisonnière.",
+      "actions": ["Pas délai carence entre contrats", "Pas indemnité précarité", "Reconduction possible année suivante", "Durée selon saison"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 144,
+    "name": "CDD remplacement",
+    "category": "contrat",
+    "tags": ["remplacement", "absent"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "CDD remplacement salarié",
+    "legal": "✅ Motif précis",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🔄 CDD Remplacement",
+      "message": "Remplacement salarié absent.",
+      "actions": ["Nom remplacé mentionné au contrat", "Durée : pendant absence", "Pas indemnité fin contrat", "Renouvellement si absence prolongée"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 145,
+    "name": "CDD accroissement activité",
+    "category": "contrat",
+    "tags": ["surcroît", "temporaire"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "CDD surcroît activité",
+    "legal": "✅ CDD classique",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📈 CDD Accroissement",
+      "message": "Activité temporairement accrue.",
+      "actions": ["Durée maximum : 18 mois", "Indemnité précarité : 10%", "Délai carence : 1/3 durée contrat", "Renouvellement possible 2 fois"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 146,
+    "name": "Intérim mission",
+    "category": "contrat",
+    "tags": ["intérim", "mission"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Mission intérimaire",
+    "legal": "✅ Travail temporaire",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🔄 Intérim",
+      "message": "Emploi via agence travail temporaire.",
+      "actions": ["Contrat mission précis", "Indemnité fin mission : 10%", "Congés payés inclus (10%)", "Égalité traitement avec permanents"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 147,
+    "name": "Stage convention",
+    "category": "contrat",
+    "tags": ["stage", "étudiant"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Stagiaire avec convention",
+    "legal": "✅ Gratification obligatoire",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎓 Stage",
+      "message": "Gratification si >2 mois.",
+      "actions": [">2 mois consécutifs : gratification minimum", "Montant : 15% plafond SS (~600€/mois)", "Pas contrat travail = pas salaire", "Maximum : 6 mois par année d’enseignement"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 148,
+    "name": "Apprentissage",
+    "category": "contrat",
+    "tags": ["alternance", "apprenti"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Contrat apprentissage",
+    "legal": "✅ Formation en alternance",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎓 Apprentissage",
+      "message": "Contrat alternance jusqu’à 29 ans.",
+      "actions": ["Salaire selon âge et année (25-100% SMIC)", "1 jour/semaine minimum en CFA", "Durée : 6 mois à 3 ans", "Aide au permis : 500€ possible"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 149,
+    "name": "Professionnalisation",
+    "category": "contrat",
+    "tags": ["alternance", "qualification"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Contrat professionnalisation",
+    "legal": "✅ Contrat qualification",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎓 Professionnalisation",
+      "message": "Alternance tous âges.",
+      "actions": ["CDD 6-24 mois ou CDI avec action pro", "Salaire selon âge et qualification (55-100%)", "15-25% temps en formation", "Tutorat en entreprise"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 150,
+    "name": "Contrat aidé",
+    "category": "contrat",
+    "tags": ["insertion", "PEC"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Parcours Emploi Compétences",
+    "legal": "✅ Aide insertion",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🤝 Contrat Aidé",
+      "message": "PEC : aide publique insertion.",
+      "actions": ["Secteur non-marchand principalement", "Accompagnement formation prévu", "CDD ou CDI", "Aide État pour employeur"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 151,
+    "name": "CDI intérimaire",
+    "category": "contrat",
+    "tags": ["intérim", "CDI"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "CDI Intérimaire (CDII)",
+    "legal": "✅ Statut particulier",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🔄 CDI Intérimaire",
+      "message": "CDI avec missions successives.",
+      "actions": ["Rémunération maintenue entre missions", "Période adaptation entre missions", "Même protection CDI classique", "Formation régulière"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 152,
+    "name": "Clause objectifs",
+    "category": "contrat",
+    "tags": ["performance", "objectifs"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Rémunération variable",
+    "legal": "⚠️ Objectifs atteignables",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎯 Objectifs",
+      "message": "Part variable selon résultats.",
+      "actions": ["Objectifs doivent être réalisables", "Critères précis et mesurables", "Révision périodique", "Partie fixe garantie"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 153,
+    "name": "Astreinte contractuelle",
+    "category": "contrat",
+    "tags": ["astreinte", "disponibilité"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Astreintes prévues contrat",
+    "legal": "⚠️ Compensation définie",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📱 Astreintes",
+      "message": "Périodes astreinte régulières.",
+      "actions": ["Fréquence et indemnisation au contrat", "Planning prévisionnel", "Intervention = heures travail", "Droit refus si non contractuel"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 154,
+    "name": "Clause dédit formation",
+    "category": "contrat",
+    "tags": ["formation", "engagement"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Formation coûteuse suivie",
+    "legal": "⚠️ Engagement durée",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📚 Clause Dédit",
+      "message": "Remboursement si départ anticipé.",
+      "actions": ["Durée engagement proportionnelle", "Montant dégressif dans temps", "Formation qualifiante longue/coûteuse", "Accord écrit obligatoire"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 155,
+    "name": "Clause confidentialité",
+    "category": "contrat",
+    "tags": ["secret", "discrétion"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Obligation confidentialité",
+    "legal": "✅ Loyauté contractuelle",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🤐 Confidentialité",
+      "message": "Discrétion informations sensibles.",
+      "actions": ["Périmètre défini au contrat", "Sanctions si violation", "Persiste après rupture contrat", "Secrets fabrication protégés"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 156,
+    "name": "Temps partiel choisi",
+    "category": "contrat",
+    "tags": ["80%", "choix"],
+    "days": [{"h": 5.6, "type": "normal"}, {"h": 5.6, "type": "normal"}, {"h": 5.6, "type": "normal"}, {"h": 5.6, "type": "normal"}, {"h": 5.6, "type": "normal"}],
+    "desc": "Temps partiel 80%",
+    "legal": "✅ Avenant écrit",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "⏱️ 80%",
+      "message": "Temps partiel 28h/semaine.",
+      "actions": ["Avenant précisant durée et répartition", "Heures complémentaires : max 10%", "Retour temps plein facilité", "Droits proratisés"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 157,
+    "name": "Compte épargne temps",
+    "category": "contrat",
+    "tags": ["CET", "épargne"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Alimentation CET",
+    "legal": "✅ Dispositif épargne",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💰 CET",
+      "message": "Épargne congés et heures.",
+      "actions": ["Alimentation : CP, RTT, heures sup", "Utilisation : congé, formation, retraite", "Transfert possible entre employeurs", "Plafond selon accord"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 158,
+    "name": "Jours RTT annuels",
+    "category": "organisation",
+    "tags": ["RTT", "repos"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Attribution RTT",
+    "legal": "✅ Réduction temps travail",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📅 RTT",
+      "message": "Jours repos compensant >35h.",
+      "actions": ["Nombre selon durée hebdomadaire", "Moitié à l’initiative employeur", "Moitié au choix salarié", "Délai prévenance respecté"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 159,
+    "name": "Semaine 4,5 jours",
+    "category": "organisation",
+    "tags": ["mercredi", "temps partiel"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 3.5, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Mi-temps mercredi",
+    "legal": "✅ Organisation particulière",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📅 Organisation Spéciale",
+      "message": "Semaine 4,5 jours travaillés.",
+      "actions": ["Avenant écrit précisant organisation", "31,5h/semaine", "Heures complémentaires encadrées", "Adaptation familiale"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 160,
+    "name": "Convention forfait heures",
+    "category": "forfait",
+    "tags": ["forfait", "heures"],
+    "days": [{"h": 9, "type": "normal"}, {"h": 9, "type": "normal"}, {"h": 9, "type": "normal"}, {"h": 9, "type": "normal"}, {"h": 8, "type": "normal"}],
+    "desc": "Forfait 39h/semaine",
+    "legal": "✅ Forfait défini",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📋 Forfait Heures",
+      "message": "Nombre heures fixé au contrat.",
+      "actions": ["Exemple : 39h avec 4h sup intégrées", "Rémunération lissée", "Limites quotidiennes maintenues", "Au-delà forfait : heures sup additionnelles"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 161,
+    "name": "Boulangerie nuit",
+    "category": "commerce",
+    "tags": ["boulangerie", "nuit"],
+    "days": [{"h": 8, "type": "nuit"}, {"h": 8, "type": "nuit"}, {"h": 8, "type": "nuit"}, {"h": 8, "type": "nuit"}, {"h": 8, "type": "nuit"}],
+    "desc": "Cuisson de nuit",
+    "legal": "⚠️ Dérogation permanente",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🥖 Boulangerie",
+      "message": "Dérogation travail nuit boulangerie.",
+      "actions": ["Dérogation permanente autorisée", "Repos compensateur adapté", "Surveillance médicale renforcée", "Majorations nuit applicables"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "🥖 Boulangerie : dérogation nuit"
+      }
+    }
+  },
+  {
+    "id": 162,
+    "name": "Presse distribution",
+    "category": "presse",
+    "tags": ["journaux", "matinale"],
+    "days": [{"h": 5, "type": "nuit"}, {"h": 5, "type": "nuit"}, {"h": 5, "type": "nuit"}, {"h": 5, "type": "nuit"}, {"h": 5, "type": "nuit"}],
+    "desc": "Distribution journaux tôt",
+    "legal": "⚠️ Horaires spécifiques",
+    "risk": "faible",
+    "conseil": {
+      "titre": "📰 Presse",
+      "message": "Distribution matinale journaux.",
+      "actions": ["Début très matinal autorisé", "Durée réduite compensatoire", "Convention collective presse", "Repos quotidien respecté"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 163,
+    "name": "Spectacle représentation",
+    "category": "spectacle",
+    "tags": ["soirée", "culture"],
+    "days": [{"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}],
+    "desc": "Représentations théâtre",
+    "legal": "⚠️ Régime dérogatoire",
+    "risk": "faible",
+    "conseil": {
+      "titre": "🎭 Spectacle",
+      "message": "Horaires atypiques spectacle.",
+      "actions": ["Amplitude adaptée représentations", "Repos compensateur", "Convention collective spectacle", "Intermittence possible"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 164,
+    "name": "Discothèque nuit",
+    "category": "hotellerie",
+    "tags": ["nuit", "soirée"],
+    "days": [{"h": 8, "type": "nuit"}, {"h": 8, "type": "nuit"}, {"h": 8, "type": "saturday"}],
+    "desc": "Travail nuit discothèque",
+    "legal": "⚠️ HCR dérogations",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🎵 Discothèque",
+      "message": "Nuits régulières secteur festif.",
+      "actions": ["Convention HCR applicable", "Majorations nuit cumul weekend", "Repos compensateur renforcé", "Surveillance santé"],
+      "alerte": {
+        "niveau": "warning",
+        "texte": "🎵 Nuits répétées : surveillance santé"
+      }
+    }
+  },
+  {
+    "id": 165,
+    "name": "Station ski saison",
+    "category": "tourisme",
+    "tags": ["saisonnier", "montagne"],
+    "days": [{"h": 9, "type": "normal"}, {"h": 9, "type": "normal"}, {"h": 9, "type": "normal"}, {"h": 9, "type": "normal"}, {"h": 9, "type": "normal"}, {"h": 9, "type": "saturday"}, {"h": 9, "type": "sunday"}],
+    "desc": "Haute saison ski",
+    "legal": "⚠️ Saisonnier intensif",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "⛷️ Station Ski",
+      "message": "Saison hivernale intensive.",
+      "actions": ["CDD saisonnier usage", "7j/7 période haute saison", "Repos hebdo par roulement", "Fin saison : récupération"],
+      "alerte": {
+        "niveau": "warning",
+        "texte": "⛷️ Saison : 7j/7 temporaire"
+      }
+    }
+  },
+  {
+    "id": 166,
+    "name": "Camping été",
+    "category": "tourisme",
+    "tags": ["été", "hébergement"],
+    "days": [{"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}, {"h": 10, "type": "saturday"}],
+    "desc": "Saison estivale camping",
+    "legal": "⚠️ HPA dérogations",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "⛺ Camping",
+      "message": "Saison estivale intensive.",
+      "actions": ["Convention HPA (Hôtellerie Plein Air)", "Amplitude étendue été", "Récupération hors saison", "Logement souvent fourni"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "⛺ Été : amplitude étendue"
+      }
+    }
+  },
+  {
+    "id": 167,
+    "name": "Agriculture récolte",
+    "category": "agriculture",
+    "tags": ["vendanges", "récolte"],
+    "days": [{"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}, {"h": 10, "type": "saturday"}],
+    "desc": "Période vendanges",
+    "legal": "⚠️ Saisonnier agricole",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🍇 Vendanges",
+      "message": "Récolte intensive temporaire.",
+      "actions": ["CDD vendanges spécifique", "Durée max : 1 mois", "Amplitude adaptée météo", "Déclaration simplifiée"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "🍇 Vendanges : CDD spécifique"
+      }
+    }
+  },
+  {
+    "id": 168,
+    "name": "Mareyeur nuit",
+    "category": "commerce",
+    "tags": ["poisson", "criée"],
+    "days": [{"h": 8, "type": "nuit"}, {"h": 8, "type": "nuit"}, {"h": 8, "type": "nuit"}, {"h": 8, "type": "nuit"}, {"h": 8, "type": "nuit"}],
+    "desc": "Criée poissons matinale",
+    "legal": "⚠️ Dérogation marée",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🐟 Mareyage",
+      "message": "Travail nuit produits mer.",
+      "actions": ["Dérogation fraîcheur produits", "Horaires liés marées", "Repos compensateur", "Surveillance médicale"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "🐟 Criée : horaires marées"
+      }
+    }
+  },
+  {
+    "id": 169,
+    "name": "Taxi/VTC nuit",
+    "category": "transport",
+    "tags": ["nuit", "conduite"],
+    "days": [{"h": 10, "type": "nuit"}, {"h": 10, "type": "nuit"}, {"h": 10, "type": "nuit"}],
+    "desc": "Courses nocturnes",
+    "legal": "⚠️ Amplitude conduite",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🚕 Taxi Nuit",
+      "message": "Conduite nocturne régulière.",
+      "actions": ["Amplitude quotidienne : 12h max", "Temps conduite : 9h/jour max", "Repos quotidien 11h impératif", "Pause 20min toutes les 4h30"],
+      "alerte": {
+        "niveau": "warning",
+        "texte": "🚕 Conduite nuit : amplitude stricte"
+      }
+    }
+  },
+  {
+    "id": 170,
+    "name": "Animateur colo",
+    "category": "animation",
+    "tags": ["séjour", "surveillance"],
+    "days": [{"h": 12, "type": "normal"}, {"h": 12, "type": "normal"}, {"h": 12, "type": "normal"}, {"h": 12, "type": "normal"}, {"h": 12, "type": "normal"}, {"h": 12, "type": "saturday"}, {"h": 12, "type": "sunday"}],
+    "desc": "Séjour vacances enfants",
+    "legal": "⚠️ Régime particulier",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🏕️ Animateur",
+      "message": "Présence continue séjours.",
+      "actions": ["Convention collective animation", "Récupération après séjour", "12h = amplitude, pas travail continu", "Diplôme requis (BAFA/BAFD)"],
+      "alerte": {
+        "niveau": "warning",
+        "texte": "🏕️ Colo : récupération post-séjour"
+      }
+    }
+  },
+  {
+    "id": 171,
+    "name": "Surveillant internat",
+    "category": "enseignement",
+    "tags": ["nuit", "surveillance"],
+    "days": [{"h": 10, "type": "nuit"}, {"h": 10, "type": "nuit"}, {"h": 10, "type": "nuit"}, {"h": 10, "type": "nuit"}],
+    "desc": "Surveillance nuit internat",
+    "legal": "⚠️ Éducation nationale",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🏫 Internat",
+      "message": "Surveillance nocturne élèves.",
+      "actions": ["Statut fonction publique si public", "Temps présence ≠ travail effectif", "Logement fourni", "Récupération prévue"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 172,
+    "name": "Pompier professionnel",
+    "category": "securite",
+    "tags": ["garde", "24h"],
+    "days": [{"h": 24, "type": "normal"}],
+    "desc": "Garde caserne 24h",
+    "legal": "⚠️ Statut spécifique",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🚒 Pompier",
+      "message": "Garde 24h caserne.",
+      "actions": ["Fonction publique territoriale", "Temps présence avec astreinte", "Interventions = travail effectif", "Repos compensateur adapté"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 173,
+    "name": "Marin pêche",
+    "category": "maritime",
+    "tags": ["mer", "marée"],
+    "days": [],
+    "desc": "Campagne pêche",
+    "legal": "⚠️ Droit maritime",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "⚓ Pêche Maritime",
+      "message": "Embarquement campagne pêche.",
+      "actions": ["Droit maritime spécifique", "Rémunération souvent à la part", "Durée selon type pêche", "Repos terre entre campagnes"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 174,
+    "name": "Personnel navigant",
+    "category": "transport",
+    "tags": ["avion", "équipage"],
+    "days": [{"h": 12, "type": "normal"}, {"h": 12, "type": "normal"}],
+    "desc": "Vols long-courriers",
+    "legal": "⚠️ Aviation civile",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "✈️ Personnel Navigant",
+      "message": "Équipage aérien commercial.",
+      "actions": ["Réglementation EASA (européenne)", "Temps vol limité (900h/an)", "Repos adapté décalages horaires", "Surveillance médicale renforcée"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 175,
+    "name": "Travailleur plateforme",
+    "category": "digital",
+    "tags": ["indépendant", "plateforme"],
+    "days": [{"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}],
+    "desc": "Livraison plateforme",
+    "legal": "⚠️ Statut débattu",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "📦 Plateforme",
+      "message": "Travail via plateforme numérique.",
+      "actions": ["Statut : souvent indépendant", "Loi d’Avenir (2024) : protections renforcées", "Accident : couverture prévue", "Revenus déclarés charges sociales"],
+      "alerte": {
+        "niveau": "warning",
+        "texte": "📦 Plateforme : vérifiez statut et protections"
+      }
+    }
+  },
+  {
+    "id": 176,
+    "name": "Influenceur rémunéré",
+    "category": "digital",
+    "tags": ["contenu", "création"],
+    "days": [{"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}, {"h": 6, "type": "normal"}],
+    "desc": "Création contenu marques",
+    "legal": "⚠️ Statut à définir",
+    "risk": "faible",
+    "conseil": {
+      "titre": "📱 Création Contenu",
+      "message": "Rémunération création contenu.",
+      "actions": ["Statut : auto-entrepreneur ou société", "Contrats partenariats formalisés", "Déclaration revenus obligatoire", "Droits auteur selon cas"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 177,
+    "name": "Testeur jeux vidéo",
+    "category": "digital",
+    "tags": ["gaming", "QA"],
+    "days": [{"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}],
+    "desc": "Test qualité jeux",
+    "legal": "✅ Salarié ou prestataire",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎮 Testeur Gaming",
+      "message": "Emploi classique secteur jeu vidéo.",
+      "actions": ["CDD ou CDI selon structures", "Convention Syntec souvent applicable", "Heures sup selon convention", "Crunch time : surveiller heures"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 178,
+    "name": "Streamer professionnel",
+    "category": "digital",
+    "tags": ["streaming", "live"],
+    "days": [{"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}, {"h": 8, "type": "normal"}],
+    "desc": "Live streaming régulier",
+    "legal": "⚠️ Indépendant",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📹 Streaming",
+      "message": "Activité streaming professionnalisée.",
+      "actions": ["Statut indépendant généralement", "Déclaration revenus obligatoire", "Partenariats = BNC", "Charges sociales à anticiper"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 179,
+    "name": "Garde corps humain",
+    "category": "securite",
+    "tags": ["protection", "VIP"],
+    "days": [{"h": 12, "type": "normal"}, {"h": 12, "type": "normal"}, {"h": 12, "type": "normal"}],
+    "desc": "Protection rapprochée",
+    "legal": "⚠️ Carte professionnelle",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🛡️ Protection Rapprochée",
+      "message": "Garde du corps professionnel.",
+      "actions": ["Carte professionnelle obligatoire", "Amplitude horaire étendue", "Majorations selon convention sécurité", "Temps présence selon mission"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 180,
+    "name": "Détective privé",
+    "category": "service",
+    "tags": ["enquête", "surveillance"],
+    "days": [{"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}, {"h": 10, "type": "normal"}],
+    "desc": "Missions enquête",
+    "legal": "⚠️ Agrément requis",
+    "risk": "faible",
+    "conseil": {
+      "titre": "🔍 Détective",
+      "message": "Enquêtes privées réglementées.",
+      "actions": ["Agrément CNAPS obligatoire", "Horaires variables selon missions", "Indépendant ou salarié agence", "Respect vie privée strict"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 181,
+    "name": "Cumul emplois privés",
+    "category": "cumul",
+    "tags": ["deux emplois"],
+    "days": [{"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}],
+    "desc": "Deux employeurs simultanés",
+    "legal": "⚠️ Durées cumulées",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "👔 Double Emploi",
+      "message": "Cumul emplois autorisé sous conditions.",
+      "actions": ["Durée maximale : 48h/semaine cumulées", "Repos quotidien 11h à respecter", "Clause exclusivité : vérifier contrats", "Pas concurrence entre employeurs"],
+      "alerte": {
+        "niveau": "warning",
+        "texte": "👔 Cumul : surveiller durées totales"
+      }
+    }
+  },
+  {
+    "id": 182,
+    "name": "Salarié + auto-entrepreneur",
+    "category": "cumul",
+    "tags": ["indépendant", "complément"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Salariat + activité indépendante",
+    "legal": "⚠️ Loyauté envers employeur",
+    "risk": "faible",
+    "conseil": {
+      "titre": "💼 Salarié + AE",
+      "message": "Cumul possible avec précautions.",
+      "actions": ["Clause exclusivité : vérifier contrat", "Pas concurrence avec employeur", "Double affiliation sociale", "Activité sur temps libre uniquement"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "💼 Cumul : loyauté envers employeur"
+      }
+    }
+  },
+  {
+    "id": 183,
+    "name": "Enseignant + vacations",
+    "category": "cumul",
+    "tags": ["enseignement", "complément"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Cours + vacations autres établissements",
+    "legal": "✅ Heures complémentaires",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎓 Enseignant + Vacations",
+      "message": "Heures complémentaires autorisées.",
+      "actions": ["Limite heures complémentaires", "Cumul rémunérations autorisé", "Repos hebdomadaire à préserver", "Déclaration vacations"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 184,
+    "name": "Retraité + emploi",
+    "category": "cumul",
+    "tags": ["retraite", "activité"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Cumul emploi-retraite",
+    "legal": "✅ Cumul encadré",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "👴 Cumul Emploi-Retraite",
+      "message": "Activité après pension possible.",
+      "actions": ["Cumul intégral si taux plein + âge légal", "Sinon : plafonds revenus", "Pas nouveaux droits retraite", "Déclarations séparées"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 185,
+    "name": "Étudiant + job",
+    "category": "cumul",
+    "tags": ["étudiant", "emploi"],
+    "days": [{"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}],
+    "desc": "Études + travail mi-temps",
+    "legal": "✅ Compatible",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎓 Étudiant Salarié",
+      "message": "Cumul études-emploi courant.",
+      "actions": ["Mi-temps recommandé pour études", "Statut étudiant maintenu si <60% temps plein", "Cotisations retraite validées", "Jobs étudiants exonérés (limites)"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 186,
+    "name": "Mandat syndical + emploi",
+    "category": "cumul",
+    "tags": ["syndical", "heures"],
+    "days": [{"h": 5, "type": "normal"}, {"h": 5, "type": "normal"}, {"h": 5, "type": "normal"}, {"h": 5, "type": "normal"}, {"h": 5, "type": "normal"}],
+    "desc": "Délégué syndical",
+    "legal": "✅ Crédit heures",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "✊ Mandat Syndical",
+      "message": "Heures délégation rémunérées.",
+      "actions": ["Crédit heures selon effectif entreprise", "Temps de travail effectif", "Protection statut représentant", "Formation syndicale possible"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 187,
+    "name": "CSE + emploi temps partiel",
+    "category": "cumul",
+    "tags": ["élu", "représentant"],
+    "days": [{"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}, {"h": 4, "type": "normal"}],
+    "desc": "Élu CSE temps partiel",
+    "legal": "✅ Heures proratisées",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🗳️ Élu Temps Partiel",
+      "message": "Crédit heures adapté au temps partiel.",
+      "actions": ["Heures délégation non proratisées", "Même protection qu’à temps plein", "Réunions CSE = temps travail", "Dépassement heures possible si nécessaire"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 188,
+    "name": "Accident trajet + télétravail",
+    "category": "sante",
+    "tags": ["accident", "hybride"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Accident trajet domicile-bureau",
+    "legal": "⚠️ Trajet protégé",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🚗 Accident Trajet",
+      "message": "Protection accident travail applicable.",
+      "actions": ["Trajet domicile-lieu habituel protégé", "Détour personnel : perd protection", "Télétravail : trajet non protégé (déjà sur lieu)", "Déclaration 24h"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 189,
+    "name": "Grossesse + télétravail",
+    "category": "familial",
+    "tags": ["maternité", "remote"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Télétravail enceinte",
+    "legal": "✅ Aménagements possibles",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "👶 Grossesse Télétravail",
+      "message": "Aménagements facilitant possible.",
+      "actions": ["Télétravail facilitant souvent accepté", "Autorisations absences examens maintenues", "Réduction temps si avis médical", "Protection licenciement identique"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 190,
+    "name": "Handicap + télétravail",
+    "category": "handicap",
+    "tags": ["RQTH", "remote"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Télétravail aménagement handicap",
+    "legal": "✅ Aménagement raisonnable",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "♿ Handicap Télétravail",
+      "message": "Télétravail comme aménagement.",
+      "actions": ["Recommandation médecin travail = poids", "Aménagements matériels fournis", "Maintien lien équipe", "Pas discrimination"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 191,
+    "name": "Formation + chômage partiel",
+    "category": "formation",
+    "tags": ["activité partielle", "FNE"],
+    "days": [{"h": 3, "type": "normal"}, {"h": 3, "type": "normal"}, {"h": 3, "type": "normal"}],
+    "desc": "Formation pendant chômage partiel",
+    "legal": "✅ FNE Formation",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📚 Formation Activité Partielle",
+      "message": "Formation pendant baisse activité.",
+      "actions": ["FNE-Formation : 100% pris en charge", "Temps formation = temps travail", "Maintien rémunération", "Développement compétences"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 192,
+    "name": "Expatriation + retour",
+    "category": "mobilite",
+    "tags": ["international", "réintégration"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Retour après mission étranger",
+    "legal": "✅ Réintégration",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏠 Retour Expatriation",
+      "message": "Retour après mission internationale.",
+      "actions": ["Poste équivalent garanti", "Accompagnement réadaptation", "Valorisation expérience internationale", "Régularisation sociale France"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 193,
+    "name": "Licenciement économique + FNE",
+    "category": "rupture",
+    "tags": ["économique", "formation"],
+    "days": [],
+    "desc": "Formation avant licenciement",
+    "legal": "✅ Sécurisation parcours",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📚 Formation Reclassement",
+      "message": "Formation avant départ entreprise.",
+      "actions": ["Bilan compétences proposé", "Formation reclassement financée", "Maintien rémunération", "Accompagnement recherche emploi"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 194,
+    "name": "Rupture conventionnelle + formation",
+    "category": "rupture",
+    "tags": ["projet", "transition"],
+    "days": [],
+    "desc": "Rupture pour projet formation",
+    "legal": "✅ CPF transition",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎓 Rupture Formation",
+      "message": "Départ pour projet professionnel.",
+      "actions": ["CPF Transition : financement formation longue", "Rupture conventionnelle permet chômage", "Formation pendant chômage possible", "Projet validé commission paritaire"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 195,
+    "name": "Démission + CPF",
+    "category": "rupture",
+    "tags": ["démission", "reconversion"],
+    "days": [],
+    "desc": "Démission projet certifiant",
+    "legal": "✅ Démission légitime",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📚 Démission Reconversion",
+      "message": "Projet formation = chômage possible.",
+      "actions": ["Projet reconversion validé : droits chômage", "Formation certifiante ou création entreprise", "Validation commission paritaire", "CPF mobilisable"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 196,
+    "name": "Inaptitude + reclassement",
+    "category": "sante",
+    "tags": ["inaptitude", "recherche"],
+    "days": [],
+    "desc": "Recherche poste adapté",
+    "legal": "⚠️ Obligation reclassement",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🏥 Reclassement",
+      "message": "Recherche poste compatible santé.",
+      "actions": ["Employeur recherche 1 mois", "Consultation CSE obligatoire", "Maintien salaire pendant recherche", "Licenciement si impossible (indemnités doublées)"],
+      "alerte": {
+        "niveau": "warning",
+        "texte": "🏥 Reclassement : délai 1 mois"
+      }
+    }
+  },
+  {
+    "id": 197,
+    "name": "Maladie longue durée + maintien",
+    "category": "sante",
+    "tags": ["ALD", "maintien"],
+    "days": [],
+    "desc": "Arrêt prolongé >6 mois",
+    "legal": "⚠️ Maintien emploi fragilisé",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🏥 Longue Maladie",
+      "message": "Arrêt prolongé fragilise emploi.",
+      "actions": ["Remplacement possible au-delà 1 an", "ALD : prise charge 100% CPAM", "Maintien salaire limité", "Contact RH régulier conseillé"],
+      "alerte": {
+        "niveau": "warning",
+        "texte": "🏥 >6 mois : risque remplacement"
+      }
+    }
+  },
+  {
+    "id": 198,
+    "name": "Burn-out reconnu + adaptation",
+    "category": "sante",
+    "tags": ["RPS", "prévention"],
+    "days": [{"h": 5, "type": "normal"}, {"h": 5, "type": "normal"}, {"h": 5, "type": "normal"}, {"h": 5, "type": "normal"}, {"h": 5, "type": "normal"}],
+    "desc": "Retour après épuisement",
+    "legal": "✅ Prévention RPS",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🏥 Retour Burn-Out",
+      "message": "Reprise après épuisement professionnel.",
+      "actions": ["Visite reprise médecin travail", "Aménagements poste selon avis", "Évaluation risques psychosociaux", "Charge travail allégée progressivement"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "🏥 Burn-out : aménagements reprise"
+      }
+    }
+  },
+  {
+    "id": 199,
+    "name": "Harcèlement signalé + protection",
+    "category": "conflit",
+    "tags": ["harcèlement", "procédure"],
+    "days": [{"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}, {"h": 7, "type": "normal"}],
+    "desc": "Procédure interne harcèlement",
+    "legal": "✅ Protection lanceur alerte",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "📢 Signalement Harcèlement",
+      "message": "Protection contre représailles.",
+      "actions": ["Référent harcèlement disponible", "Enquête interne obligatoire", "Protection contre sanctions", "Médiation possible"],
+      "alerte": {
+        "niveau": "info",
+        "texte": "📢 Harcèlement : protection signalement"
+      }
+    }
+  },
+  {
+    "id": 200,
+    "name": "Transaction signée + fin",
+    "category": "juridique",
+    "tags": ["accord", "transaction"],
+    "days": [],
+    "desc": "Accord transactionnel conclu",
+    "legal": "✅ Fin différend",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🤝 Transaction",
+      "message": "Accord mettant fin au litige.",
+      "actions": ["Concessions réciproques", "Irrévocable après signature", "Délai rétractation écoulé", "Exécution des engagements"],
+      "alerte": null
+    }
+  }
+]
 
-{id:105,name:“Grossesse déclarée”,category:“sante”,tags:[“maternité”,“protection”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Travail pendant grossesse”,legal:“✅ Protection renforcée”,risk:“aucun”,conseil:{titre:“👶 Grossesse”,message:“Protection spécifique dès déclaration.”,actions:[“Autorisations absences examens médicaux”,“Interdiction licenciement (sauf faute grave)”,“Aménagements poste possibles”,“Congé maternité : 16 semaines minimum”],alerte:null}},
-
-{id:106,name:“Don de sang”,category:“sante”,tags:[“don”,“autorisation”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Absence pour don du sang”,legal:“✅ Autorisation légale”,risk:“aucun”,conseil:{titre:“💉 Don du Sang”,message:“Absence autorisée pour don.”,actions:[“Durée : temps nécessaire au don”,“Non rémunéré sauf convention collective”,“Justificatif EFS à fournir”,“Ne peut être refusé”],alerte:null}},
-
-{id:107,name:“Vaccination obligatoire”,category:“sante”,tags:[“obligation sanitaire”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Vaccination secteur santé”,legal:“✅ Obligation secteur”,risk:“aucun”,conseil:{titre:“💉 Vaccination Obligatoire”,message:“Certains secteurs imposent des vaccinations.”,actions:[“Santé, petite enfance : vaccinations définies”,“Prise en charge employeur”,“Temps vaccination = temps travail”,“Suspension possible si refus”],alerte:null}},
-
-{id:108,name:“Évaluation risques pro”,category:“sante”,tags:[“DUERP”,“prévention”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Participation Document Unique”,legal:“✅ DUERP obligatoire”,risk:“aucun”,conseil:{titre:“📋 Document Unique”,message:“Évaluation des risques professionnels.”,actions:[“Document Unique obligatoire toutes entreprises”,“Mise à jour annuelle minimum”,“Consultation salariés prévue”,“Actions prévention définies”],alerte:null}},
-
-{id:109,name:“Formation sécurité”,category:“sante”,tags:[“SST”,“formation”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Formation SST suivie”,legal:“✅ Formation sécurité”,risk:“aucun”,conseil:{titre:“🚑 Formation SST”,message:“Sauveteur Secouriste du Travail.”,actions:[“Durée : 14h (2 jours)”,“Recyclage tous les 2 ans”,“Temps de travail effectif”,“Certificat délivré”],alerte:null}},
-
-{id:110,name:“Incendie évacuation”,category:“sante”,tags:[“exercice”,“sécurité”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Exercice évacuation annuel”,legal:“✅ Exercice obligatoire”,risk:“aucun”,conseil:{titre:“🔥 Exercice Évacuation”,message:“2 exercices annuels minimum.”,actions:[“Fréquence : semestrielle minimum”,“Participation obligatoire”,“Temps travail effectif”,“Formation évacuateurs”],alerte:null}},
-
-{id:111,name:“Équipement EPI”,category:“sante”,tags:[“protection”,“équipement”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Port EPI obligatoire”,legal:“✅ Fourniture employeur”,risk:“aucun”,conseil:{titre:“🦺 EPI”,message:“Équipements Protection Individuelle fournis.”,actions:[“Fourniture gratuite par employeur”,“Port obligatoire si risque”,“Vérification périodique”,“Remplacement si défectueux”],alerte:null}},
-
-{id:112,name:“Exposition amiante”,category:“sante”,tags:[“amiante”,“traçabilité”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Travaux zone amiantée”,legal:“⚠️ Suivi spécifique”,risk:“moyen”,conseil:{titre:“⚠️ Exposition Amiante”,message:“Suivi médical renforcé obligatoire.”,actions:[“Attestation exposition délivrée”,“Surveillance médicale post-exposition 50 ans”,“Formation risques amiante”,“Certification SS3 ou SS4 selon travaux”],alerte:{niveau:“warning”,texte:“⚠️ Amiante : traçabilité exposition 50 ans”}}},
-
-{id:113,name:“Travail isolé forêt”,category:“sante”,tags:[“isolement”,“risque”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Travailleur isolé terrain”,legal:“⚠️ Dispositif protection”,risk:“moyen”,conseil:{titre:“👤 Travail Isolé”,message:“Dispositifs de protection requis.”,actions:[“DATI (Dispositif Alarme Travailleur Isolé)”,“Vérifications régulières”,“Moyens communication garantis”,“Procédure alerte définie”],alerte:{niveau:“info”,texte:“👤 Isolement : dispositif protection obligatoire”}}},
-
-{id:114,name:“Canicule organisation”,category:“sante”,tags:[“chaleur”,“adaptation”],days:[{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”}],desc:“Fortes chaleurs”,legal:“⚠️ Mesures adaptation”,risk:“moyen”,conseil:{titre:“🌡️ Fortes Chaleurs”,message:“Adaptation organisation nécessaire.”,actions:[“Mise à disposition eau fraîche”,“Aménagement horaires si possible”,“Pauses régulières”,“Local climatisé ou ventilé”],alerte:{niveau:“warning”,texte:“🌡️ Canicule : mesures adaptation obligatoires”}}},
-
-{id:115,name:“Grand froid”,category:“sante”,tags:[“températures”,“protection”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Travail températures négatives”,legal:“⚠️ Protection spécifique”,risk:“moyen”,conseil:{titre:“❄️ Grand Froid”,message:“Travail par températures extrêmes.”,actions:[“Vêtements adaptés fournis”,“Pauses réchauffement régulières”,“Boissons chaudes à disposition”,“Surveillance santé renforcée”],alerte:{niveau:“info”,texte:“❄️ Froid : équipements protection fournis”}}},
-
-{id:116,name:“Risque chimique”,category:“sante”,tags:[“produits”,“exposition”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Manipulation produits chimiques”,legal:“⚠️ Traçabilité expositions”,risk:“moyen”,conseil:{titre:“☣️ Risque Chimique”,message:“Exposition produits dangereux tracée.”,actions:[“Fiche exposition individuelle”,“Suivi médical renforcé”,“Formation manipulation obligatoire”,“EPI adaptés fournis”],alerte:{niveau:“warning”,texte:“☣️ Chimique : traçabilité exposition”}}},
-
-{id:117,name:“Bruit excessif”,category:“sante”,tags:[“nuisance”,“audition”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Exposition >85dB”,legal:“⚠️ Protection auditive”,risk:“moyen”,conseil:{titre:“🔊 Exposition Bruit”,message:“Protection auditive au-delà 80dB.”,actions:[“Protections auditives obligatoires >85dB”,“Audiogramme régulier”,“Aménagements acoustiques”,“Formation risques auditifs”],alerte:{niveau:“info”,texte:“🔊 >85dB : protections auditives obligatoires”}}},
-
-{id:118,name:“Vibrations machines”,category:“sante”,tags:[“TMS”,“prévention”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Utilisation outils vibrants”,legal:“⚠️ Valeurs limites”,risk:“moyen”,conseil:{titre:“📳 Vibrations”,message:“Exposition vibrations réglementée.”,actions:[“Valeurs limites définies”,“Surveillance médicale si dépassement”,“Gants anti-vibrations”,“Limitation temps exposition”],alerte:{niveau:“info”,texte:“📳 Vibrations : surveillance exposition”}}},
-
-{id:119,name:“Écran quotidien”,category:“sante”,tags:[“informatique”,“fatigue”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Travail écran >4h/jour”,legal:“✅ Pause écran”,risk:“faible”,conseil:{titre:“💻 Travail Écran”,message:“Pauses recommandées toutes les 2h.”,actions:[“Pause 5-10min toutes les 2h conseillée”,“Ergonomie poste vérifiée”,“Visite ophtalmologique possible”,“Règle 20-20-20 : pause visuelle”],alerte:null}},
-
-{id:120,name:“Port charges lourdes”,category:“sante”,tags:[“manutention”,“TMS”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Manutention manuelle”,legal:“⚠️ Limites poids”,risk:“moyen”,conseil:{titre:“📦 Port Charges”,message:“Limites poids selon sexe et âge.”,actions:[“Hommes adultes : 55kg max occasionnel”,“Femmes adultes : 25kg max occasionnel”,“Formation gestes et postures”,“Aide mécanique si dépassement”],alerte:{niveau:“info”,texte:“📦 Charges lourdes : formation gestes obligatoire”}}},
-
-// SCÉNARIOS 121-140 : CONGÉS ET ABSENCES SPÉCIFIQUES
-
-{id:121,name:“Congés payés annuels”,category:“conge”,tags:[“CP”,“acquisition”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Prise congés annuels”,legal:“✅ Droit acquis”,risk:“aucun”,conseil:{titre:“🏖️ Congés Payés”,message:“2,5 jours ouvrables par mois travaillé.”,actions:[“30 jours ouvrables = 5 semaines par an”,“Période de référence : juin-mai”,“Prise selon accord employeur”,“Fractionnement possible”],alerte:null}},
-
-{id:122,name:“Congés fractionnés”,category:“conge”,tags:[“fractionnement”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Congés pris en plusieurs fois”,legal:“✅ Jours fractionnement”,risk:“aucun”,conseil:{titre:“🏖️ Fractionnement”,message:“Congés en plusieurs périodes.”,actions:[“Congé principal : minimum 12 jours continus”,“Jours fractionnement si <12j en été”,“Accord employeur sur dates”,“Planification anticipée”],alerte:null}},
-
-{id:123,name:“Congé ancienneté”,category:“conge”,tags:[“ancienneté”],days:[],desc:“Jours supplémentaires ancienneté”,legal:“⚠️ Selon convention”,risk:“aucun”,conseil:{titre:“📅 Ancienneté”,message:“Jours supplémentaires selon convention.”,actions:[“Vérifiez convention collective”,“Généralement : +1j après 10-15 ans”,“Cumul avec congés légaux”,“Prise selon calendrier”],alerte:null}},
-
-{id:124,name:“Congé sans solde”,category:“conge”,tags:[“non payé”],days:[],desc:“Absence non rémunérée”,legal:“⚠️ Accord employeur”,risk:“aucun”,conseil:{titre:“📋 Congé Sans Solde”,message:“Suspension contrat sans rémunération.”,actions:[“Accord employeur nécessaire”,“Durée définie à l’avance”,“Pas d’acquisition droits pendant période”,“Réintégration garantie”],alerte:null}},
-
-{id:125,name:“Congé décès”,category:“conge”,tags:[“deuil”],days:[],desc:“Décès proche”,legal:“✅ Congés pour événements”,risk:“aucun”,conseil:{titre:“🕊️ Congé Décès”,message:“Jours selon lien familial.”,actions:[“Conjoint/enfant/parent : 5 jours”,“Frère/sœur : 3 jours”,“Justificatif acte décès”,“Rémunération maintenue”],alerte:null}},
-
-{id:126,name:“Congé mariage”,category:“conge”,tags:[“mariage”],days:[],desc:“Mariage du salarié”,legal:“✅ Congé événement”,risk:“aucun”,conseil:{titre:“💍 Mariage”,message:“4 jours pour mariage salarié.”,actions:[“Mariage salarié : 4 jours”,“Mariage enfant : 1 jour (selon convention)”,“PACS : selon convention collective”,“Délai prévenance raisonnable”],alerte:null}},
-
-{id:127,name:“Congé naissance”,category:“conge”,tags:[“naissance”],days:[],desc:“Naissance enfant”,legal:“✅ Congé naissance”,risk:“aucun”,conseil:{titre:“👶 Naissance”,message:“3 jours naissance + congé paternité.”,actions:[“Naissance : 3 jours dans 15 jours suivants”,”+ Congé paternité : 28 jours calendaires”,“Rémunération maintenue (3j)”,“Justificatif acte naissance”],alerte:null}},
-
-{id:128,name:“Congé déménagement”,category:“conge”,tags:[“déménagement”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Jour déménagement”,legal:“⚠️ Selon convention”,risk:“aucun”,conseil:{titre:“🚚 Déménagement”,message:“1-2 jours selon conventions collectives.”,actions:[“Vérifiez convention collective”,“Généralement 1-2 jours rémunérés”,“Justificatif à fournir”,“Délai prévenance”],alerte:null}},
-
-{id:129,name:“Congé jury assises”,category:“conge”,tags:[“jury”,“citoyen”],days:[],desc:“Convocation jury citoyen”,legal:“✅ Autorisation légale”,risk:“aucun”,conseil:{titre:“⚖️ Jury Assises”,message:“Autorisation absence obligatoire.”,actions:[“Convocation = obligation civique”,“Indemnisation justice”,“Employeur ne peut refuser”,“Maintien emploi garanti”],alerte:null}},
-
-{id:130,name:“Congé formation syndicale”,category:“conge”,tags:[“syndical”,“formation”],days:[],desc:“Formation syndicale”,legal:“✅ Droit syndical”,risk:“aucun”,conseil:{titre:“📚 Formation Syndicale”,message:“Congés formation syndicale.”,actions:[“12 jours maximum par an”,“Non rémunéré (pris en charge syndicat)”,“Autorisation préalable nécessaire”,“Protection statut”],alerte:null}},
-
-{id:131,name:“Absence maladie ordinaire”,category:“absence”,tags:[“arrêt”],days:[{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Maladie courte”,legal:“✅ Indemnisation CPAM”,risk:“aucun”,conseil:{titre:“🏥 Maladie”,message:“Indemnisation dès 4e jour.”,actions:[“Certificat médical sous 48h”,“IJSS à partir du 4e jour”,“Maintien partiel employeur selon ancienneté”,“Contre-visite patronale possible”],alerte:null}},
-
-{id:132,name:“Absence consultation médicale”,category:“absence”,tags:[“médecin”],days:[{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”}],desc:“RDV médical ponctuel”,legal:“⚠️ Tolérance usuelle”,risk:“aucun”,conseil:{titre:“🏥 RDV Médical”,message:“Autorisations selon usage entreprise.”,actions:[“Privilégier hors horaires travail”,“Justificatif médical”,“Selon usage : rémunéré ou non”,“Prévenir à l’avance”],alerte:null}},
-
-{id:133,name:“Absence examen permis”,category:“absence”,tags:[“permis conduire”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Passage permis de conduire”,legal:“⚠️ Selon convention”,risk:“aucun”,conseil:{titre:“🚗 Permis Conduire”,message:“Autorisation selon convention collective.”,actions:[“Vérifiez convention collective”,“Généralement : 1 jour autorisé”,“Non rémunéré sauf disposition”,“Convocation à présenter”],alerte:null}},
-
-{id:134,name:“Absence convocation préfecture”,category:“absence”,tags:[“administratif”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Convocation administrative”,legal:“✅ Selon nature convocation”,risk:“aucun”,conseil:{titre:“📋 Convocation Admin”,message:“Autorisation selon nature.”,actions:[“Convocation obligatoire : autorisation due”,“Justificatif convocation à présenter”,“Rémunération : selon nature”,“Prévenir employeur”],alerte:null}},
-
-{id:135,name:“Grève participation”,category:“absence”,tags:[“grève”,“droit”],days:[],desc:“Journée de grève”,legal:“✅ Droit de grève”,risk:“aucun”,conseil:{titre:“✊ Droit de Grève”,message:“Droit constitutionnel, non rémunéré.”,actions:[“Exercice libre sans autorisation”,“Non rémunération (retenue 1/30e)”,“Protection contre sanctions”,“Préavis dans services publics”],alerte:null}},
-
-{id:136,name:“Lock-out”,category:“absence”,tags:[“fermeture”,“conflit”],days:[],desc:“Fermeture exceptionnelle”,legal:“⚠️ Maintien salaire”,risk:“aucun”,conseil:{titre:“🔒 Lock-Out”,message:“Fermeture temporaire entreprise.”,actions:[“Maintien rémunération si décision employeur”,“Chômage partiel possible”,“Situation exceptionnelle”,“Information instances représentatives”],alerte:null}},
-
-{id:137,name:“Intempéries BTP”,category:“absence”,tags:[“météo”,“chômage”],days:[],desc:“Arrêt travail intempéries”,legal:“✅ Chômage intempéries”,risk:“aucun”,conseil:{titre:“🌧️ Intempéries”,message:“Indemnisation chômage intempéries.”,actions:[“Spécifique secteur BTP”,“Indemnisation caisse congés”,“Conditions météo définies”,“Reprise dès conditions permettent”],alerte:null}},
-
-{id:138,name:“Panne transport public”,category:“absence”,tags:[“transport”,“retard”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Grève transports”,legal:“⚠️ Pas force majeure automatique”,risk:“faible”,conseil:{titre:“🚇 Grève Transports”,message:“Grève transports : justification absence.”,actions:[“Recherche solutions alternatives”,“Télétravail si possible”,“Justificatifs perturbations”,“Retenue salaire possible selon circonstances”],alerte:{niveau:“info”,texte:“🚇 Grève transports : solutions alternatives”}}},
-
-{id:139,name:“Garde enfant imprévue”,category:“absence”,tags:[“enfant”,“urgence”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Absence garde enfant”,legal:“⚠️ Congé enfant malade”,risk:“aucun”,conseil:{titre:“👶 Garde Enfant”,message:“Congé enfant malade selon conditions.”,actions:[“3-5 jours selon âge et nombre enfants”,“Certificat médical obligatoire”,“Non rémunéré sauf convention”,“Protection emploi si conditions”],alerte:null}},
-
-{id:140,name:“Examens médicaux obligatoires”,category:“absence”,tags:[“prévention”,“grossesse”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Examens médicaux légaux”,legal:“✅ Autorisation légale”,risk:“aucun”,conseil:{titre:“🏥 Examens Obligatoires”,message:“Examens prévus par la loi.”,actions:[“Grossesse : 7 examens obligatoires”,“Médecine du travail : visites réglementaires”,“Temps travail effectif”,“Rémunération maintenue”],alerte:null}},
-
-// SCÉNARIOS 141-160 : SITUATIONS CONTRACTUELLES PARTICULIÈRES
-
-{id:141,name:“Période essai standard”,category:“contrat”,tags:[“essai”,“évaluation”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“En période d’essai”,legal:“✅ Période probatoire”,risk:“aucun”,conseil:{titre:“📝 Période Essai”,message:“Évaluation réciproque des parties.”,actions:[“Durée selon qualification (2-4 mois)”,“Rupture libre avec préavis réduit”,“Renouvellement possible si prévu au contrat”,“Évaluation régulière”],alerte:null}},
-
-{id:142,name:“Fin période essai”,category:“contrat”,tags:[“rupture”,“essai”],days:[],desc:“Rupture période essai”,legal:“✅ Rupture simplifiée”,risk:“aucun”,conseil:{titre:“📝 Fin Essai”,message:“Rupture possible pendant période essai.”,actions:[“Préavis : 24h à 2 semaines selon durée”,“Pas indemnité rupture”,“Chômage : droits maintenus”,“Pas obligation motivation”],alerte:null}},
-
-{id:143,name:“CDD saisonnier”,category:“contrat”,tags:[“saison”,“temporaire”],days:[{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”}],desc:“Contrat emploi saisonnier”,legal:“✅ CDD spécifique”,risk:“aucun”,conseil:{titre:“🌞 CDD Saisonnier”,message:“Contrat lié activité saisonnière.”,actions:[“Pas délai carence entre contrats”,“Pas indemnité précarité”,“Reconduction possible année suivante”,“Durée selon saison”],alerte:null}},
-
-{id:144,name:“CDD remplacement”,category:“contrat”,tags:[“remplacement”,“absent”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“CDD remplacement salarié”,legal:“✅ Motif précis”,risk:“aucun”,conseil:{titre:“🔄 CDD Remplacement”,message:“Remplacement salarié absent.”,actions:[“Nom remplacé mentionné au contrat”,“Durée : pendant absence”,“Pas indemnité fin contrat”,“Renouvellement si absence prolongée”],alerte:null}},
-
-{id:145,name:“CDD accroissement activité”,category:“contrat”,tags:[“surcroît”,“temporaire”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“CDD surcroît activité”,legal:“✅ CDD classique”,risk:“aucun”,conseil:{titre:“📈 CDD Accroissement”,message:“Activité temporairement accrue.”,actions:[“Durée maximum : 18 mois”,“Indemnité précarité : 10%”,“Délai carence : 1/3 durée contrat”,“Renouvellement possible 2 fois”],alerte:null}},
-
-{id:146,name:“Intérim mission”,category:“contrat”,tags:[“intérim”,“mission”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Mission intérimaire”,legal:“✅ Travail temporaire”,risk:“aucun”,conseil:{titre:“🔄 Intérim”,message:“Emploi via agence travail temporaire.”,actions:[“Contrat mission précis”,“Indemnité fin mission : 10%”,“Congés payés inclus (10%)”,“Égalité traitement avec permanents”],alerte:null}},
-
-{id:147,name:“Stage convention”,category:“contrat”,tags:[“stage”,“étudiant”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Stagiaire avec convention”,legal:“✅ Gratification obligatoire”,risk:“aucun”,conseil:{titre:“🎓 Stage”,message:“Gratification si >2 mois.”,actions:[”>2 mois consécutifs : gratification minimum”,“Montant : 15% plafond SS (~600€/mois)”,“Pas contrat travail = pas salaire”,“Maximum : 6 mois par année d’enseignement”],alerte:null}},
-
-{id:148,name:“Apprentissage”,category:“contrat”,tags:[“alternance”,“apprenti”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Contrat apprentissage”,legal:“✅ Formation en alternance”,risk:“aucun”,conseil:{titre:“🎓 Apprentissage”,message:“Contrat alternance jusqu’à 29 ans.”,actions:[“Salaire selon âge et année (25-100% SMIC)”,“1 jour/semaine minimum en CFA”,“Durée : 6 mois à 3 ans”,“Aide au permis : 500€ possible”],alerte:null}},
-
-{id:149,name:“Professionnalisation”,category:“contrat”,tags:[“alternance”,“qualification”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Contrat professionnalisation”,legal:“✅ Contrat qualification”,risk:“aucun”,conseil:{titre:“🎓 Professionnalisation”,message:“Alternance tous âges.”,actions:[“CDD 6-24 mois ou CDI avec action pro”,“Salaire selon âge et qualification (55-100%)”,“15-25% temps en formation”,“Tutorat en entreprise”],alerte:null}},
-
-{id:150,name:“Contrat aidé”,category:“contrat”,tags:[“insertion”,“PEC”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Parcours Emploi Compétences”,legal:“✅ Aide insertion”,risk:“aucun”,conseil:{titre:“🤝 Contrat Aidé”,message:“PEC : aide publique insertion.”,actions:[“Secteur non-marchand principalement”,“Accompagnement formation prévu”,“CDD ou CDI”,“Aide État pour employeur”],alerte:null}},
-
-{id:151,name:“CDI intérimaire”,category:“contrat”,tags:[“intérim”,“CDI”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“CDI Intérimaire (CDII)”,legal:“✅ Statut particulier”,risk:“aucun”,conseil:{titre:“🔄 CDI Intérimaire”,message:“CDI avec missions successives.”,actions:[“Rémunération maintenue entre missions”,“Période adaptation entre missions”,“Même protection CDI classique”,“Formation régulière”],alerte:null}},
-
-{id:152,name:“Clause objectifs”,category:“contrat”,tags:[“performance”,“objectifs”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Rémunération variable”,legal:“⚠️ Objectifs atteignables”,risk:“aucun”,conseil:{titre:“🎯 Objectifs”,message:“Part variable selon résultats.”,actions:[“Objectifs doivent être réalisables”,“Critères précis et mesurables”,“Révision périodique”,“Partie fixe garantie”],alerte:null}},
-
-{id:153,name:“Astreinte contractuelle”,category:“contrat”,tags:[“astreinte”,“disponibilité”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Astreintes prévues contrat”,legal:“⚠️ Compensation définie”,risk:“aucun”,conseil:{titre:“📱 Astreintes”,message:“Périodes astreinte régulières.”,actions:[“Fréquence et indemnisation au contrat”,“Planning prévisionnel”,“Intervention = heures travail”,“Droit refus si non contractuel”],alerte:null}},
-
-{id:154,name:“Clause dédit formation”,category:“contrat”,tags:[“formation”,“engagement”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Formation coûteuse suivie”,legal:“⚠️ Engagement durée”,risk:“aucun”,conseil:{titre:“📚 Clause Dédit”,message:“Remboursement si départ anticipé.”,actions:[“Durée engagement proportionnelle”,“Montant dégressif dans temps”,“Formation qualifiante longue/coûteuse”,“Accord écrit obligatoire”],alerte:null}},
-
-{id:155,name:“Clause confidentialité”,category:“contrat”,tags:[“secret”,“discrétion”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Obligation confidentialité”,legal:“✅ Loyauté contractuelle”,risk:“aucun”,conseil:{titre:“🤐 Confidentialité”,message:“Discrétion informations sensibles.”,actions:[“Périmètre défini au contrat”,“Sanctions si violation”,“Persiste après rupture contrat”,“Secrets fabrication protégés”],alerte:null}},
-
-{id:156,name:“Temps partiel choisi”,category:“contrat”,tags:[“80%”,“choix”],days:[{h:5.6,type:“normal”},{h:5.6,type:“normal”},{h:5.6,type:“normal”},{h:5.6,type:“normal”},{h:5.6,type:“normal”}],desc:“Temps partiel 80%”,legal:“✅ Avenant écrit”,risk:“aucun”,conseil:{titre:“⏱️ 80%”,message:“Temps partiel 28h/semaine.”,actions:[“Avenant précisant durée et répartition”,“Heures complémentaires : max 10%”,“Retour temps plein facilité”,“Droits proratisés”],alerte:null}},
-
-{id:157,name:“Compte épargne temps”,category:“contrat”,tags:[“CET”,“épargne”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Alimentation CET”,legal:“✅ Dispositif épargne”,risk:“aucun”,conseil:{titre:“💰 CET”,message:“Épargne congés et heures.”,actions:[“Alimentation : CP, RTT, heures sup”,“Utilisation : congé, formation, retraite”,“Transfert possible entre employeurs”,“Plafond selon accord”],alerte:null}},
-
-{id:158,name:“Jours RTT annuels”,category:“organisation”,tags:[“RTT”,“repos”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Attribution RTT”,legal:“✅ Réduction temps travail”,risk:“aucun”,conseil:{titre:“📅 RTT”,message:“Jours repos compensant >35h.”,actions:[“Nombre selon durée hebdomadaire”,“Moitié à l’initiative employeur”,“Moitié au choix salarié”,“Délai prévenance respecté”],alerte:null}},
-
-{id:159,name:“Semaine 4,5 jours”,category:“organisation”,tags:[“mercredi”,“temps partiel”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:3.5,type:“normal”},{h:7,type:“normal”}],desc:“Mi-temps mercredi”,legal:“✅ Organisation particulière”,risk:“aucun”,conseil:{titre:“📅 Organisation Spéciale”,message:“Semaine 4,5 jours travaillés.”,actions:[“Avenant écrit précisant organisation”,“31,5h/semaine”,“Heures complémentaires encadrées”,“Adaptation familiale”],alerte:null}},
-
-{id:160,name:“Convention forfait heures”,category:“forfait”,tags:[“forfait”,“heures”],days:[{h:9,type:“normal”},{h:9,type:“normal”},{h:9,type:“normal”},{h:9,type:“normal”},{h:8,type:“normal”}],desc:“Forfait 39h/semaine”,legal:“✅ Forfait défini”,risk:“aucun”,conseil:{titre:“📋 Forfait Heures”,message:“Nombre heures fixé au contrat.”,actions:[“Exemple : 39h avec 4h sup intégrées”,“Rémunération lissée”,“Limites quotidiennes maintenues”,“Au-delà forfait : heures sup additionnelles”],alerte:null}},
-
-// SCÉNARIOS 161-180 : SECTEURS SPÉCIAUX ET ATYPIQUES
-
-{id:161,name:“Boulangerie nuit”,category:“commerce”,tags:[“boulangerie”,“nuit”],days:[{h:8,type:“nuit”},{h:8,type:“nuit”},{h:8,type:“nuit”},{h:8,type:“nuit”},{h:8,type:“nuit”}],desc:“Cuisson de nuit”,legal:“⚠️ Dérogation permanente”,risk:“moyen”,conseil:{titre:“🥖 Boulangerie”,message:“Dérogation travail nuit boulangerie.”,actions:[“Dérogation permanente autorisée”,“Repos compensateur adapté”,“Surveillance médicale renforcée”,“Majorations nuit applicables”],alerte:{niveau:“info”,texte:“🥖 Boulangerie : dérogation nuit”}}},
-
-{id:162,name:“Presse distribution”,category:“presse”,tags:[“journaux”,“matinale”],days:[{h:5,type:“nuit”},{h:5,type:“nuit”},{h:5,type:“nuit”},{h:5,type:“nuit”},{h:5,type:“nuit”}],desc:“Distribution journaux tôt”,legal:“⚠️ Horaires spécifiques”,risk:“faible”,conseil:{titre:“📰 Presse”,message:“Distribution matinale journaux.”,actions:[“Début très matinal autorisé”,“Durée réduite compensatoire”,“Convention collective presse”,“Repos quotidien respecté”],alerte:null}},
-
-{id:163,name:“Spectacle représentation”,category:“spectacle”,tags:[“soirée”,“culture”],days:[{h:10,type:“normal”},{h:10,type:“normal”}],desc:“Représentations théâtre”,legal:“⚠️ Régime dérogatoire”,risk:“faible”,conseil:{titre:“🎭 Spectacle”,message:“Horaires atypiques spectacle.”,actions:[“Amplitude adaptée représentations”,“Repos compensateur”,“Convention collective spectacle”,“Intermittence possible”],alerte:null}},
-
-{id:164,name:“Discothèque nuit”,category:“hotellerie”,tags:[“nuit”,“soirée”],days:[{h:8,type:“nuit”},{h:8,type:“nuit”},{h:8,type:“saturday”}],desc:“Travail nuit discothèque”,legal:“⚠️ HCR dérogations”,risk:“moyen”,conseil:{titre:“🎵 Discothèque”,message:“Nuits régulières secteur festif.”,actions:[“Convention HCR applicable”,“Majorations nuit cumul weekend”,“Repos compensateur renforcé”,“Surveillance santé”],alerte:{niveau:“warning”,texte:“🎵 Nuits répétées : surveillance santé”}}},
-
-{id:165,name:“Station ski saison”,category:“tourisme”,tags:[“saisonnier”,“montagne”],days:[{h:9,type:“normal”},{h:9,type:“normal”},{h:9,type:“normal”},{h:9,type:“normal”},{h:9,type:“normal”},{h:9,type:“saturday”},{h:9,type:“sunday”}],desc:“Haute saison ski”,legal:“⚠️ Saisonnier intensif”,risk:“moyen”,conseil:{titre:“⛷️ Station Ski”,message:“Saison hivernale intensive.”,actions:[“CDD saisonnier usage”,“7j/7 période haute saison”,“Repos hebdo par roulement”,“Fin saison : récupération”],alerte:{niveau:“warning”,texte:“⛷️ Saison : 7j/7 temporaire”}}},
-
-{id:166,name:“Camping été”,category:“tourisme”,tags:[“été”,“hébergement”],days:[{h:10,type:“normal”},{h:10,type:“normal”},{h:10,type:“normal”},{h:10,type:“normal”},{h:10,type:“normal”},{h:10,type:“saturday”}],desc:“Saison estivale camping”,legal:“⚠️ HPA dérogations”,risk:“moyen”,conseil:{titre:“⛺ Camping”,message:“Saison estivale intensive.”,actions:[“Convention HPA (Hôtellerie Plein Air)”,“Amplitude étendue été”,“Récupération hors saison”,“Logement souvent fourni”],alerte:{niveau:“info”,texte:“⛺ Été : amplitude étendue”}}},
-
-{id:167,name:“Agriculture récolte”,category:“agriculture”,tags:[“vendanges”,“récolte”],days:[{h:10,type:“normal”},{h:10,type:“normal”},{h:10,type:“normal”},{h:10,type:“normal”},{h:10,type:“normal”},{h:10,type:“saturday”}],desc:“Période vendanges”,legal:“⚠️ Saisonnier agricole”,risk:“moyen”,conseil:{titre:“🍇 Vendanges”,message:“Récolte intensive temporaire.”,actions:[“CDD vendanges spécifique”,“Durée max : 1 mois”,“Amplitude adaptée météo”,“Déclaration simplifiée”],alerte:{niveau:“info”,texte:“🍇 Vendanges : CDD spécifique”}}},
-
-{id:168,name:“Mareyeur nuit”,category:“commerce”,tags:[“poisson”,“criée”],days:[{h:8,type:“nuit”},{h:8,type:“nuit”},{h:8,type:“nuit”},{h:8,type:“nuit”},{h:8,type:“nuit”}],desc:“Criée poissons matinale”,legal:“⚠️ Dérogation marée”,risk:“moyen”,conseil:{titre:“🐟 Mareyage”,message:“Travail nuit produits mer.”,actions:[“Dérogation fraîcheur produits”,“Horaires liés marées”,“Repos compensateur”,“Surveillance médicale”],alerte:{niveau:“info”,texte:“🐟 Criée : horaires marées”}}},
-
-{id:169,name:“Taxi/VTC nuit”,category:“transport”,tags:[“nuit”,“conduite”],days:[{h:10,type:“nuit”},{h:10,type:“nuit”},{h:10,type:“nuit”}],desc:“Courses nocturnes”,legal:“⚠️ Amplitude conduite”,risk:“moyen”,conseil:{titre:“🚕 Taxi Nuit”,message:“Conduite nocturne régulière.”,actions:[“Amplitude quotidienne : 12h max”,“Temps conduite : 9h/jour max”,“Repos quotidien 11h impératif”,“Pause 20min toutes les 4h30”],alerte:{niveau:“warning”,texte:“🚕 Conduite nuit : amplitude stricte”}}},
-
-{id:170,name:“Animateur colo”,category:“animation”,tags:[“séjour”,“surveillance”],days:[{h:12,type:“normal”},{h:12,type:“normal”},{h:12,type:“normal”},{h:12,type:“normal”},{h:12,type:“normal”},{h:12,type:“saturday”},{h:12,type:“sunday”}],desc:“Séjour vacances enfants”,legal:“⚠️ Régime particulier”,risk:“moyen”,conseil:{titre:“🏕️ Animateur”,message:“Présence continue séjours.”,actions:[“Convention collective animation”,“Récupération après séjour”,“12h = amplitude, pas travail continu”,“Diplôme requis (BAFA/BAFD)”],alerte:{niveau:“warning”,texte:“🏕️ Colo : récupération post-séjour”}}},
-
-{id:171,name:“Surveillant internat”,category:“enseignement”,tags:[“nuit”,“surveillance”],days:[{h:10,type:“nuit”},{h:10,type:“nuit”},{h:10,type:“nuit”},{h:10,type:“nuit”}],desc:“Surveillance nuit internat”,legal:“⚠️ Éducation nationale”,risk:“moyen”,conseil:{titre:“🏫 Internat”,message:“Surveillance nocturne élèves.”,actions:[“Statut fonction publique si public”,“Temps présence ≠ travail effectif”,“Logement fourni”,“Récupération prévue”],alerte:null}},
-
-{id:172,name:“Pompier professionnel”,category:“securite”,tags:[“garde”,“24h”],days:[{h:24,type:“normal”}],desc:“Garde caserne 24h”,legal:“⚠️ Statut spécifique”,risk:“moyen”,conseil:{titre:“🚒 Pompier”,message:“Garde 24h caserne.”,actions:[“Fonction publique territoriale”,“Temps présence avec astreinte”,“Interventions = travail effectif”,“Repos compensateur adapté”],alerte:null}},
-
-{id:173,name:“Marin pêche”,category:“maritime”,tags:[“mer”,“marée”],days:[],desc:“Campagne pêche”,legal:“⚠️ Droit maritime”,risk:“moyen”,conseil:{titre:“⚓ Pêche Maritime”,message:“Embarquement campagne pêche.”,actions:[“Droit maritime spécifique”,“Rémunération souvent à la part”,“Durée selon type pêche”,“Repos terre entre campagnes”],alerte:null}},
-
-{id:174,name:“Personnel navigant”,category:“transport”,tags:[“avion”,“équipage”],days:[{h:12,type:“normal”},{h:12,type:“normal”}],desc:“Vols long-courriers”,legal:“⚠️ Aviation civile”,risk:“moyen”,conseil:{titre:“✈️ Personnel Navigant”,message:“Équipage aérien commercial.”,actions:[“Réglementation EASA (européenne)”,“Temps vol limité (900h/an)”,“Repos adapté décalages horaires”,“Surveillance médicale renforcée”],alerte:null}},
-
-{id:175,name:“Travailleur plateforme”,category:“digital”,tags:[“indépendant”,“plateforme”],days:[{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”}],desc:“Livraison plateforme”,legal:“⚠️ Statut débattu”,risk:“moyen”,conseil:{titre:“📦 Plateforme”,message:“Travail via plateforme numérique.”,actions:[“Statut : souvent indépendant”,“Loi d’Avenir (2024) : protections renforcées”,“Accident : couverture prévue”,“Revenus déclarés charges sociales”],alerte:{niveau:“warning”,texte:“📦 Plateforme : vérifiez statut et protections”}}},
-
-{id:176,name:“Influenceur rémunéré”,category:“digital”,tags:[“contenu”,“création”],days:[{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”}],desc:“Création contenu marques”,legal:“⚠️ Statut à définir”,risk:“faible”,conseil:{titre:“📱 Création Contenu”,message:“Rémunération création contenu.”,actions:[“Statut : auto-entrepreneur ou société”,“Contrats partenariats formalisés”,“Déclaration revenus obligatoire”,“Droits auteur selon cas”],alerte:null}},
-
-{id:177,name:“Testeur jeux vidéo”,category:“digital”,tags:[“gaming”,“QA”],days:[{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”}],desc:“Test qualité jeux”,legal:“✅ Salarié ou prestataire”,risk:“aucun”,conseil:{titre:“🎮 Testeur Gaming”,message:“Emploi classique secteur jeu vidéo.”,actions:[“CDD ou CDI selon structures”,“Convention Syntec souvent applicable”,“Heures sup selon convention”,“Crunch time : surveiller heures”],alerte:null}},
-
-{id:178,name:“Streamer professionnel”,category:“digital”,tags:[“streaming”,“live”],days:[{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”},{h:8,type:“normal”}],desc:“Live streaming régulier”,legal:“⚠️ Indépendant”,risk:“aucun”,conseil:{titre:“📹 Streaming”,message:“Activité streaming professionnalisée.”,actions:[“Statut indépendant généralement”,“Déclaration revenus obligatoire”,“Partenariats = BNC”,“Charges sociales à anticiper”],alerte:null}},
-
-{id:179,name:“Garde corps humain”,category:“securite”,tags:[“protection”,“VIP”],days:[{h:12,type:“normal”},{h:12,type:“normal”},{h:12,type:“normal”}],desc:“Protection rapprochée”,legal:“⚠️ Carte professionnelle”,risk:“moyen”,conseil:{titre:“🛡️ Protection Rapprochée”,message:“Garde du corps professionnel.”,actions:[“Carte professionnelle obligatoire”,“Amplitude horaire étendue”,“Majorations selon convention sécurité”,“Temps présence selon mission”],alerte:null}},
-
-{id:180,name:“Détective privé”,category:“service”,tags:[“enquête”,“surveillance”],days:[{h:10,type:“normal”},{h:10,type:“normal”},{h:10,type:“normal”},{h:10,type:“normal”}],desc:“Missions enquête”,legal:“⚠️ Agrément requis”,risk:“faible”,conseil:{titre:“🔍 Détective”,message:“Enquêtes privées réglementées.”,actions:[“Agrément CNAPS obligatoire”,“Horaires variables selon missions”,“Indépendant ou salarié agence”,“Respect vie privée strict”],alerte:null}},
-
-// SCÉNARIOS 181-200 : SITUATIONS COMPLEXES MULTI-FACTEURS
-
-{id:181,name:“Cumul emplois privés”,category:“cumul”,tags:[“deux emplois”],days:[{h:4,type:“normal”},{h:4,type:“normal”},{h:4,type:“normal”},{h:4,type:“normal”},{h:4,type:“normal”}],desc:“Deux employeurs simultanés”,legal:“⚠️ Durées cumulées”,risk:“moyen”,conseil:{titre:“👔 Double Emploi”,message:“Cumul emplois autorisé sous conditions.”,actions:[“Durée maximale : 48h/semaine cumulées”,“Repos quotidien 11h à respecter”,“Clause exclusivité : vérifier contrats”,“Pas concurrence entre employeurs”],alerte:{niveau:“warning”,texte:“👔 Cumul : surveiller durées totales”}}},
-
-{id:182,name:“Salarié + auto-entrepreneur”,category:“cumul”,tags:[“indépendant”,“complément”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Salariat + activité indépendante”,legal:“⚠️ Loyauté envers employeur”,risk:“faible”,conseil:{titre:“💼 Salarié + AE”,message:“Cumul possible avec précautions.”,actions:[“Clause exclusivité : vérifier contrat”,“Pas concurrence avec employeur”,“Double affiliation sociale”,“Activité sur temps libre uniquement”],alerte:{niveau:“info”,texte:“💼 Cumul : loyauté envers employeur”}}},
-
-{id:183,name:“Enseignant + vacations”,category:“cumul”,tags:[“enseignement”,“complément”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Cours + vacations autres établissements”,legal:“✅ Heures complémentaires”,risk:“aucun”,conseil:{titre:“🎓 Enseignant + Vacations”,message:“Heures complémentaires autorisées.”,actions:[“Limite heures complémentaires”,“Cumul rémunérations autorisé”,“Repos hebdomadaire à préserver”,“Déclaration vacations”],alerte:null}},
-
-{id:184,name:“Retraité + emploi”,category:“cumul”,tags:[“retraite”,“activité”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Cumul emploi-retraite”,legal:“✅ Cumul encadré”,risk:“aucun”,conseil:{titre:“👴 Cumul Emploi-Retraite”,message:“Activité après pension possible.”,actions:[“Cumul intégral si taux plein + âge légal”,“Sinon : plafonds revenus”,“Pas nouveaux droits retraite”,“Déclarations séparées”],alerte:null}},
-
-{id:185,name:“Étudiant + job”,category:“cumul”,tags:[“étudiant”,“emploi”],days:[{h:4,type:“normal”},{h:4,type:“normal”},{h:4,type:“normal”},{h:4,type:“normal”},{h:4,type:“normal”}],desc:“Études + travail mi-temps”,legal:“✅ Compatible”,risk:“aucun”,conseil:{titre:“🎓 Étudiant Salarié”,message:“Cumul études-emploi courant.”,actions:[“Mi-temps recommandé pour études”,“Statut étudiant maintenu si <60% temps plein”,“Cotisations retraite validées”,“Jobs étudiants exonérés (limites)”],alerte:null}},
-
-{id:186,name:“Mandat syndical + emploi”,category:“cumul”,tags:[“syndical”,“heures”],days:[{h:5,type:“normal”},{h:5,type:“normal”},{h:5,type:“normal”},{h:5,type:“normal”},{h:5,type:“normal”}],desc:“Délégué syndical”,legal:“✅ Crédit heures”,risk:“aucun”,conseil:{titre:“✊ Mandat Syndical”,message:“Heures délégation rémunérées.”,actions:[“Crédit heures selon effectif entreprise”,“Temps de travail effectif”,“Protection statut représentant”,“Formation syndicale possible”],alerte:null}},
-
-{id:187,name:“CSE + emploi temps partiel”,category:“cumul”,tags:[“élu”,“représentant”],days:[{h:4,type:“normal”},{h:4,type:“normal”},{h:4,type:“normal”},{h:4,type:“normal”},{h:4,type:“normal”}],desc:“Élu CSE temps partiel”,legal:“✅ Heures proratisées”,risk:“aucun”,conseil:{titre:“🗳️ Élu Temps Partiel”,message:“Crédit heures adapté au temps partiel.”,actions:[“Heures délégation non proratisées”,“Même protection qu’à temps plein”,“Réunions CSE = temps travail”,“Dépassement heures possible si nécessaire”],alerte:null}},
-
-{id:188,name:“Accident trajet + télétravail”,category:“sante”,tags:[“accident”,“hybride”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Accident trajet domicile-bureau”,legal:“⚠️ Trajet protégé”,risk:“aucun”,conseil:{titre:“🚗 Accident Trajet”,message:“Protection accident travail applicable.”,actions:[“Trajet domicile-lieu habituel protégé”,“Détour personnel : perd protection”,“Télétravail : trajet non protégé (déjà sur lieu)”,“Déclaration 24h”],alerte:null}},
-
-{id:189,name:“Grossesse + télétravail”,category:“familial”,tags:[“maternité”,“remote”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Télétravail enceinte”,legal:“✅ Aménagements possibles”,risk:“aucun”,conseil:{titre:“👶 Grossesse Télétravail”,message:“Aménagements facilitant possible.”,actions:[“Télétravail facilitant souvent accepté”,“Autorisations absences examens maintenues”,“Réduction temps si avis médical”,“Protection licenciement identique”],alerte:null}},
-
-{id:190,name:“Handicap + télétravail”,category:“handicap”,tags:[“RQTH”,“remote”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Télétravail aménagement handicap”,legal:“✅ Aménagement raisonnable”,risk:“aucun”,conseil:{titre:“♿ Handicap Télétravail”,message:“Télétravail comme aménagement.”,actions:[“Recommandation médecin travail = poids”,“Aménagements matériels fournis”,“Maintien lien équipe”,“Pas discrimination”],alerte:null}},
-
-{id:191,name:“Formation + chômage partiel”,category:“formation”,tags:[“activité partielle”,“FNE”],days:[{h:3,type:“normal”},{h:3,type:“normal”},{h:3,type:“normal”}],desc:“Formation pendant chômage partiel”,legal:“✅ FNE Formation”,risk:“aucun”,conseil:{titre:“📚 Formation Activité Partielle”,message:“Formation pendant baisse activité.”,actions:[“FNE-Formation : 100% pris en charge”,“Temps formation = temps travail”,“Maintien rémunération”,“Développement compétences”],alerte:null}},
-
-{id:192,name:“Expatriation + retour”,category:“mobilite”,tags:[“international”,“réintégration”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Retour après mission étranger”,legal:“✅ Réintégration”,risk:“aucun”,conseil:{titre:“🏠 Retour Expatriation”,message:“Retour après mission internationale.”,actions:[“Poste équivalent garanti”,“Accompagnement réadaptation”,“Valorisation expérience internationale”,“Régularisation sociale France”],alerte:null}},
-
-{id:193,name:“Licenciement économique + FNE”,category:“rupture”,tags:[“économique”,“formation”],days:[],desc:“Formation avant licenciement”,legal:“✅ Sécurisation parcours”,risk:“aucun”,conseil:{titre:“📚 Formation Reclassement”,message:“Formation avant départ entreprise.”,actions:[“Bilan compétences proposé”,“Formation reclassement financée”,“Maintien rémunération”,“Accompagnement recherche emploi”],alerte:null}},
-
-{id:194,name:“Rupture conventionnelle + formation”,category:“rupture”,tags:[“projet”,“transition”],days:[],desc:“Rupture pour projet formation”,legal:“✅ CPF transition”,risk:“aucun”,conseil:{titre:“🎓 Rupture Formation”,message:“Départ pour projet professionnel.”,actions:[“CPF Transition : financement formation longue”,“Rupture conventionnelle permet chômage”,“Formation pendant chômage possible”,“Projet validé commission paritaire”],alerte:null}},
-
-{id:195,name:“Démission + CPF”,category:“rupture”,tags:[“démission”,“reconversion”],days:[],desc:“Démission projet certifiant”,legal:“✅ Démission légitime”,risk:“aucun”,conseil:{titre:“📚 Démission Reconversion”,message:“Projet formation = chômage possible.”,actions:[“Projet reconversion validé : droits chômage”,“Formation certifiante ou création entreprise”,“Validation commission paritaire”,“CPF mobilisable”],alerte:null}},
-
-{id:196,name:“Inaptitude + reclassement”,category:“sante”,tags:[“inaptitude”,“recherche”],days:[],desc:“Recherche poste adapté”,legal:“⚠️ Obligation reclassement”,risk:“moyen”,conseil:{titre:“🏥 Reclassement”,message:“Recherche poste compatible santé.”,actions:[“Employeur recherche 1 mois”,“Consultation CSE obligatoire”,“Maintien salaire pendant recherche”,“Licenciement si impossible (indemnités doublées)”],alerte:{niveau:“warning”,texte:“🏥 Reclassement : délai 1 mois”}}},
-
-{id:197,name:“Maladie longue durée + maintien”,category:“sante”,tags:[“ALD”,“maintien”],days:[],desc:“Arrêt prolongé >6 mois”,legal:“⚠️ Maintien emploi fragilisé”,risk:“moyen”,conseil:{titre:“🏥 Longue Maladie”,message:“Arrêt prolongé fragilise emploi.”,actions:[“Remplacement possible au-delà 1 an”,“ALD : prise charge 100% CPAM”,“Maintien salaire limité”,“Contact RH régulier conseillé”],alerte:{niveau:“warning”,texte:“🏥 >6 mois : risque remplacement”}}},
-
-{id:198,name:“Burn-out reconnu + adaptation”,category:“sante”,tags:[“RPS”,“prévention”],days:[{h:5,type:“normal”},{h:5,type:“normal”},{h:5,type:“normal”},{h:5,type:“normal”},{h:5,type:“normal”}],desc:“Retour après épuisement”,legal:“✅ Prévention RPS”,risk:“moyen”,conseil:{titre:“🏥 Retour Burn-Out”,message:“Reprise après épuisement professionnel.”,actions:[“Visite reprise médecin travail”,“Aménagements poste selon avis”,“Évaluation risques psychosociaux”,“Charge travail allégée progressivement”],alerte:{niveau:“info”,texte:“🏥 Burn-out : aménagements reprise”}}},
-
-{id:199,name:“Harcèlement signalé + protection”,category:“conflit”,tags:[“harcèlement”,“procédure”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Procédure interne harcèlement”,legal:“✅ Protection lanceur alerte”,risk:“moyen”,conseil:{titre:“📢 Signalement Harcèlement”,message:“Protection contre représailles.”,actions:[“Référent harcèlement disponible”,“Enquête interne obligatoire”,“Protection contre sanctions”,“Médiation possible”],alerte:{niveau:“info”,texte:“📢 Harcèlement : protection signalement”}}},
-
-{id:200,name:“Transaction signée + fin”,category:“juridique”,tags:[“accord”,“transaction”],days:[],desc:“Accord transactionnel conclu”,legal:“✅ Fin différend”,risk:“aucun”,conseil:{titre:“🤝 Transaction”,message:“Accord mettant fin au litige.”,actions:[“Concessions réciproques”,“Irrévocable après signature”,“Délai rétractation écoulé”,“Exécution des engagements”],alerte:null}}
-      // SCÉNARIOS 201-220 : SITUATIONS CONTRACTUELLES AVANCÉES
 
 {id:201,name:"Succession CDD",category:"contrat",tags:["CDD","enchaînement"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Enchaînement contrats durée déterminée",legal:"✅ Règles encadrement",risk:"aucun",conseil:{titre:"📄 CDD Successifs",message:"L'enchaînement de CDD obéit à des règles précises.",actions:["Délai de carence : 1/3 de la durée du contrat précédent","Exceptions : remplacement absent, emploi saisonnier, usage","Durée maximale : 18 mois sur 36 mois (hors exceptions)","Motif de recours doit être conforme à la législation"],alerte:null}},
 
