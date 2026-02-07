@@ -7555,210 +7555,1582 @@ function initScenarios() {
     "desc": "Inconfort position",
     "legal": "⚠️ Risque TMS",
     "risk": "moyen",
-    "conseil": { "titre": "🪑 Ergonomie Insuffisante", "message": "Un poste mal réglé cause douleurs à long terme.", "actions": ["Demander audit ergonomique", "Réglages : écran hauteur yeux, pieds au sol", "Solliciter matériel adapté (siège, repose-pieds)", "Médecin travail si douleurs"], "alerte": { "niveau": "warning", "texte": "🪑 Ergonomie : prévenir TMS" } }
+    "conseil": { 
+      "titre": "🪑 Ergonomie Insuffisante", 
+      "message": "Un poste mal réglé cause douleurs à long terme.", 
+      "actions": ["Demander audit ergonomique", "Réglages : écran hauteur yeux, pieds au sol", "Solliciter matériel adapté (siège, repose-pieds)", "Médecin travail si douleurs"], 
+      "alerte": { "niveau": "warning", "texte": "🪑 Ergonomie : prévenir TMS" } 
+    }
+  },
+  {
+    "id": 503,
+    "name": "Bruit ambiant excessif",
+    "category": "environnement",
+    "tags": ["bruit", "concentration"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Open-space bruyant",
+    "legal": "⚠️ Concentration perturbée",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🔊 Bruit Excessif",
+      "message": "Le bruit constant fatigue et réduit concentration.",
+      "actions": ["Casque anti-bruit si autorisé", "Négocier espaces calmes ou bulles", "Signaler niveau bruit à RH", "Alterner lieux si télétravail possible"],
+      "alerte": { "niveau": "info", "texte": "🔊 Bruit : impact concentration et fatigue" }
+    }
+  },
+  {
+    "id": 504,
+    "name": "Luminosité inadaptée",
+    "category": "environnement",
+    "tags": ["lumière", "fatigue"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Éclairage insuffisant ou éblouissant",
+    "legal": "⚠️ Fatigue visuelle",
+    "risk": "faible",
+    "conseil": {
+      "titre": "💡 Luminosité",
+      "message": "Un éclairage inadapté fatigue yeux et cerveau.",
+      "actions": ["Lampe d’appoint si sous-éclairage", "Stores/filtres si éblouissement", "Signaler problème éclairage", "Pauses visuelles régulières"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 505,
+    "name": "Température inconfortable",
+    "category": "environnement",
+    "tags": ["température", "confort"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Trop chaud ou trop froid",
+    "legal": "⚠️ Confort thermique",
+    "risk": "faible",
+    "conseil": {
+      "titre": "🌡️ Température",
+      "message": "L’inconfort thermique réduit concentration.",
+      "actions": ["Recommandation : 19-26°C", "Adapter vêtements (couches)", "Signaler dysfonctionnement climatisation", "Solutions individuelles si impossible collectif"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 506,
+    "name": "Qualité air médiocre",
+    "category": "environnement",
+    "tags": ["air", "santé"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Air confiné",
+    "legal": "⚠️ Ventilation insuffisante",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "💨 Qualité Air",
+      "message": "Un air confiné cause maux de tête et fatigue.",
+      "actions": ["Aérer régulièrement si possible", "Signaler problème ventilation", "Pauses extérieur si possible", "Plantes dépolluantes si autorisées"],
+      "alerte": { "niveau": "info", "texte": "💨 Air confiné : ventilation importante" }
+    }
+  },
+  {
+    "id": 507,
+    "name": "Espace personnel suffisant",
+    "category": "environnement",
+    "tags": ["espace", "intimité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Bureau individuel ou cloisonné",
+    "legal": "✅ Intimité préservée",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏢 Espace Personnel",
+      "message": "Un espace personnel favorise concentration et bien-être.",
+      "actions": ["Personnaliser espace raisonnablement", "Respecter espaces collègues", "Valoriser espace comme ressource", "Négocier aménagements si besoin"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 508,
+    "name": "Promiscuité excessive",
+    "category": "environnement",
+    "tags": ["densité", "stress"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Open-space surchargé",
+    "legal": "⚠️ Manque intimité",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "👥 Surpopulation",
+      "message": "La promiscuité excessive génère stress.",
+      "actions": ["Négocier rotations télétravail", "Utiliser espaces calmes si disponibles", "Casque signalant concentration", "Remonter problème densité"],
+      "alerte": { "niveau": "info", "texte": "👥 Surpopulation : négocier alternatives" }
+    }
+  },
+  {
+    "id": 509,
+    "name": "Espaces détente accessibles",
+    "category": "environnement",
+    "tags": ["détente", "ressources"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Lieux repos disponibles",
+    "legal": "✅ Ressource bien-être",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "☕ Espaces Détente",
+      "message": "Les espaces détente favorisent récupération.",
+      "actions": ["Utiliser espaces sans culpabilité", "Vraies pauses loin poste", "Respecter usages collectifs", "Proposer aménagements si absents"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 510,
+    "name": "Restauration qualité site",
+    "category": "environnement",
+    "tags": ["alimentation", "bien-être"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Cantine ou options saines",
+    "legal": "✅ Santé favorisée",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🍽️ Restauration",
+      "message": "Une alimentation de qualité soutient énergie.",
+      "actions": ["Privilégier options équilibrées", "Prendre temps repas suffisant", "Limiter fast-food quotidien", "Participer amélioration offre si possible"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 511,
+    "name": "Accès difficile site",
+    "category": "environnement",
+    "tags": ["trajet", "fatigue"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Longs trajets pénibles",
+    "legal": "⚠️ Fatigue accrue",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🚗 Trajets Longs",
+      "message": "Les longs trajets amplifient fatigue.",
+      "actions": ["Explorer télétravail partiel", "Horaires décalés si trafic évitable", "Optimiser trajets (covoiturage, lecture)", "Quantifier temps perdu (négociation remote)"],
+      "alerte": { "niveau": "info", "texte": "🚗 >90min/jour trajet : fatigue cumulative" }
+    }
+  },
+  {
+    "id": 512,
+    "name": "Matériel informatique performant",
+    "category": "environnement",
+    "tags": ["outils", "efficacité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Équipement adapté",
+    "legal": "✅ Productivité facilitée",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💻 Matériel Performant",
+      "message": "De bons outils réduisent frustrations.",
+      "actions": ["Signaler besoins spécifiques métier", "Maintenir matériel (mises à jour, nettoyage)", "Valoriser investissement si présent", "Solliciter renouvellement si obsolète"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 513,
+    "name": "Outils vétustes",
+    "category": "environnement",
+    "tags": ["outils", "frustration"],
+    "days": [{ "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }],
+    "desc": "Matériel lent ou défaillant",
+    "legal": "⚠️ Perte temps",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🐌 Outils Lents",
+      "message": "Du matériel inadapté génère frustration quotidienne.",
+      "actions": ["Quantifier temps perdu (lenteurs, bugs)", "Documenter dysfonctionnements précis", "Justifier ROI renouvellement", "Solliciter IT et manager"],
+      "alerte": { "niveau": "warning", "texte": "🐌 Outils vétustes : perte productivité" }
+    }
+  },
+  {
+    "id": 514,
+    "name": "Sécurité site assurée",
+    "category": "environnement",
+    "tags": ["sécurité", "sérénité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Environnement sécurisé",
+    "legal": "✅ Sérénité garantie",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🛡️ Sécurité",
+      "message": "Un environnement sûr favorise sérénité.",
+      "actions": ["Respecter consignes sécurité", "Signaler risques observés", "Participer formations sécurité", "Apprécier sécurité comme acquis"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 515,
+    "name": "Risques sécurité présents",
+    "category": "environnement",
+    "tags": ["sécurité", "danger"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Dangers non traités",
+    "legal": "⚠️ Obligation sécurité",
+    "risk": "élevé",
+    "conseil": {
+      "titre": "⚠️ Risques Sécurité",
+      "message": "Les risques non traités sont inacceptables.",
+      "actions": ["Documenter risques précisément", "Signaler immédiatement responsable/CSSCT", "Droit retrait si danger grave imminent", "Inspection travail si inaction"],
+      "alerte": { "niveau": "danger", "texte": "⚠️ Danger : droit de retrait possible" }
+    }
+  },
+  {
+    "id": 516,
+    "name": "Flexibilité horaires présente",
+    "category": "organisation",
+    "tags": ["flexibilité", "autonomie"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Aménagements horaires possibles",
+    "legal": "✅ Conciliation facilitée",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "⏰ Flexibilité",
+      "message": "La flexibilité horaires facilite équilibre vie.",
+      "actions": ["Utiliser flexibilité offerte", "Respecter plages présence communes", "Communiquer planning équipe", "Valoriser confiance accordée"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 517,
+    "name": "Rigidité horaires contraignante",
+    "category": "organisation",
+    "tags": ["rigidité", "contrainte"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Aucune souplesse",
+    "legal": "⚠️ Conciliation difficile",
+    "risk": "faible",
+    "conseil": {
+      "titre": "🔒 Rigidité Horaires",
+      "message": "L’absence flexibilité complique équilibre vie.",
+      "actions": ["Identifier contraintes réelles vs organisationnelles", "Proposer aménagements limités", "Négocier occasions exceptionnelles", "Explorer alternatives (télétravail partiel)"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 518,
+    "name": "Télétravail équilibré",
+    "category": "organisation",
+    "tags": ["télétravail", "équilibre"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Mix présentiel/remote sain",
+    "legal": "✅ Meilleur des deux",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏠 Télétravail Équilibré",
+      "message": "L’hybridation bien dosée optimise bien-être.",
+      "actions": ["Trouver rythme personnel optimal", "Maintenir lien équipe jours présentiels", "Profiter concentration jours remote", "Adapter selon tâches et besoins"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 519,
+    "name": "Télétravail mal organisé",
+    "category": "organisation",
+    "tags": ["télétravail", "isolement"],
+    "days": [{ "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }],
+    "desc": "Remote sans cadre",
+    "legal": "⚠️ Dérives possibles",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🏠 Télétravail Déstructuré",
+      "message": "Le télétravail sans cadre peut dériver.",
+      "actions": ["Créer routine structurante", "Espaces et horaires définis", "Maintien lien social intentionnel", "Demander cadrage si organisation floue"],
+      "alerte": { "niveau": "info", "texte": "🏠 Remote : créer structure intentionnelle" }
+    }
+  },
+  {
+    "id": 520,
+    "name": "Politique télétravail absente",
+    "category": "organisation",
+    "tags": ["télétravail", "refus"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Remote impossible",
+    "legal": "⚠️ Flexibilité limitée",
+    "risk": "faible",
+    "conseil": {
+      "titre": "🏢 Pas Télétravail",
+      "message": "L’absence télétravail limite options équilibre.",
+      "actions": ["Vérifier faisabilité réelle métier", "Proposer test périodes limitées", "Explorer jours exceptionnels (grève transport)", "Négocier autres flexibilités (horaires)"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 521,
+    "name": "Parking disponible site",
+    "category": "environnement",
+    "tags": ["parking", "praticité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Stationnement facile",
+    "legal": "✅ Facilité accès",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🅿️ Parking",
+      "message": "Un parking facilite quotidien.",
+      "actions": ["Respecter règles stationnement", "Covoiturage si places limitées", "Valoriser facilité comme avantage", "Proposer alternatives (vélo) si intérêt"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 522,
+    "name": "Accès transports publics",
+    "category": "environnement",
+    "tags": ["transport", "écologie"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Site bien desservi",
+    "legal": "✅ Mobilité durable",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🚇 Transports",
+      "message": "De bons transports réduisent stress trajets.",
+      "actions": ["Optimiser itinéraires et horaires", "Profiter temps transport (lecture, repos)", "Prise en charge abonnement si prévue", "Alternatives si grèves fréquentes"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 523,
+    "name": "Services proximité site",
+    "category": "environnement",
+    "tags": ["commodités", "qualité vie"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Commerces, crèche accessibles",
+    "legal": "✅ Facilitations vie",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏪 Services Proximité",
+      "message": "Les services proches facilitent quotidien.",
+      "actions": ["Utiliser services disponibles", "Mutualiser déplacements", "Proposer partenariats si manques", "Valoriser atouts localisation"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 524,
+    "name": "Espaces verts accessibles",
+    "category": "environnement",
+    "tags": ["nature", "récupération"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Accès extérieur/nature",
+    "legal": "✅ Ressource bien-être",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🌳 Espaces Verts",
+      "message": "Le contact nature favorise récupération.",
+      "actions": ["Pauses extérieur si possible", "Déjeuner dehors beau temps", "Marche pause midi", "Valoriser accès nature"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 525,
+    "name": "Environnement esthétique agréable",
+    "category": "environnement",
+    "tags": ["esthétique", "bien-être"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Locaux plaisants",
+    "legal": "✅ Cadre valorisant",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎨 Cadre Agréable",
+      "message": "Un environnement plaisant favorise bien-être.",
+      "actions": ["Personnaliser espace modestement", "Participer embellissement si possible", "Maintenir propreté collective", "Reconnaître chance si présent"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 526,
+    "name": "Priorisation claire quotidienne",
+    "category": "organisation",
+    "tags": ["priorisation", "efficacité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Top 3 tâches identifiées",
+    "legal": "✅ Organisation saine",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎯 Priorisation",
+      "message": "Prioriser clairement réduit stress et améliore résultats.",
+      "actions": ["Méthode 1-3-5 : 1 grosse + 3 moyennes + 5 petites", "Distinguer urgent vs important (Eisenhower)", "Réévaluer priorités si changements", "Accepter tout ne sera pas fait"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 527,
+    "name": "To-do lists paralysantes",
+    "category": "organisation",
+    "tags": ["listes", "anxiété"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Listes infinies stressantes",
+    "legal": "⚠️ Anxiété productivité",
+    "risk": "faible",
+    "conseil": {
+      "titre": "📝 Listes Anxiogènes",
+      "message": "Les listes infinies génèrent anxiété sans productivité.",
+      "actions": ["Limiter liste quotidienne (5-7 items max)", "Parking lot pour idées futures", "Célébrer fait pas juste ajouté", "Abandonner items obsolètes sans culpabilité"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 528,
+    "name": "Planning réaliste journée",
+    "category": "organisation",
+    "tags": ["planning", "réalisme"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Objectifs atteignables",
+    "legal": "✅ Gestion saine",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📅 Planning Réaliste",
+      "message": "Un planning réaliste réduit stress et frustration.",
+      "actions": ["Règle 50% : planifier seulement moitié temps", "Prévoir imprévus et interruptions", "Buffer entre tâches longues", "Ajuster selon réalité pas idéal"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 529,
+    "name": "Surbooking chronique calendrier",
+    "category": "organisation",
+    "tags": ["surcharge", "calendrier"],
+    "days": [{ "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }],
+    "desc": "Calendrier saturé sans marges",
+    "legal": "⚠️ Surcharge planifiée",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "📅 Surbooking",
+      "message": "Un agenda sans marges mène à l’épuisement.",
+      "actions": ["Audit calendrier : temps production vs réunions", "Bloquer créneaux production (non négociables)", "Décliner réunions non essentielles", "Buffers 15min entre RDV"],
+      "alerte": { "niveau": "warning", "texte": "📅 Calendrier saturé : surcharge programmée" }
+    }
+  },
+  {
+    "id": 530,
+    "name": "Technique Pomodoro utilisée",
+    "category": "organisation",
+    "tags": ["focus", "productivité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "25min focus + 5min pause",
+    "legal": "✅ Méthode efficace",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🍅 Pomodoro",
+      "message": "La technique Pomodoro maintient concentration et énergie.",
+      "actions": ["25min concentration sans interruption", "5min pause vraie (pas email)", "4 pomodoros → pause longue 15-20min", "Adapter durées selon tâches"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 531,
+    "name": "Time-blocking pratiqué",
+    "category": "organisation",
+    "tags": ["calendrier", "discipline"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Créneaux thématiques dédiés",
+    "legal": "✅ Organisation structurée",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📊 Time-Blocking",
+      "message": "Bloquer temps par thème réduit dispersion.",
+      "actions": ["Blocs thématiques (emails, production, réunions)", "Respecter blocs comme RDV externes", "Couleurs calendrier par type activité", "Protéger blocs production de sollicitations"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 532,
+    "name": "Batching tâches similaires",
+    "category": "organisation",
+    "tags": ["efficacité", "groupement"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Regroupement tâches types",
+    "legal": "✅ Optimisation cognitive",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📦 Batching",
+      "message": "Regrouper tâches similaires réduit coût changement contexte.",
+      "actions": ["Emails en 2-3 créneaux fixes/jour", "Appels regroupés si possible", "Tâches administratives en bloc", "Limiter changements contexte"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 533,
+    "name": "Matinées protégées travail profond",
+    "category": "organisation",
+    "tags": ["deep work", "productivité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Créneaux concentration garantis",
+    "legal": "✅ Productivité maximale",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🧠 Deep Work",
+      "message": "Les matinées focus produisent résultats de qualité.",
+      "actions": ["Bloquer 2-4h matinées pour tâches complexes", "Zéro interruption pendant créneaux", "Communiquer indisponibilité équipe", "Réserver après-midis tâches moins exigeantes"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 534,
+    "name": "Multitâche constant",
+    "category": "organisation",
+    "tags": ["multitâche", "inefficacité"],
+    "days": [{ "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }],
+    "desc": "Jonglage permanent tâches",
+    "legal": "⚠️ Dispersion cognitive",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🎪 Multitâche",
+      "message": "Le multitâche réduit qualité et augmente fatigue.",
+      "actions": ["Monotâche intentionnel : une chose à la fois", "Fermer onglets/apps non utilisés", "Terminer avant passer à suivant", "Accepter ralentissement apparent (efficacité réelle +)"],
+      "alerte": { "niveau": "info", "texte": "🎪 Multitâche : illusion productivité" }
+    }
+  },
+  {
+    "id": 535,
+    "name": "Délégation saine pratiquée",
+    "category": "organisation",
+    "tags": ["délégation", "confiance"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Répartition charge équipe",
+    "legal": "✅ Management efficace",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🤝 Délégation",
+      "message": "Déléguer libère temps et développe équipe.",
+      "actions": ["Identifier tâches délégables", "Former si compétence manquante", "Lâcher contrôle sur modalités", "Reconnaître apport délégation"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 536,
+    "name": "Tout faire soi-même",
+    "category": "organisation",
+    "tags": ["contrôle", "surcharge"],
+    "days": [{ "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }],
+    "desc": "Refus déléguer",
+    "legal": "⚠️ Surcharge évitable",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🦸 Tout Seul",
+      "message": "Tout faire soi-même mène à l’épuisement.",
+      "actions": ["Identifier raisons refus (confiance, perfectionnisme)", "Commencer petit : déléguer tâche non critique", "Accepter façons faire différentes", "Calculer coût opportunité temps"],
+      "alerte": { "niveau": "warning", "texte": "🦸 Tout faire : surcharge inévitable" }
+    }
+  },
+  {
+    "id": 537,
+    "name": "Dire non approprié",
+    "category": "organisation",
+    "tags": ["limites", "assertivité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Refus polis mais fermes",
+    "legal": "✅ Protection charge",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🚫 Non Sain",
+      "message": "Savoir dire non protège temps et énergie.",
+      "actions": ["Non = oui à priorités actuelles", "Proposer alternatives si possible", "Expliquer brièvement sans sur-justifier", "Valoriser assertivité comme compétence"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 538,
+    "name": "Difficulté refuser sollicitations",
+    "category": "organisation",
+    "tags": ["limites", "surcharge"],
+    "days": [{ "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }],
+    "desc": "Oui automatiques",
+    "legal": "⚠️ Manque limites",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "✅ Oui Automatiques",
+      "message": "Dire oui à tout surcharge et frustre.",
+      "actions": ["Identifier raisons oui (peur décevoir, plaire)", "Demander temps réflexion avant engagement", "Évaluer coût réel avant accepter", "Pratiquer non progressivement"],
+      "alerte": { "niveau": "info", "texte": "✅ Toujours oui : protéger limites" }
+    }
+  },
+  {
+    "id": 539,
+    "name": "Revue hebdomadaire pratiquée",
+    "category": "organisation",
+    "tags": ["réflexion", "ajustement"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Point semaine régulier",
+    "legal": "✅ Recul bénéfique",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🔄 Revue Hebdo",
+      "message": "La revue hebdomadaire permet ajustements proactifs.",
+      "actions": ["Vendredi après-midi ou dimanche soir", "Bilan semaine : réussites + apprentissages", "Planification semaine suivante", "Ajustements méthodes si besoin"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 540,
+    "name": "Mode réactif permanent",
+    "category": "organisation",
+    "tags": ["réactivité", "urgences"],
+    "days": [{ "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }],
+    "desc": "Seulement réponse urgences",
+    "legal": "⚠️ Absence stratégie",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🚨 Mode Pompier",
+      "message": "La réactivité constante empêche travail de fond.",
+      "actions": ["Identifier si urgences évitables (anticipation)", "Bloquer temps proactif (planification)", "Distinguer urgent vs important", "Travailler causes racines urgences"],
+      "alerte": { "niveau": "warning", "texte": "🚨 Mode réactif : cercle vicieux" }
+    }
+  },
+  {
+    "id": 541,
+    "name": "Perfectionnisme sain",
+    "category": "organisation",
+    "tags": ["qualité", "équilibre"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Excellence sans obsession",
+    "legal": "✅ Standards élevés",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "⭐ Excellence",
+      "message": "L’excellence saine vise qualité sans sacrifice bien-être.",
+      "actions": ["Standards élevés mais flexibles", "Accepter 'excellent' sans être 'parfait'", "Adapter niveau selon enjeux réels", "Célébrer résultats même imparfaits"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 542,
+    "name": "Perfectionnisme pathologique",
+    "category": "organisation",
+    "tags": ["perfectionnisme", "paralysie"],
+    "days": [{ "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }, { "h": 9, "type": "normal" }],
+    "desc": "Jamais assez bien",
+    "legal": "⚠️ Épuisement garanti",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "💎 Perfectionnisme Toxique",
+      "message": "Le perfectionnisme excessif paralyse et épuise.",
+      "actions": ["Identifier peurs sous-jacentes (jugement, rejet)", "Principe fait > parfait", "Temps limité par tâche (deadline auto-imposée)", "Accompagnement psy si envahissant"],
+      "alerte": { "niveau": "warning", "texte": "💎 Perfectionnisme : risque burn-out" }
+    }
+  },
+  {
+    "id": 543,
+    "name": "Automatisation tâches répétitives",
+    "category": "organisation",
+    "tags": ["efficacité", "automatisation"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Processus optimisés",
+    "legal": "✅ Gain temps",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🤖 Automatisation",
+      "message": "Automatiser tâches répétitives libère temps et énergie.",
+      "actions": ["Identifier tâches répétitives chronophages", "Modèles emails/documents standards", "Macros ou scripts simples", "Formation outils si complexe"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 544,
+    "name": "Documentation personnelle maintenue",
+    "category": "organisation",
+    "tags": ["mémoire", "efficacité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Notes procédures accessibles",
+    "legal": "✅ Capitalisation savoir",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📚 Documentation",
+      "message": "Documenter réduit charge mentale et facilite partage.",
+      "actions": ["Notes procédures récurrentes", "Base connaissance personnelle", "Modèles situations fréquentes", "Partage équipe si pertinent"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 545,
+    "name": "Rituels début/fin journée",
+    "category": "organisation",
+    "tags": ["rituels", "transitions"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Routines entrée/sortie travail",
+    "legal": "✅ Transitions saines",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎭 Rituels",
+      "message": "Les rituels facilitent transitions pro-perso.",
+      "actions": ["Matin : routine activation (café, to-do, lecture actu)", "Soir : routine clôture (to-do demain, ranger, fermer apps)", "Symboles transition (trajet, vêtements)", "Cohérence rituels = signal cerveau"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 546,
+    "name": "Gestion email structurée",
+    "category": "organisation",
+    "tags": ["emails", "productivité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Méthode inbox zero",
+    "legal": "✅ Maîtrise communication",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📧 Emails Maîtrisés",
+      "message": "Une gestion structurée emails réduit anxiété.",
+      "actions": ["Créneaux dédiés (pas tout le temps)", "Méthode 2min : traiter immédiat si <2min", "Dossiers/labels thématiques", "Archiver pas laisser en boîte"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 547,
+    "name": "Procrastination productive reconnue",
+    "category": "organisation",
+    "tags": ["procrastination", "créativité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Temps incubation utile",
+    "legal": "✅ Processus créatif",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💡 Incubation",
+      "message": "Certains délais permettent maturation idées.",
+      "actions": ["Distinguer incubation vs évitement", "Temps réflexion légitime décisions complexes", "Tolérer inconfort incertitude temporaire", "Deadline finale claire malgré incubation"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 548,
+    "name": "Objectifs SMART définis",
+    "category": "organisation",
+    "tags": ["objectifs", "clarté"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Buts spécifiques mesurables",
+    "legal": "✅ Direction claire",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎯 Objectifs SMART",
+      "message": "Des objectifs clairs focalisent énergie efficacement.",
+      "actions": ["Spécifique, Mesurable, Atteignable, Réaliste, Temporel", "Découper gros objectifs en jalons", "Célébrer jalons atteints", "Réviser si contexte change"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 549,
+    "name": "Objectifs flous paralysants",
+    "category": "organisation",
+    "tags": ["clarté", "direction"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Attentes imprécises",
+    "legal": "⚠️ Direction manquante",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "❓ Objectifs Flous",
+      "message": "Des objectifs vagues génèrent anxiété et inefficacité.",
+      "actions": ["Clarifier avec manager si flou descendant", "Définir propres critères succès si impossible", "Communiquer besoin précision", "Itérations OK si évolution contexte"],
+      "alerte": { "niveau": "info", "texte": "❓ Flou : demander précisions" }
+    }
+  },
+  {
+    "id": 550,
+    "name": "Célébration petites victoires",
+    "category": "reconnaissance",
+    "tags": ["célébration", "motivation"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Reconnaissance progrès",
+    "legal": "✅ Motivation maintenue",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎉 Victoires",
+      "message": "Célébrer progrès maintient motivation long terme.",
+      "actions": ["Reconnaître accomplissements quotidiens", "Pause micro-célébration après tâche difficile", "Journal succès hebdomaire", "Partager victoires équipe"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 551,
+    "name": "Sport régulier pratiqué",
+    "category": "prevention",
+    "tags": ["sport", "énergie"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Activité physique maintenue",
+    "legal": "✅ Protection santé",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏃 Sport Régulier",
+      "message": "L’activity physique protège stress et burn-out.",
+      "actions": ["Minimum 30min 3x/semaine", "Activité plaisir pas contrainte", "Varier intensités selon énergie", "Sport = investissement santé"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 552,
+    "name": "Alimentation équilibrée",
+    "category": "prevention",
+    "tags": ["nutrition", "énergie"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Repas sains réguliers",
+    "legal": "✅ Énergie stable",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🥗 Nutrition",
+      "message": "Une alimentation équilibrée soutient énergie et concentration.",
+      "actions": ["3 repas réguliers sans sauter", "Limiter sucres rapides et excitants", "Hydratation suffisante (1,5-2L/jour)", "Collations saines si fringales"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 553,
+    "name": "Sommeil qualité prioritaire",
+    "category": "prevention",
+    "tags": ["sommeil", "récupération"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "7-8h nuit régulières",
+    "legal": "✅ Récupération essentielle",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "😴 Sommeil Qualité",
+      "message": "Le sommeil est le pilier prévention burn-out.",
+      "actions": ["7-8h minimum non négociables", "Horaires réguliers même week-end", "Routine coucher apaisante", "Chambre fraîche, sombre, silencieuse"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 554,
+    "name": "Pratiques relaxation régulières",
+    "category": "prevention",
+    "tags": ["relaxation", "stress"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Méditation, yoga, cohérence cardiaque",
+    "legal": "✅ Gestion stress",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🧘 Relaxation",
+      "message": "Les techniques relaxation réduisent stress durablement.",
+      "actions": ["Trouver pratique adaptée (méditation, yoga, respiration)", "Régularité > durée (5min/jour > 1h/semaine)", "Apps guidage si débutant", "Intégrer routine quotidienne"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 555,
+    "name": "Réseau soutien social",
+    "category": "prevention",
+    "tags": ["social", "soutien"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Proches soutenants présents",
+    "legal": "✅ Facteur protecteur",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "❤️ Soutien Social",
+      "message": "Le soutien social est facteur protecteur majeur.",
+      "actions": ["Cultiver relations qualité", "Parler difficultés avec confidents", "Demander aide si besoin", "Réciprocité : offrir soutien aussi"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 556,
+    "name": "Psychothérapie préventive",
+    "category": "prevention",
+    "tags": ["psy", "accompagnement"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Suivi psy régulier",
+    "legal": "✅ Accompagnement proactif",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🧠 Thérapie Préventive",
+      "message": "Consulter psy n’exige pas crise : prévention légitime.",
+      "actions": ["Thérapie = hygiène mentale pas pathologie", "TCC efficace prévention burn-out", "Régularité (mensuelle) même si ça va", "Investissement santé mentale"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 557,
+    "name": "Formation gestion stress",
+    "category": "prevention",
+    "tags": ["formation", "compétences"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Apprentissage outils",
+    "legal": "✅ Développement compétences",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📚 Formation Stress",
+      "message": "Apprendre gérer stress est compétence précieuse.",
+      "actions": ["Solliciter formations entreprise si disponibles", "MOOC gestion stress gratuits", "Livres références (Christophe André, etc.)", "Pratiquer régulièrement outils appris"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 558,
+    "name": "Coaching professionnel",
+    "category": "prevention",
+    "tags": ["coaching", "développement"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Accompagnement coach",
+    "legal": "✅ Soutien développement",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💼 Coaching",
+      "message": "Le coaching facilite transitions et développement.",
+      "actions": ["Coaching = accélérateur pas béquille", "Objectifs clairs dès départ", "Engagement régulier séances", "Application apprentissages entre séances"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 559,
+    "name": "Bilan compétences anticipé",
+    "category": "prevention",
+    "tags": ["bilan", "orientation"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Réflexion projet pro",
+    "legal": "✅ Anticipation évolution",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🔍 Bilan Compétences",
+      "message": "Le bilan compétences clarifie aspirations.",
+      "actions": ["Financement CPF possible", "Accompagnement neutre extérieur", "Exploration sans obligation changement", "Timing : avant crise pas pendant"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 560,
+    "name": "Veille évolution métier",
+    "category": "prevention",
+    "tags": ["veille", "adaptation"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Actualisation compétences",
+    "legal": "✅ Employabilité maintenue",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📡 Veille Métier",
+      "message": "Se maintenir à jour réduit anxiété obsolescence.",
+      "actions": ["Temps veille régulier (1-2h/semaine)", "Conférences, webinaires métier", "Réseaux professionnels actifs", "Certifications si pertinent"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 561,
+    "name": "Mentorat bénéficié",
+    "category": "prevention",
+    "tags": ["mentorat", "apprentissage"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Mentor expérimenté accessible",
+    "legal": "✅ Apprentissage accéléré",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎓 Mentorat",
+      "message": "Un mentor facilite navigation carrière.",
+      "actions": ["Solliciter mentor formel ou informel", "Régularité échanges", "Questions préparées en amont", "Réciprocité : mentorat inversé junior"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 562,
+    "name": "Groupes parole pairs",
+    "category": "prevention",
+    "tags": ["pairs", "partage"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Échanges collègues similaires",
+    "legal": "✅ Soutien mutuel",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💬 Groupes Pairs",
+      "message": "Les groupes pairs normalisent difficultés.",
+      "actions": ["Groupes informels déjeuners", "Communautés métier/secteur", "Partage expériences sans jugement", "Ressources collectives solutions"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 563,
+    "name": "Formation premiers secours PSY",
+    "category": "prevention",
+    "tags": ["PSSM", "secourisme"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "PSSM (Premiers Secours Santé Mentale)",
+    "legal": "✅ Compétence utile",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🚑 PSSM",
+      "message": "Les premiers secours santé mentale sauvent.",
+      "actions": ["Formation PSSM 14h disponible", "Reconnaître signaux détresse", "Orienter vers ressources appropriées", "Déstigmatiser santé mentale"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 564,
+    "name": "Cellule écoute entreprise",
+    "category": "prevention",
+    "tags": ["écoute", "ressource"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Service soutien psy accessible",
+    "legal": "✅ Ressource interne",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "☎️ Cellule Écoute",
+      "message": "Les cellules écoute offrent soutien confidentiel.",
+      "actions": ["Utiliser sans crainte confidentialité garantie", "Premier contact téléphonique souvent", "Orientation ressources adaptées", "Complément pas remplacement suivi externe"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 565,
+    "name": "Programme QVT entreprise",
+    "category": "prevention",
+    "tags": ["QVT", "initiative"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Actions qualité vie travail",
+    "legal": "✅ Engagement employeur",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🌟 Programme QVT",
+      "message": "Les programmes QVT améliorent conditions travail.",
+      "actions": ["Participer initiatives proposées", "Feedback constructif améliorations", "Proposer idées nouvelles actions", "Reconnaissance efforts entreprise"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 566,
+    "name": "Droit déconnexion formalisé",
+    "category": "prevention",
+    "tags": ["déconnexion", "droit"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Charte déconnexion respectée",
+    "legal": "✅ Protection repos",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📵 Droit Déconnexion",
+      "message": "Le droit déconnexion protège récupération.",
+      "actions": ["Connaître règles entreprise", "Respecter droit collègues", "Envoi différé emails hors horaires", "Culture collective respectueuse"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 567,
+    "name": "Référent harcèlement connu",
+    "category": "prevention",
+    "tags": ["harcèlement", "ressource"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Point contact identifié",
+    "legal": "✅ Ressource accessible",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🛡️ Référent Harcèlement",
+      "message": "Le référent harcèlement est ressource confidentielle.",
+      "actions": ["Connaître identité référent", "Contacter si situation ambiguë (pas que certitude)", "Confidentialité garantie", "Orientation démarches appropriées"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 568,
+    "name": "CSSCT actif",
+    "category": "prevention",
+    "tags": ["CSSCT", "prévention"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Commission santé travail dynamique",
+    "legal": "✅ Prévention collective",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "👥 CSSCT",
+      "message": "Le CSSCT œuvre pour conditions travail.",
+      "actions": ["Connaître membres CSSCT", "Remonter préoccupations santé/sécurité", "Participer enquêtes si sollicité", "Soutenir actions prévention"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 569,
+    "name": "Médecin travail accessible",
+    "category": "prevention",
+    "tags": ["médecine travail", "santé"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Service santé travail présent",
+    "legal": "✅ Ressource santé",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🏥 Médecin Travail",
+      "message": "Le médecin travail est allié santé pro.",
+      "actions": ["Solliciter visite sans attendre visite périodique", "Aborder santé mentale sans tabou", "Préconisations aménagements possibles", "Confidentialité vis-à-vis employeur"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 570,
+    "name": "Ergonome intervenu",
+    "category": "prevention",
+    "tags": ["ergonomie", "prévention"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Audit poste réalisé",
+    "legal": "✅ Prévention TMS",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🪑 Ergonome",
+      "message": "L’ergonome optimise poste et prévient douleurs.",
+      "actions": ["Demander audit si inconfort", "Appliquer recommandations", "Réglages réguliers (posture évolue)", "Signaler nouveaux équipements"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 571,
+    "name": "Formation RPS managers",
+    "category": "prevention",
+    "tags": ["management", "formation"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Sensibilisation risques psychosociaux",
+    "legal": "✅ Prévention managériale",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "👔 Managers Formés RPS",
+      "message": "Des managers formés détectent signaux précocement.",
+      "actions": ["Si manager : solliciter formation RPS", "Dialogue ouvert santé mentale équipe", "Détection signaux faibles", "Orientation ressources appropriées"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 572,
+    "name": "Baromètre social régulier",
+    "category": "prevention",
+    "tags": ["enquête", "climat"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Enquêtes climat social",
+    "legal": "✅ Écoute organisée",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "📊 Baromètre",
+      "message": "Les enquêtes régulières mesurent climat.",
+      "actions": ["Répondre honnêtement enquêtes", "Anonymat respecté", "Suivi actions post-enquête", "Feedback si pas actions"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 573,
+    "name": "Entretiens annuels qualitatifs",
+    "category": "prevention",
+    "tags": ["entretien", "écoute"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Moments écoute formalisés",
+    "legal": "✅ Dialogue régulier",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💬 Entretiens Annuels",
+      "message": "Les entretiens sont moments légitimes évocation difficultés.",
+      "actions": ["Préparer entretien (bilan, besoins)", "Aborder charge travail honnêtement", "Solliciter soutiens nécessaires", "Formalisation écrite engagements"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 574,
+    "name": "Congés sabbatiques possibles",
+    "category": "prevention",
+    "tags": ["sabbatique", "ressourcement"],
+    "days": [],
+    "desc": "Dispositif pause longue",
+    "legal": "✅ Ressourcement profond",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🌴 Sabbatique",
+      "message": "Le congé sabbatique permet ressourcement profond.",
+      "actions": ["6-11 mois suspension contrat", "Ancienneté requise (vérifier accord)", "Réflexion projet pendant sabbatique", "Retour garanti poste équivalent"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 575,
+    "name": "Temps partiel choisi facilité",
+    "category": "prevention",
+    "tags": ["temps partiel", "équilibre"],
+    "days": [{ "h": 5.6, "type": "normal" }, { "h": 5.6, "type": "normal" }, { "h": 5.6, "type": "normal" }, { "h": 5.6, "type": "normal" }, { "h": 5.6, "type": "normal" }],
+    "desc": "Réduction temps possible",
+    "legal": "✅ Flexibilité offerte",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "⏱️ Temps Partiel",
+      "message": "Le temps partiel choisi améliore équilibre vie.",
+      "actions": ["Explorer si envisagé (80% populaire)", "Impacts financiers à anticiper", "Négocier jours ou horaires adaptés", "Retour temps plein facilité"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 576,
+    "name": "Retour après arrêt burn-out",
+    "category": "prevention",
+    "tags": ["retour", "reprise"],
+    "days": [{ "h": 4, "type": "normal" }, { "h": 4, "type": "normal" }, { "h": 4, "type": "normal" }, { "h": 4, "type": "normal" }, { "h": 4, "type": "normal" }],
+    "desc": "Reprise progressive travail",
+    "legal": "✅ Retour aménagé",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🔄 Retour Burn-Out",
+      "message": "Le retour après burn-out nécessite accompagnement.",
+      "actions": ["Mi-temps thérapeutique si prescrit", "Aménagements charge discutés", "Suivi psy maintenu", "Vigilance rechute premiers mois"],
+      "alerte": { "niveau": "info", "texte": "🔄 Retour : vigilance rechute" }
+    }
+  },
+  {
+    "id": 577,
+    "name": "Proche en burn-out",
+    "category": "prevention",
+    "tags": ["entourage", "soutien"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Soutenir collègue en difficulté",
+    "legal": "✅ Soutien approprié",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🤝 Soutenir Proche",
+      "message": "Soutenir sans se substituer aux professionnels.",
+      "actions": ["Écoute bienveillante sans jugement", "Encourager consultation professionnelle", "Ne pas minimiser ('Ça va passer')", "Respecter rythme et choix personne"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 578,
+    "name": "Manager détecte signaux équipe",
+    "category": "prevention",
+    "tags": ["management", "détection"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Vigilance santé collaborateurs",
+    "legal": "✅ Responsabilité managériale",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "👔 Manager Vigilant",
+      "message": "Le manager a rôle clé détection précoce.",
+      "actions": ["Formation reconnaissance signaux", "Entretiens réguliers individuels", "Réagir rapidement changements comportement", "Mobiliser ressources (RH, médecin travail)"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 579,
+    "name": "Changement organisation stressant",
+    "category": "organisation",
+    "tags": ["changement", "adaptation"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Restructuration en cours",
+    "legal": "⚠️ Période incertitude",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🔄 Changement Orga",
+      "message": "Les changements organisationnels génèrent stress.",
+      "actions": ["Chercher informations fiables", "Exprimer préoccupations légitimes", "Se concentrer sur contrôlable", "Soutien mutuel entre collègues"],
+      "alerte": { "niveau": "info", "texte": "🔄 Changement : normal stresser" }
+    }
+  },
+  {
+    "id": 580,
+    "name": "Fusion acquisition vécue",
+    "category": "organisation",
+    "tags": ["fusion", "incertitude"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Rachat entreprise",
+    "legal": "⚠️ Incertitude majeure",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🔀 Fusion",
+      "message": "Les fusions créent incertitude importante.",
+      "actions": ["Informations officielles privilégiées", "Préparer CV par précaution", "Opportunités possibles nouvelles structure", "Soutien externe (réseau, psy) si anxiété"],
+      "alerte": { "niveau": "warning", "texte": "🔀 Fusion : anticiper scénarios" }
+    }
+  },
+  {
+    "id": 581,
+    "name": "Plan social annoncé",
+    "category": "organisation",
+    "tags": ["licenciement", "crise"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Restructuration emplois",
+    "legal": "⚠️ Stress majeur",
+    "risk": "élevé",
+    "conseil": {
+      "titre": "⚠️ Plan Social",
+      "message": "L’annonce plan social est traumatisante.",
+      "actions": ["Informations précises sur process", "Accompagnement reclassement si concerné", "Soutien psy cellule entreprise ou externe", "Droits syndicaux et légaux"],
+      "alerte": { "niveau": "danger", "texte": "⚠️ Plan social : soutien essentiel" }
+    }
+  },
+  {
+    "id": 582,
+    "name": "Conflit équipes chronique",
+    "category": "relationnel",
+    "tags": ["conflit", "collectif"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Tensions inter-services",
+    "legal": "⚠️ RPS collectifs",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "⚔️ Conflits Équipes",
+      "message": "Les conflits chroniques dégradent climat.",
+      "actions": ["Médiation professionnelle externe", "Clarification rôles et responsabilités", "Team-building si relations détériorées", "Protection individuelle malgré contexte"],
+      "alerte": { "niveau": "warning", "texte": "⚔️ Conflits durables : médiation nécessaire" }
+    }
+  },
+  {
+    "id": 583,
+    "name": "Leadership toxique subi",
+    "category": "relationnel",
+    "tags": ["leadership", "toxicité"],
+    "days": [{ "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }, { "h": 8, "type": "normal" }],
+    "desc": "Direction dysfonctionnelle",
+    "legal": "⚠️ Culture toxique",
+    "risk": "élevé",
+    "conseil": {
+      "titre": "☠️ Leadership Toxique",
+      "message": "Un leadership toxique impacte tous.",
+      "actions": ["Documenter comportements problématiques", "Soutien collectif entre pairs", "Signalement RH ou instances", "Envisager départ si aucune évolution"],
+      "alerte": { "niveau": "danger", "texte": "☠️ Leadership toxique : protéger santé" }
+    }
+  },
+  {
+    "id": 584,
+    "name": "Valeurs entreprise inspirantes",
+    "category": "reconnaissance",
+    "tags": ["valeurs", "engagement"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Culture alignée aspirations",
+    "legal": "✅ Engagement fort",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "⭐ Culture Inspirante",
+      "message": "L’alignement culturel nourrit engagement.",
+      "actions": ["Incarner valeurs au quotidien", "Valoriser culture comme atout", "Participer initiatives culturelles", "Reconnaître chance alignement"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 585,
+    "name": "Mission entreprise questionnée",
+    "category": "reconnaissance",
+    "tags": ["mission", "dissonance"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Doutes impact organisation",
+    "legal": "⚠️ Conflit éthique",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "❓ Mission Questionnée",
+      "message": "Les doutes sur mission génèrent mal-être.",
+      "actions": ["Identifier nature questionnement", "Discussion pairs confiance", "Engagement actions alignées si possible", "Envisager transition si conflit profond"],
+      "alerte": { "niveau": "info", "texte": "❓ Doutes mission : légitime questionner" }
+    }
+  },
+  {
+    "id": 586,
+    "name": "Innovation encouragée",
+    "category": "organisation",
+    "tags": ["innovation", "créativité"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Droit erreur reconnu",
+    "legal": "✅ Culture apprenante",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💡 Innovation",
+      "message": "Le droit à l’erreur favorise créativité.",
+      "actions": ["Proposer idées sans crainte", "Apprentissage des échecs valorisé", "Expérimentations encouragées", "Célébration tentatives autant que réussites"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 587,
+    "name": "Erreur sanctionnée sévèrement",
+    "category": "organisation",
+    "tags": ["erreur", "punition"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Climat peur erreur",
+    "legal": "⚠️ Culture punitive",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "⚠️ Peur Erreur",
+      "message": "La peur de l’erreur inhibe et stresse.",
+      "actions": ["Documenter réactions disproportionnées", "Distinguer erreur vs faute intentionnelle", "Soutien mutuel équipe", "Questionner culture apprentissage"],
+      "alerte": { "niveau": "warning", "texte": "⚠️ Climat peur : culture toxique" }
+    }
+  },
+  {
+    "id": 588,
+    "name": "Transparence décisions",
+    "category": "organisation",
+    "tags": ["transparence", "confiance"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Communication ouverte",
+    "legal": "✅ Confiance établie",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💎 Transparence",
+      "message": "La transparence crée confiance et engagement.",
+      "actions": ["Valoriser ouverture communication", "Partager informations pertinentes", "Questions bienvenues", "Feedback positif sur transparence"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 589,
+    "name": "Secrets et non-dits",
+    "category": "organisation",
+    "tags": ["opacité", "méfiance"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Communication opaque",
+    "legal": "⚠️ Climat méfiance",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "🤐 Opacité",
+      "message": "L’opacité génère rumeurs et méfiance.",
+      "actions": ["Solliciter informations factuelles", "Distinguer rumeur vs fait", "Demander clarifications formelles", "Documenter incohérences si pattern"],
+      "alerte": { "niveau": "info", "texte": "🤐 Opacité : demander transparence" }
+    }
+  },
+  {
+    "id": 590,
+    "name": "Participation décisions encouragée",
+    "category": "organisation",
+    "tags": ["participation", "empowerment"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Voix collaborateurs entendue",
+    "legal": "✅ Empowerment",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🗣️ Participation",
+      "message": "La participation aux décisions motive.",
+      "actions": ["Contribuer activement consultations", "Propositions argumentées", "Accepter décisions finales même si divergentes", "Reconnaître écoute comme valeur"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 591,
+    "name": "Décisions imposées sans consultation",
+    "category": "organisation",
+    "tags": ["autoritarisme", "frustration"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Style management directif",
+    "legal": "⚠️ Démotivation",
+    "risk": "moyen",
+    "conseil": {
+      "titre": "📢 Impositions",
+      "message": "Les décisions imposées démotivent.",
+      "actions": ["Exprimer impact sur motivation", "Proposer modalités consultation", "Distinguer urgence vs habitude", "Valoriser participation quand présente"],
+      "alerte": { "niveau": "info", "texte": "📢 Pas consultation : impact engagement" }
+    }
+  },
+  {
+    "id": 592,
+    "name": "Équilibre vie réussi long terme",
+    "category": "equilibre",
+    "tags": ["équilibre", "réussite"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Harmonie pro-perso durable",
+    "legal": "✅ Réussite holistique",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🌈 Équilibre Réussi",
+      "message": "L’équilibre durable est accomplissement majeur.",
+      "actions": ["Protéger équilibre comme acquis précieux", "Rester vigilant dérives progressives", "Partager pratiques gagnantes", "Reconnaître équilibre comme réussite"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 593,
+    "name": "Reconversion réfléchie",
+    "category": "prevention",
+    "tags": ["reconversion", "projet"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Projet changement professionnel",
+    "legal": "✅ Évolution choisie",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🔄 Reconversion",
+      "message": "La reconversion mûrie ouvre nouvelles perspectives.",
+      "actions": ["Bilan compétences préalable", "Test activité (stage, bénévolat)", "Sécurisation financière transition", "Accompagnement (coach, formation)"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 594,
+    "name": "Démission précipitée évitée",
+    "category": "prevention",
+    "tags": ["démission", "réflexion"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Décision reportée à tête froide",
+    "legal": "✅ Décision éclairée",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "⏸️ Pause Décision",
+      "message": "Reporter décisions importantes en période fragilité.",
+      "actions": ["Règle 30 jours : attendre avant démissionner", "Consulter avant décision irréversible", "Solutions intermédiaires (mobilité, aménagements)", "Sécurisation avant saut (emploi, finances)"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 595,
+    "name": "Mobilité interne réussie",
+    "category": "prevention",
+    "tags": ["mobilité", "évolution"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Changement poste/service",
+    "legal": "✅ Nouvelle dynamique",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🔄 Mobilité Interne",
+      "message": "La mobilité interne peut relancer dynamique.",
+      "actions": ["Explorer opportunités internes", "Accompagnement transition (formation)", "Conservation ancienneté et avantages", "Réseau préservé"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 596,
+    "name": "Transition carrière préparée",
+    "category": "prevention",
+    "tags": ["transition", "anticipation"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Évolution anticipée",
+    "legal": "✅ Anticipation sereine",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎯 Transition Préparée",
+      "message": "Anticiper transitions réduit stress.",
+      "actions": ["Développement compétences transférables", "Réseau professionnel entretenu", "Formation continue régulière", "Employabilité maintenue"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 597,
+    "name": "Résilience développée",
+    "category": "prevention",
+    "tags": ["résilience", "adaptation"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Capacité rebond renforcée",
+    "legal": "✅ Compétence vie",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "💪 Résilience",
+      "message": "La résilience se construit et se renforce.",
+      "actions": ["Apprentissage de chaque épreuve", "Réseau soutien solide", "Pratiques ressourcement régulières", "Aide professionnelle si besoin"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 598,
+    "name": "Gratitude pratiquée",
+    "category": "prevention",
+    "tags": ["gratitude", "bien-être"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Reconnaissance quotidienne positif",
+    "legal": "✅ Mindset positif",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🙏 Gratitude",
+      "message": "La gratitude améliore bien-être durablement.",
+      "actions": ["Journal gratitude (3 éléments/jour)", "Reconnaissance verbale aux autres", "Focus sur présent vs rumination", "Pratique régulière = impact cumulatif"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 599,
+    "name": "Auto-compassion cultivée",
+    "category": "prevention",
+    "tags": ["bienveillance", "soi"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Bienveillance envers soi",
+    "legal": "✅ Pilier bien-être",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "❤️ Auto-Compassion",
+      "message": "L’auto-compassion réduit stress et burn-out.",
+      "actions": ["Parler à soi comme à ami", "Accepter imperfections sans jugement", "Reconnaître humanité commune difficultés", "Mindfulness et acceptation"],
+      "alerte": null
+    }
+  },
+  {
+    "id": 600,
+    "name": "Vigilance continue bien-être",
+    "category": "prevention",
+    "tags": ["vigilance", "équilibre"],
+    "days": [{ "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }, { "h": 7, "type": "normal" }],
+    "desc": "Attention quotidienne signaux",
+    "legal": "✅ Prévention active",
+    "risk": "aucun",
+    "conseil": {
+      "titre": "🎯 Vigilance Continue",
+      "message": "Le bien-être nécessite attention régulière.",
+      "actions": ["Check-in quotidien : comment je vais vraiment?", "Ajustements proactifs si dérive", "Aide précoce plus efficace que tardive", "Bien-être = marathon pas sprint"],
+      "alerte": null
+    }
   }
 ];
-
-
-{id:503,name:"Bruit ambiant excessif",category:"environnement",tags:["bruit","concentration"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Open-space bruyant",legal:"⚠️ Concentration perturbée",risk:"moyen",conseil:{titre:"🔊 Bruit Excessif",message:"Le bruit constant fatigue et réduit concentration.",actions:["Casque anti-bruit si autorisé","Négocier espaces calmes ou bulles","Signaler niveau bruit à RH","Alterner lieux si télétravail possible"],alerte:{niveau:"info",texte:"🔊 Bruit : impact concentration et fatigue"}}},
-
-{id:504,name:"Luminosité inadaptée",category:"environnement",tags:["lumière","fatigue"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Éclairage insuffisant ou éblouissant",legal:"⚠️ Fatigue visuelle",risk:"faible",conseil:{titre:"💡 Luminosité",message:"Un éclairage inadapté fatigue yeux et cerveau.",actions:["Lampe d’appoint si sous-éclairage","Stores/filtres si éblouissement","Signaler problème éclairage","Pauses visuelles régulières"],alerte:null}},
-
-{id:505,name:"Température inconfortable",category:"environnement",tags:["température","confort"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Trop chaud ou trop froid",legal:"⚠️ Confort thermique",risk:"faible",conseil:{titre:"🌡️ Température",message:"L’inconfort thermique réduit concentration.",actions:["Recommandation : 19-26°C","Adapter vêtements (couches)","Signaler dysfonctionnement climatisation","Solutions individuelles si impossible collectif"],alerte:null}},
-
-{id:506,name:"Qualité air médiocre",category:"environnement",tags:["air","santé"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Air confiné",legal:"⚠️ Ventilation insuffisante",risk:"moyen",conseil:{titre:"💨 Qualité Air",message:"Un air confiné cause maux de tête et fatigue.",actions:["Aérer régulièrement si possible","Signaler problème ventilation","Pauses extérieur si possible","Plantes dépolluantes si autorisées"],alerte:{niveau:"info",texte:"💨 Air confiné : ventilation importante"}}},
-
-{id:507,name:"Espace personnel suffisant",category:"environnement",tags:["espace","intimité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Bureau individuel ou cloisonné",legal:"✅ Intimité préservée",risk:"aucun",conseil:{titre:"🏢 Espace Personnel",message:"Un espace personnel favorise concentration et bien-être.",actions:["Personnaliser espace raisonnablement","Respecter espaces collègues","Valoriser espace comme ressource","Négocier aménagements si besoin"],alerte:null}},
-
-{id:508,name:"Promiscuité excessive",category:"environnement",tags:["densité","stress"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Open-space surchargé",legal:"⚠️ Manque intimité",risk:"moyen",conseil:{titre:"👥 Surpopulation",message:"La promiscuité excessive génère stress.",actions:["Négocier rotations télétravail","Utiliser espaces calmes si disponibles","Casque signalant concentration","Remonter problème densité"],alerte:{niveau:"info",texte:"👥 Surpopulation : négocier alternatives"}}},
-
-{id:509,name:"Espaces détente accessibles",category:"environnement",tags:["détente","ressources"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Lieux repos disponibles",legal:"✅ Ressource bien-être",risk:"aucun",conseil:{titre:"☕ Espaces Détente",message:"Les espaces détente favorisent récupération.",actions:["Utiliser espaces sans culpabilité","Vraies pauses loin poste","Respecter usages collectifs","Proposer aménagements si absents"],alerte:null}},
-
-{id:510,name:"Restauration qualité site",category:"environnement",tags:["alimentation","bien-être"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Cantine ou options saines",legal:"✅ Santé favorisée",risk:"aucun",conseil:{titre:"🍽️ Restauration",message:"Une alimentation de qualité soutient énergie.",actions:["Privilégier options équilibrées","Prendre temps repas suffisant","Limiter fast-food quotidien","Participer amélioration offre si possible"],alerte:null}},
-
-{id:511,name:"Accès difficile site",category:"environnement",tags:["trajet","fatigue"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Longs trajets pénibles",legal:"⚠️ Fatigue accrue",risk:"moyen",conseil:{titre:"🚗 Trajets Longs",message:"Les longs trajets amplifient fatigue.",actions:["Explorer télétravail partiel","Horaires décalés si trafic évitable","Optimiser trajets (covoiturage, lecture)","Quantifier temps perdu (négociation remote)"],alerte:{niveau:"info",texte:"🚗 >90min/jour trajet : fatigue cumulative"}}},
-
-{id:512,name:"Matériel informatique performant",category:"environnement",tags:["outils","efficacité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Équipement adapté",legal:"✅ Productivité facilitée",risk:"aucun",conseil:{titre:"💻 Matériel Performant",message:"De bons outils réduisent frustrations.",actions:["Signaler besoins spécifiques métier","Maintenir matériel (mises à jour, nettoyage)","Valoriser investissement si présent","Solliciter renouvellement si obsolète"],alerte:null}},
-
-{id:513,name:"Outils vétustes",category:"environnement",tags:["outils","frustration"],days:[{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"}],desc:"Matériel lent ou défaillant",legal:"⚠️ Perte temps",risk:"moyen",conseil:{titre:"🐌 Outils Lents",message:"Du matériel inadapté génère frustration quotidienne.",actions:["Quantifier temps perdu (lenteurs, bugs)","Documenter dysfonctionnements précis","Justifier ROI renouvellement","Solliciter IT et manager"],alerte:{niveau:"warning",texte:"🐌 Outils vétustes : perte productivité"}}},
-
-{id:514,name:"Sécurité site assurée",category:"environnement",tags:["sécurité","sérénité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Environnement sécurisé",legal:"✅ Sérénité garantie",risk:"aucun",conseil:{titre:"🛡️ Sécurité",message:"Un environnement sûr favorise sérénité.",actions:["Respecter consignes sécurité","Signaler risques observés","Participer formations sécurité","Apprécier sécurité comme acquis"],alerte:null}},
-
-{id:515,name:"Risques sécurité présents",category:"environnement",tags:["sécurité","danger"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Dangers non traités",legal:"⚠️ Obligation sécurité",risk:"élevé",conseil:{titre:"⚠️ Risques Sécurité",message:"Les risques non traités sont inacceptables.",actions:["Documenter risques précisément","Signaler immédiatement responsable/CSSCT","Droit retrait si danger grave imminent","Inspection travail si inaction"],alerte:{niveau:"danger",texte:"⚠️ Danger : droit de retrait possible"}}},
-
-{id:516,name:"Flexibilité horaires présente",category:"organisation",tags:["flexibilité","autonomie"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Aménagements horaires possibles",legal:"✅ Conciliation facilitée",risk:"aucun",conseil:{titre:"⏰ Flexibilité",message:"La flexibilité horaires facilite équilibre vie.",actions:["Utiliser flexibilité offerte","Respecter plages présence communes","Communiquer planning équipe","Valoriser confiance accordée"],alerte:null}},
-
-{id:517,name:"Rigidité horaires contraignante",category:"organisation",tags:["rigidité","contrainte"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Aucune souplesse",legal:"⚠️ Conciliation difficile",risk:"faible",conseil:{titre:"🔒 Rigidité Horaires",message:"L’absence flexibilité complique équilibre vie.",actions:["Identifier contraintes réelles vs organisationnelles","Proposer aménagements limités","Négocier occasions exceptionnelles","Explorer alternatives (télétravail partiel)"],alerte:null}},
-
-{id:518,name:"Télétravail équilibré",category:"organisation",tags:["télétravail","équilibre"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Mix présentiel/remote sain",legal:"✅ Meilleur des deux",risk:"aucun",conseil:{titre:"🏠 Télétravail Équilibré",message:"L’hybridation bien dosée optimise bien-être.",actions:["Trouver rythme personnel optimal","Maintenir lien équipe jours présentiels","Profiter concentration jours remote","Adapter selon tâches et besoins"],alerte:null}},
-
-{id:519,name:"Télétravail mal organisé",category:"organisation",tags:["télétravail","isolement"],days:[{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"}],desc:"Remote sans cadre",legal:"⚠️ Dérives possibles",risk:"moyen",conseil:{titre:"🏠 Télétravail Déstructuré",message:"Le télétravail sans cadre peut dériver.",actions:["Créer routine structurante","Espaces et horaires définis","Maintien lien social intentionnel","Demander cadrage si organisation floue"],alerte:{niveau:"info",texte:"🏠 Remote : créer structure intentionnelle"}}},
-
-{id:520,name:"Politique télétravail absente",category:"organisation",tags:["télétravail","refus"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Remote impossible",legal:"⚠️ Flexibilité limitée",risk:"faible",conseil:{titre:"🏢 Pas Télétravail",message:"L’absence télétravail limite options équilibre.",actions:["Vérifier faisabilité réelle métier","Proposer test périodes limitées","Explorer jours exceptionnels (grève transport)","Négocier autres flexibilités (horaires)"],alerte:null}},
-
-{id:521,name:"Parking disponible site",category:"environnement",tags:["parking","praticité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Stationnement facile",legal:"✅ Facilité accès",risk:"aucun",conseil:{titre:"🅿️ Parking",message:"Un parking facilite quotidien.",actions:["Respecter règles stationnement","Covoiturage si places limitées","Valoriser facilité comme avantage","Proposer alternatives (vélo) si intérêt"],alerte:null}},
-
-{id:522,name:"Accès transports publics",category:"environnement",tags:["transport","écologie"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Site bien desservi",legal:"✅ Mobilité durable",risk:"aucun",conseil:{titre:"🚇 Transports",message:"De bons transports réduisent stress trajets.",actions:["Optimiser itinéraires et horaires","Profiter temps transport (lecture, repos)","Prise en charge abonnement si prévue","Alternatives si grèves fréquentes"],alerte:null}},
-
-{id:523,name:"Services proximité site",category:"environnement",tags:["commodités","qualité vie"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Commerces, crèche accessibles",legal:"✅ Facilitations vie",risk:"aucun",conseil:{titre:"🏪 Services Proximité",message:"Les services proches facilitent quotidien.",actions:["Utiliser services disponibles","Mutualiser déplacements","Proposer partenariats si manques","Valoriser atouts localisation"],alerte:null}},
-
-{id:524,name:"Espaces verts accessibles",category:"environnement",tags:["nature","récupération"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Accès extérieur/nature",legal:"✅ Ressource bien-être",risk:"aucun",conseil:{titre:"🌳 Espaces Verts",message:"Le contact nature favorise récupération.",actions:["Pauses extérieur si possible","Déjeuner dehors beau temps","Marche pause midi","Valoriser accès nature"],alerte:null}},
-
-{id:525,name:"Environnement esthétique agréable",category:"environnement",tags:["esthétique","bien-être"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Locaux plaisants",legal:"✅ Cadre valorisant",risk:"aucun",conseil:{titre:"🎨 Cadre Agréable",message:"Un environnement plaisant favorise bien-être.",actions:["Personnaliser espace modestement","Participer embellissement si possible","Maintenir propreté collective","Reconnaître chance si présent"],alerte:null}},
-
-{id:526,name:"Priorisation claire quotidienne",category:"organisation",tags:["priorisation","efficacité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Top 3 tâches identifiées",legal:"✅ Organisation saine",risk:"aucun",conseil:{titre:"🎯 Priorisation",message:"Prioriser clairement réduit stress et améliore résultats.",actions:["Méthode 1-3-5 : 1 grosse + 3 moyennes + 5 petites","Distinguer urgent vs important (Eisenhower)","Réévaluer priorités si changements","Accepter tout ne sera pas fait"],alerte:null}},
-
-{id:527,name:"To-do lists paralysantes",category:"organisation",tags:["listes","anxiété"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Listes infinies stressantes",legal:"⚠️ Anxiété productivité",risk:"faible",conseil:{titre:"📝 Listes Anxiogènes",message:"Les listes infinies génèrent anxiété sans productivité.",actions:["Limiter liste quotidienne (5-7 items max)","Parking lot pour idées futures","Célébrer fait pas juste ajouté","Abandonner items obsolètes sans culpabilité"],alerte:null}},
-
-{id:528,name:"Planning réaliste journée",category:"organisation",tags:["planning","réalisme"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Objectifs atteignables",legal:"✅ Gestion saine",risk:"aucun",conseil:{titre:"📅 Planning Réaliste",message:"Un planning réaliste réduit stress et frustration.",actions:["Règle 50% : planifier seulement moitié temps","Prévoir imprévus et interruptions","Buffer entre tâches longues","Ajuster selon réalité pas idéal"],alerte:null}},
-
-{id:529,name:"Surbooking chronique calendrier",category:"organisation",tags:["surcharge","calendrier"],days:[{h:9,type:"normal"},{h:9,type:"normal"},{h:9,type:"normal"},{h:9,type:"normal"},{h:9,type:"normal"}],desc:"Calendrier saturé sans marges",legal:"⚠️ Surcharge planifiée",risk:"moyen",conseil:{titre:"📅 Surbooking",message:"Un agenda sans marges mène à l’épuisement.",actions:["Audit calendrier : temps production vs réunions","Bloquer créneaux production (non négociables)","Décliner réunions non essentielles","Buffers 15min entre RDV"],alerte:{niveau:"warning",texte:"📅 Calendrier saturé : surcharge programmée"}}},
-
-{id:530,name:"Technique Pomodoro utilisée",category:"organisation",tags:["focus","productivité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"25min focus + 5min pause",legal:"✅ Méthode efficace",risk:"aucun",conseil:{titre:"🍅 Pomodoro",message:"La technique Pomodoro maintient concentration et énergie.",actions:["25min concentration sans interruption","5min pause vraie (pas email)","4 pomodoros → pause longue 15-20min","Adapter durées selon tâches"],alerte:null}},
-
-{id:531,name:"Time-blocking pratiqué",category:"organisation",tags:["calendrier","discipline"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Créneaux thématiques dédiés",legal:"✅ Organisation structurée",risk:"aucun",conseil:{titre:"📊 Time-Blocking",message:"Bloquer temps par thème réduit dispersion.",actions:["Blocs thématiques (emails, production, réunions)","Respecter blocs comme RDV externes","Couleurs calendrier par type activité","Protéger blocs production de sollicitations"],alerte:null}},
-
-{id:532,name:"Batching tâches similaires",category:"organisation",tags:["efficacité","groupement"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Regroupement tâches types",legal:"✅ Optimisation cognitive",risk:"aucun",conseil:{titre:"📦 Batching",message:"Regrouper tâches similaires réduit coût changement contexte.",actions:["Emails en 2-3 créneaux fixes/jour","Appels regroupés si possible","Tâches administratives en bloc","Limiter changements contexte"],alerte:null}},
-
-{id:533,name:"Matinées protégées travail profond",category:"organisation",tags:["deep work","productivité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Créneaux concentration garantis",legal:"✅ Productivité maximale",risk:"aucun",conseil:{titre:"🧠 Deep Work",message:"Les matinées focus produisent résultats de qualité.",actions:["Bloquer 2-4h matinées pour tâches complexes","Zéro interruption pendant créneaux","Communiquer indisponibilité équipe","Réserver après-midis tâches moins exigeantes"],alerte:null}},
-
-{id:534,name:"Multitâche constant",category:"organisation",tags:["multitâche","inefficacité"],days:[{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"}],desc:"Jonglage permanent tâches",legal:"⚠️ Dispersion cognitive",risk:"moyen",conseil:{titre:"🎪 Multitâche",message:"Le multitâche réduit qualité et augmente fatigue.",actions:["Monotâche intentionnel : une chose à la fois","Fermer onglets/apps non utilisés","Terminer avant passer à suivant","Accepter ralentissement apparent (efficacité réelle +)"],alerte:{niveau:"info",texte:"🎪 Multitâche : illusion productivité"}}},
-
-{id:535,name:"Délégation saine pratiquée",category:"organisation",tags:["délégation","confiance"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Répartition charge équipe",legal:"✅ Management efficace",risk:"aucun",conseil:{titre:"🤝 Délégation",message:"Déléguer libère temps et développe équipe.",actions:["Identifier tâches délégables","Former si compétence manquante","Lâcher contrôle sur modalités","Reconnaître apport délégation"],alerte:null}},
-
-{id:536,name:"Tout faire soi-même",category:"organisation",tags:["contrôle","surcharge"],days:[{h:9,type:"normal"},{h:9,type:"normal"},{h:9,type:"normal"},{h:9,type:"normal"},{h:9,type:"normal"}],desc:"Refus déléguer",legal:"⚠️ Surcharge évitable",risk:"moyen",conseil:{titre:"🦸 Tout Seul",message:"Tout faire soi-même mène à l’épuisement.",actions:["Identifier raisons refus (confiance, perfectionnisme)","Commencer petit : déléguer tâche non critique","Accepter façons faire différentes","Calculer coût opportunité temps"],alerte:{niveau:"warning",texte:"🦸 Tout faire : surcharge inévitable"}}},
-
-{id:537,name:"Dire non approprié",category:"organisation",tags:["limites","assertivité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Refus polis mais fermes",legal:"✅ Protection charge",risk:"aucun",conseil:{titre:"🚫 Non Sain",message:"Savoir dire non protège temps et énergie.",actions:["Non = oui à priorités actuelles","Proposer alternatives si possible","Expliquer brièvement sans sur-justifier","Valoriser assertivité comme compétence"],alerte:null}},
-
-{id:538,name:"Difficulté refuser sollicitations",category:"organisation",tags:["limites","surcharge"],days:[{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"}],desc:"Oui automatiques",legal:"⚠️ Manque limites",risk:"moyen",conseil:{titre:"✅ Oui Automatiques",message:"Dire oui à tout surcharge et frustre.",actions:["Identifier raisons oui (peur décevoir, plaire)","Demander temps réflexion avant engagement","Évaluer coût réel avant accepter","Pratiquer non progressivement"],alerte:{niveau:"info",texte:"✅ Toujours oui : protéger limites"}}},
-
-{id:539,name:"Revue hebdomadaire pratiquée",category:"organisation",tags:["réflexion","ajustement"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Point semaine régulier",legal:"✅ Recul bénéfique",risk:"aucun",conseil:{titre:"🔄 Revue Hebdo",message:"La revue hebdomadaire permet ajustements proactifs.",actions:["Vendredi après-midi ou dimanche soir","Bilan semaine : réussites + apprentissages","Planification semaine suivante","Ajustements méthodes si besoin"],alerte:null}},
-
-{id:540,name:"Mode réactif permanent",category:"organisation",tags:["réactivité","urgences"],days:[{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"}],desc:"Seulement réponse urgences",legal:"⚠️ Absence stratégie",risk:"moyen",conseil:{titre:"🚨 Mode Pompier",message:"La réactivité constante empêche travail de fond.",actions:["Identifier si urgences évitables (anticipation)","Bloquer temps proactif (planification)","Distinguer urgent vs important","Travailler causes racines urgences"],alerte:{niveau:"warning",texte:"🚨 Mode réactif : cercle vicieux"}}},
-
-{id:541,name:"Perfectionnisme sain",category:"organisation",tags:["qualité","équilibre"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Excellence sans obsession",legal:"✅ Standards élevés",risk:"aucun",conseil:{titre:"⭐ Excellence",message:"L’excellence saine vise qualité sans sacrifice bien-être.",actions:["Standards élevés mais flexibles","Accepter 'excellent' sans être 'parfait'","Adapter niveau selon enjeux réels","Célébrer résultats même imparfaits"],alerte:null}},
-
-{id:542,name:"Perfectionnisme pathologique",category:"organisation",tags:["perfectionnisme","paralysie"],days:[{h:9,type:"normal"},{h:9,type:"normal"},{h:9,type:"normal"},{h:9,type:"normal"},{h:9,type:"normal"}],desc:"Jamais assez bien",legal:"⚠️ Épuisement garanti",risk:"moyen",conseil:{titre:"💎 Perfectionnisme Toxique",message:"Le perfectionnisme excessif paralyse et épuise.",actions:["Identifier peurs sous-jacentes (jugement, rejet)","Principe fait > parfait","Temps limité par tâche (deadline auto-imposée)","Accompagnement psy si envahissant"],alerte:{niveau:"warning",texte:"💎 Perfectionnisme : risque burn-out"}}},
-
-{id:543,name:"Automatisation tâches répétitives",category:"organisation",tags:["efficacité","automatisation"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Processus optimisés",legal:"✅ Gain temps",risk:"aucun",conseil:{titre:"🤖 Automatisation",message:"Automatiser tâches répétitives libère temps et énergie.",actions:["Identifier tâches répétitives chronophages","Modèles emails/documents standards","Macros ou scripts simples","Formation outils si complexe"],alerte:null}},
-
-{id:544,name:"Documentation personnelle maintenue",category:"organisation",tags:["mémoire","efficacité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Notes procédures accessibles",legal:"✅ Capitalisation savoir",risk:"aucun",conseil:{titre:"📚 Documentation",message:"Documenter réduit charge mentale et facilite partage.",actions:["Notes procédures récurrentes","Base connaissance personnelle","Modèles situations fréquentes","Partage équipe si pertinent"],alerte:null}},
-
-{id:545,name:"Rituels début/fin journée",category:"organisation",tags:["rituels","transitions"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Routines entrée/sortie travail",legal:"✅ Transitions saines",risk:"aucun",conseil:{titre:"🎭 Rituels",message:"Les rituels facilitent transitions pro-perso.",actions:["Matin : routine activation (café, to-do, lecture actu)","Soir : routine clôture (to-do demain, ranger, fermer apps)","Symboles transition (trajet, vêtements)","Cohérence rituels = signal cerveau"],alerte:null}},
-
-{id:546,name:"Gestion email structurée",category:"organisation",tags:["emails","productivité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Méthode inbox zero",legal:"✅ Maîtrise communication",risk:"aucun",conseil:{titre:"📧 Emails Maîtrisés",message:"Une gestion structurée emails réduit anxiété.",actions:["Créneaux dédiés (pas tout le temps)","Méthode 2min : traiter immédiat si <2min","Dossiers/labels thématiques","Archiver pas laisser en boîte"],alerte:null}},
-
-{id:547,name:"Procrastination productive reconnue",category:"organisation",tags:["procrastination","créativité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Temps incubation utile",legal:"✅ Processus créatif",risk:"aucun",conseil:{titre:"💡 Incubation",message:"Certains délais permettent maturation idées.",actions:["Distinguer incubation vs évitement","Temps réflexion légitime décisions complexes","Tolérer inconfort incertitude temporaire","Deadline finale claire malgré incubation"],alerte:null}},
-
-{id:548,name:"Objectifs SMART définis",category:"organisation",tags:["objectifs","clarté"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Buts spécifiques mesurables",legal:"✅ Direction claire",risk:"aucun",conseil:{titre:"🎯 Objectifs SMART",message:"Des objectifs clairs focalisent énergie efficacement.",actions:["Spécifique, Mesurable, Atteignable, Réaliste, Temporel","Découper gros objectifs en jalons","Célébrer jalons atteints","Réviser si contexte change"],alerte:null}},
-
-{id:549,name:"Objectifs flous paralysants",category:"organisation",tags:["clarté","direction"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Attentes imprécises",legal:"⚠️ Direction manquante",risk:"moyen",conseil:{titre:"❓ Objectifs Flous",message:"Des objectifs vagues génèrent anxiété et inefficacité.",actions:["Clarifier avec manager si flou descendant","Définir propres critères succès si impossible","Communiquer besoin précision","Itérations OK si évolution contexte"],alerte:{niveau:"info",texte:"❓ Flou : demander précisions"}}},
-
-{id:550,name:"Célébration petites victoires",category:"reconnaissance",tags:["célébration","motivation"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Reconnaissance progrès",legal:"✅ Motivation maintenue",risk:"aucun",conseil:{titre:"🎉 Victoires",message:"Célébrer progrès maintient motivation long terme.",actions:["Reconnaître accomplissements quotidiens","Pause micro-célébration après tâche difficile","Journal succès hebdomaire","Partager victoires équipe"],alerte:null}},
-
-{id:551,name:"Sport régulier pratiqué",category:"prevention",tags:["sport","énergie"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Activité physique maintenue",legal:"✅ Protection santé",risk:"aucun",conseil:{titre:"🏃 Sport Régulier",message:"L’activité physique protège stress et burn-out.",actions:["Minimum 30min 3x/semaine","Activité plaisir pas contrainte","Varier intensités selon énergie","Sport = investissement santé"],alerte:null}},
-
-{id:552,name:"Alimentation équilibrée",category:"prevention",tags:["nutrition","énergie"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Repas sains réguliers",legal:"✅ Énergie stable",risk:"aucun",conseil:{titre:"🥗 Nutrition",message:"Une alimentation équilibrée soutient énergie et concentration.",actions:["3 repas réguliers sans sauter","Limiter sucres rapides et excitants","Hydratation suffisante (1,5-2L/jour)","Collations saines si fringales"],alerte:null}},
-
-{id:553,name:"Sommeil qualité prioritaire",category:"prevention",tags:["sommeil","récupération"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"7-8h nuit régulières",legal:"✅ Récupération essentielle",risk:"aucun",conseil:{titre:"😴 Sommeil Qualité",message:"Le sommeil est le pilier prévention burn-out.",actions:["7-8h minimum non négociables","Horaires réguliers même week-end","Routine coucher apaisante","Chambre fraîche, sombre, silencieuse"],alerte:null}},
-
-{id:554,name:"Pratiques relaxation régulières",category:"prevention",tags:["relaxation","stress"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Méditation, yoga, cohérence cardiaque",legal:"✅ Gestion stress",risk:"aucun",conseil:{titre:"🧘 Relaxation",message:"Les techniques relaxation réduisent stress durablement.",actions:["Trouver pratique adaptée (méditation, yoga, respiration)","Régularité > durée (5min/jour > 1h/semaine)","Apps guidage si débutant","Intégrer routine quotidienne"],alerte:null}},
-
-{id:555,name:"Réseau soutien social",category:"prevention",tags:["social","soutien"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Proches soutenants présents",legal:"✅ Facteur protecteur",risk:"aucun",conseil:{titre:"❤️ Soutien Social",message:"Le soutien social est facteur protecteur majeur.",actions:["Cultiver relations qualité","Parler difficultés avec confidents","Demander aide si besoin","Réciprocité : offrir soutien aussi"],alerte:null}},
-
-{id:556,name:"Psychothérapie préventive",category:"prevention",tags:["psy","accompagnement"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Suivi psy régulier",legal:"✅ Accompagnement proactif",risk:"aucun",conseil:{titre:"🧠 Thérapie Préventive",message:"Consulter psy n’exige pas crise : prévention légitime.",actions:["Thérapie = hygiène mentale pas pathologie","TCC efficace prévention burn-out","Régularité (mensuelle) même si ça va","Investissement santé mentale"],alerte:null}},
-
-{id:557,name:"Formation gestion stress",category:"prevention",tags:["formation","compétences"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Apprentissage outils",legal:"✅ Développement compétences",risk:"aucun",conseil:{titre:"📚 Formation Stress",message:"Apprendre gérer stress est compétence précieuse.",actions:["Solliciter formations entreprise si disponibles","MOOC gestion stress gratuits","Livres références (Christophe André, etc.)","Pratiquer régulièrement outils appris"],alerte:null}},
-
-{id:558,name:"Coaching professionnel",category:"prevention",tags:["coaching","développement"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Accompagnement coach",legal:"✅ Soutien développement",risk:"aucun",conseil:{titre:"💼 Coaching",message:"Le coaching facilite transitions et développement.",actions:["Coaching = accélérateur pas béquille","Objectifs clairs dès départ","Engagement régulier séances","Application apprentissages entre séances"],alerte:null}},
-
-{id:559,name:"Bilan compétences anticipé",category:"prevention",tags:["bilan","orientation"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Réflexion projet pro",legal:"✅ Anticipation évolution",risk:"aucun",conseil:{titre:"🔍 Bilan Compétences",message:"Le bilan compétences clarifie aspirations.",actions:["Financement CPF possible","Accompagnement neutre extérieur","Exploration sans obligation changement","Timing : avant crise pas pendant"],alerte:null}},
-
-{id:560,name:"Veille évolution métier",category:"prevention",tags:["veille","adaptation"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Actualisation compétences",legal:"✅ Employabilité maintenue",risk:"aucun",conseil:{titre:"📡 Veille Métier",message:"Se maintenir à jour réduit anxiété obsolescence.",actions:["Temps veille régulier (1-2h/semaine)","Conférences, webinaires métier","Réseaux professionnels actifs","Certifications si pertinent"],alerte:null}},
-
-{id:561,name:"Mentorat bénéficié",category:"prevention",tags:["mentorat","apprentissage"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Mentor expérimenté accessible",legal:"✅ Apprentissage accéléré",risk:"aucun",conseil:{titre:"🎓 Mentorat",message:"Un mentor facilite navigation carrière.",actions:["Solliciter mentor formel ou informel","Régularité échanges","Questions préparées en amont","Réciprocité : mentorat inversé junior"],alerte:null}},
-
-{id:562,name:"Groupes parole pairs",category:"prevention",tags:["pairs","partage"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Échanges collègues similaires",legal:"✅ Soutien mutuel",risk:"aucun",conseil:{titre:"💬 Groupes Pairs",message:"Les groupes pairs normalisent difficultés.",actions:["Groupes informels déjeuners","Communautés métier/secteur","Partage expériences sans jugement","Ressources collectives solutions"],alerte:null}},
-
-{id:563,name:"Formation premiers secours PSY",category:"prevention",tags:["PSSM","secourisme"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"PSSM (Premiers Secours Santé Mentale)",legal:"✅ Compétence utile",risk:"aucun",conseil:{titre:"🚑 PSSM",message:"Les premiers secours santé mentale sauvent.",actions:["Formation PSSM 14h disponible","Reconnaître signaux détresse","Orienter vers ressources appropriées","Déstigmatiser santé mentale"],alerte:null}},
-
-{id:564,name:"Cellule écoute entreprise",category:"prevention",tags:["écoute","ressource"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Service soutien psy accessible",legal:"✅ Ressource interne",risk:"aucun",conseil:{titre:"☎️ Cellule Écoute",message:"Les cellules écoute offrent soutien confidentiel.",actions:["Utiliser sans crainte confidentialité garantie","Premier contact téléphonique souvent","Orientation ressources adaptées","Complément pas remplacement suivi externe"],alerte:null}},
-
-{id:565,name:"Programme QVT entreprise",category:"prevention",tags:["QVT","initiative"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Actions qualité vie travail",legal:"✅ Engagement employeur",risk:"aucun",conseil:{titre:"🌟 Programme QVT",message:"Les programmes QVT améliorent conditions travail.",actions:["Participer initiatives proposées","Feedback constructif améliorations","Proposer idées nouvelles actions","Reconnaissance efforts entreprise"],alerte:null}},
-
-{id:566,name:"Droit déconnexion formalisé",category:"prevention",tags:["déconnexion","droit"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Charte déconnexion respectée",legal:"✅ Protection repos",risk:"aucun",conseil:{titre:"📵 Droit Déconnexion",message:"Le droit déconnexion protège récupération.",actions:["Connaître règles entreprise","Respecter droit collègues","Envoi différé emails hors horaires","Culture collective respectueuse"],alerte:null}},
-
-{id:567,name:"Référent harcèlement connu",category:"prevention",tags:["harcèlement","ressource"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Point contact identifié",legal:"✅ Ressource accessible",risk:"aucun",conseil:{titre:"🛡️ Référent Harcèlement",message:"Le référent harcèlement est ressource confidentielle.",actions:["Connaître identité référent","Contacter si situation ambiguë (pas que certitude)","Confidentialité garantie","Orientation démarches appropriées"],alerte:null}},
-
-{id:568,name:"CSSCT actif",category:"prevention",tags:["CSSCT","prévention"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Commission santé travail dynamique",legal:"✅ Prévention collective",risk:"aucun",conseil:{titre:"👥 CSSCT",message:"Le CSSCT œuvre pour conditions travail.",actions:["Connaître membres CSSCT","Remonter préoccupations santé/sécurité","Participer enquêtes si sollicité","Soutenir actions prévention"],alerte:null}},
-
-{id:569,name:"Médecin travail accessible",category:"prevention",tags:["médecine travail","santé"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Service santé travail présent",legal:"✅ Ressource santé",risk:"aucun",conseil:{titre:"🏥 Médecin Travail",message:"Le médecin travail est allié santé pro.",actions:["Solliciter visite sans attendre visite périodique","Aborder santé mentale sans tabou","Préconisations aménagements possibles","Confidentialité vis-à-vis employeur"],alerte:null}},
-
-{id:570,name:"Ergonome intervenu",category:"prevention",tags:["ergonomie","prévention"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Audit poste réalisé",legal:"✅ Prévention TMS",risk:"aucun",conseil:{titre:"🪑 Ergonome",message:"L’ergonome optimise poste et prévient douleurs.",actions:["Demander audit si inconfort","Appliquer recommandations","Réglages réguliers (posture évolue)","Signaler nouveaux équipements"],alerte:null}},
-
-{id:571,name:"Formation RPS managers",category:"prevention",tags:["management","formation"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Sensibilisation risques psychosociaux",legal:"✅ Prévention managériale",risk:"aucun",conseil:{titre:"👔 Managers Formés RPS",message:"Des managers formés détectent signaux précocement.",actions:["Si manager : solliciter formation RPS","Dialogue ouvert santé mentale équipe","Détection signaux faibles","Orientation ressources appropriées"],alerte:null}},
-
-{id:572,name:"Baromètre social régulier",category:"prevention",tags:["enquête","climat"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Enquêtes climat social",legal:"✅ Écoute organisée",risk:"aucun",conseil:{titre:"📊 Baromètre",message:"Les enquêtes régulières mesurent climat.",actions:["Répondre honnêtement enquêtes","Anonymat respecté","Suivi actions post-enquête","Feedback si pas actions"],alerte:null}},
-
-{id:573,name:"Entretiens annuels qualitatifs",category:"prevention",tags:["entretien","écoute"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Moments écoute formalisés",legal:"✅ Dialogue régulier",risk:"aucun",conseil:{titre:"💬 Entretiens Annuels",message:"Les entretiens sont moments légitimes évocation difficultés.",actions:["Préparer entretien (bilan, besoins)","Aborder charge travail honnêtement","Solliciter soutiens nécessaires","Formalisation écrite engagements"],alerte:null}},
-
-{id:574,name:"Congés sabbatiques possibles",category:"prevention",tags:["sabbatique","ressourcement"],days:[],desc:"Dispositif pause longue",legal:"✅ Ressourcement profond",risk:"aucun",conseil:{titre:"🌴 Sabbatique",message:"Le congé sabbatique permet ressourcement profond.",actions:["6-11 mois suspension contrat","Ancienneté requise (vérifier accord)","Réflexion projet pendant sabbatique","Retour garanti poste équivalent"],alerte:null}},
-
-{id:575,name:"Temps partiel choisi facilité",category:"prevention",tags:["temps partiel","équilibre"],days:[{h:5.6,type:"normal"},{h:5.6,type:"normal"},{h:5.6,type:"normal"},{h:5.6,type:"normal"},{h:5.6,type:"normal"}],desc:"Réduction temps possible",legal:"✅ Flexibilité offerte",risk:"aucun",conseil:{titre:"⏱️ Temps Partiel",message:"Le temps partiel choisi améliore équilibre vie.",actions:["Explorer si envisagé (80% populaire)","Impacts financiers à anticiper","Négocier jours ou horaires adaptés","Retour temps plein facilité"],alerte:null}},
-
-{id:576,name:"Retour après arrêt burn-out",category:"prevention",tags:["retour","reprise"],days:[{h:4,type:"normal"},{h:4,type:"normal"},{h:4,type:"normal"},{h:4,type:"normal"},{h:4,type:"normal"}],desc:"Reprise progressive travail",legal:"✅ Retour aménagé",risk:"moyen",conseil:{titre:"🔄 Retour Burn-Out",message:"Le retour après burn-out nécessite accompagnement.",actions:["Mi-temps thérapeutique si prescrit","Aménagements charge discutés","Suivi psy maintenu","Vigilance rechute premiers mois"],alerte:{niveau:"info",texte:"🔄 Retour : vigilance rechute"}}},
-
-{id:577,name:"Proche en burn-out",category:"prevention",tags:["entourage","soutien"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Soutenir collègue en difficulté",legal:"✅ Soutien approprié",risk:"aucun",conseil:{titre:"🤝 Soutenir Proche",message:"Soutenir sans se substituer aux professionnels.",actions:["Écoute bienveillante sans jugement","Encourager consultation professionnelle","Ne pas minimiser ('Ça va passer')","Respecter rythme et choix personne"],alerte:null}},
-
-{id:578,name:"Manager détecte signaux équipe",category:"prevention",tags:["management","détection"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Vigilance santé collaborateurs",legal:"✅ Responsabilité managériale",risk:"aucun",conseil:{titre:"👔 Manager Vigilant",message:"Le manager a rôle clé détection précoce.",actions:["Formation reconnaissance signaux","Entretiens réguliers individuels","Réagir rapidement changements comportement","Mobiliser ressources (RH, médecin travail)"],alerte:null}},
-
-{id:579,name:"Changement organisation stressant",category:"organisation",tags:["changement","adaptation"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Restructuration en cours",legal:"⚠️ Période incertitude",risk:"moyen",conseil:{titre:"🔄 Changement Orga",message:"Les changements organisationnels génèrent stress.",actions:["Chercher informations fiables","Exprimer préoccupations légitimes","Se concentrer sur contrôlable","Soutien mutuel entre collègues"],alerte:{niveau:"info",texte:"🔄 Changement : normal stresser"}}},
-
-{id:580,name:"Fusion acquisition vécue",category:"organisation",tags:["fusion","incertitude"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Rachat entreprise",legal:"⚠️ Incertitude majeure",risk:"moyen",conseil:{titre:"🔀 Fusion",message:"Les fusions créent incertitude importante.",actions:["Informations officielles privilégiées","Préparer CV par précaution","Opportunités possibles nouvelles structure","Soutien externe (réseau, psy) si anxiété"],alerte:{niveau:"warning",texte:"🔀 Fusion : anticiper scénarios"}}},
-
-{id:581,name:"Plan social annoncé",category:"organisation",tags:["licenciement","crise"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Restructuration emplois",legal:"⚠️ Stress majeur",risk:"élevé",conseil:{titre:"⚠️ Plan Social",message:"L’annonce plan social est traumatisante.",actions:["Informations précises sur process","Accompagnement reclassement si concerné","Soutien psy cellule entreprise ou externe","Droits syndicaux et légaux"],alerte:{niveau:"danger",texte:"⚠️ Plan social : soutien essentiel"}}},
-
-{id:582,name:"Conflit équipes chronique",category:"relationnel",tags:["conflit","collectif"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Tensions inter-services",legal:"⚠️ RPS collectifs",risk:"moyen",conseil:{titre:"⚔️ Conflits Équipes",message:"Les conflits chroniques dégradent climat.",actions:["Médiation professionnelle externe","Clarification rôles et responsabilités","Team-building si relations détériorées","Protection individuelle malgré contexte"],alerte:{niveau:"warning",texte:"⚔️ Conflits durables : médiation nécessaire"}}},
-
-{id:583,name:"Leadership toxique subi",category:"relationnel",tags:["leadership","toxicité"],days:[{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"},{h:8,type:"normal"}],desc:"Direction dysfonctionnelle",legal:"⚠️ Culture toxique",risk:"élevé",conseil:{titre:"☠️ Leadership Toxique",message:"Un leadership toxique impacte tous.",actions:["Documenter comportements problématiques","Soutien collectif entre pairs","Signalement RH ou instances","Envisager départ si aucune évolution"],alerte:{niveau:"danger",texte:"☠️ Leadership toxique : protéger santé"}}},
-
-{id:584,name:"Valeurs entreprise inspirantes",category:"reconnaissance",tags:["valeurs","engagement"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Culture alignée aspirations",legal:"✅ Engagement fort",risk:"aucun",conseil:{titre:"⭐ Culture Inspirante",message:"L’alignement culturel nourrit engagement.",actions:["Incarner valeurs au quotidien","Valoriser culture comme atout","Participer initiatives culturelles","Reconnaître chance alignement"],alerte:null}},
-
-{id:585,name:"Mission entreprise questionnée",category:"reconnaissance",tags:["mission","dissonance"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Doutes impact organisation",legal:"⚠️ Conflit éthique",risk:"moyen",conseil:{titre:"❓ Mission Questionnée",message:"Les doutes sur mission génèrent mal-être.",actions:["Identifier nature questionnement","Discussion pairs confiance","Engagement actions alignées si possible","Envisager transition si conflit profond"],alerte:{niveau:"info",texte:"❓ Doutes mission : légitime questionner"}}},
-
-{id:586,name:"Innovation encouragée",category:"organisation",tags:["innovation","créativité"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Droit erreur reconnu",legal:"✅ Culture apprenante",risk:"aucun",conseil:{titre:"💡 Innovation",message:"Le droit à l’erreur favorise créativité.",actions:["Proposer idées sans crainte","Apprentissage des échecs valorisé","Expérimentations encouragées","Célébration tentatives autant que réussites"],alerte:null}},
-
-{id:587,name:"Erreur sanctionnée sévèrement",category:"organisation",tags:["erreur","punition"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Climat peur erreur",legal:"⚠️ Culture punitive",risk:"moyen",conseil:{titre:"⚠️ Peur Erreur",message:"La peur de l’erreur inhibe et stresse.",actions:["Documenter réactions disproportionnées","Distinguer erreur vs faute intentionnelle","Soutien mutuel équipe","Questionner culture apprentissage"],alerte:{niveau:"warning",texte:"⚠️ Climat peur : culture toxique"}}},
-
-{id:588,name:"Transparence décisions",category:"organisation",tags:["transparence","confiance"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Communication ouverte",legal:"✅ Confiance établie",risk:"aucun",conseil:{titre:"💎 Transparence",message:"La transparence crée confiance et engagement.",actions:["Valoriser ouverture communication","Partager informations pertinentes","Questions bienvenues","Feedback positif sur transparence"],alerte:null}},
-
-{id:589,name:"Secrets et non-dits",category:"organisation",tags:["opacité","méfiance"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Communication opaque",legal:"⚠️ Climat méfiance",risk:"moyen",conseil:{titre:"🤐 Opacité",message:"L’opacité génère rumeurs et méfiance.",actions:["Solliciter informations factuelles","Distinguer rumeur vs fait","Demander clarifications formelles","Documenter incohérences si pattern"],alerte:{niveau:"info",texte:"🤐 Opacité : demander transparence"}}},
-
-{id:590,name:"Participation décisions encouragée",category:"organisation",tags:["participation","empowerment"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Voix collaborateurs entendue",legal:"✅ Empowerment",risk:"aucun",conseil:{titre:"🗣️ Participation",message:"La participation aux décisions motive.",actions:["Contribuer activement consultations","Propositions argumentées","Accepter décisions finales même si divergentes","Reconnaître écoute comme valeur"],alerte:null}},
-
-{id:591,name:"Décisions imposées sans consultation",category:"organisation",tags:["autoritarisme","frustration"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Style management directif",legal:"⚠️ Démotivation",risk:"moyen",conseil:{titre:"📢 Impositions",message:"Les décisions imposées démotivent.",actions:["Exprimer impact sur motivation","Proposer modalités consultation","Distinguer urgence vs habitude","Valoriser participation quand présente"],alerte:{niveau:"info",texte:"📢 Pas consultation : impact engagement"}}},
-
-{id:592,name:"Équilibre vie réussi long terme",category:"equilibre",tags:["équilibre","réussite"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Harmonie pro-perso durable",legal:"✅ Réussite holistique",risk:"aucun",conseil:{titre:"🌈 Équilibre Réussi",message:"L’équilibre durable est accomplissement majeur.",actions:["Protéger équilibre comme acquis précieux","Rester vigilant dérives progressives","Partager pratiques gagnantes","Reconnaître équilibre comme réussite"],alerte:null}},
-
-{id:593,name:"Reconversion réfléchie",category:"prevention",tags:["reconversion","projet"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Projet changement professionnel",legal:"✅ Évolution choisie",risk:"aucun",conseil:{titre:"🔄 Reconversion",message:"La reconversion mûrie ouvre nouvelles perspectives.",actions:["Bilan compétences préalable","Test activité (stage, bénévolat)","Sécurisation financière transition","Accompagnement (coach, formation)"],alerte:null}},
-
-{id:594,name:"Démission précipitée évitée",category:"prevention",tags:["démission","réflexion"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Décision reportée à tête froide",legal:"✅ Décision éclairée",risk:"aucun",conseil:{titre:"⏸️ Pause Décision",message:"Reporter décisions importantes en période fragilité.",actions:["Règle 30 jours : attendre avant démissionner","Consulter avant décision irréversible","Solutions intermédiaires (mobilité, aménagements)","Sécurisation avant saut (emploi, finances)"],alerte:null}},
-
-{id:595,name:"Mobilité interne réussie",category:"prevention",tags:["mobilité","évolution"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Changement poste/service",legal:"✅ Nouvelle dynamique",risk:"aucun",conseil:{titre:"🔄 Mobilité Interne",message:"La mobilité interne peut relancer dynamique.",actions:["Explorer opportunités internes","Accompagnement transition (formation)","Conservation ancienneté et avantages","Réseau préservé"],alerte:null}},
-
-{id:596,name:"Transition carrière préparée",category:"prevention",tags:["transition","anticipation"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Évolution anticipée",legal:"✅ Anticipation sereine",risk:"aucun",conseil:{titre:"🎯 Transition Préparée",message:"Anticiper transitions réduit stress.",actions:["Développement compétences transférables","Réseau professionnel entretenu","Formation continue régulière","Employabilité maintenue"],alerte:null}},
-
-{id:597,name:"Résilience développée",category:"prevention",tags:["résilience","adaptation"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Capacité rebond renforcée",legal:"✅ Compétence vie",risk:"aucun",conseil:{titre:"💪 Résilience",message:"La résilience se construit et se renforce.",actions:["Apprentissage de chaque épreuve","Réseau soutien solide","Pratiques ressourcement régulières","Aide professionnelle si besoin"],alerte:null}},
-
-{id:598,name:"Gratitude pratiquée",category:"prevention",tags:["gratitude","bien-être"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Reconnaissance quotidienne positif",legal:"✅ Mindset positif",risk:"aucun",conseil:{titre:"🙏 Gratitude",message:"La gratitude améliore bien-être durablement.",actions:["Journal gratitude (3 éléments/jour)","Reconnaissance verbale aux autres","Focus sur présent vs rumination","Pratique régulière = impact cumulatif"],alerte:null}},
-
-{id:599,name:"Auto-compassion cultivée",category:"prevention",tags:["bienveillance","soi"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Bienveillance envers soi",legal:"✅ Pilier bien-être",risk:"aucun",conseil:{titre:"❤️ Auto-Compassion",message:"L’auto-compassion réduit stress et burn-out.",actions:["Parler à soi comme à ami","Accepter imperfections sans jugement","Reconnaître humanité commune difficultés","Mindfulness et acceptation"],alerte:null}},
-
-{id:600,name:"Vigilance continue bien-être",category:"prevention",tags:["vigilance","équilibre"],days:[{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"},{h:7,type:"normal"}],desc:"Attention quotidienne signaux",legal:"✅ Prévention active",risk:"aucun",conseil:{titre:"🎯 Vigilance Continue",message:"Le bien-être nécessite attention régulière.",actions:["Check-in quotidien : comment je vais vraiment?","Ajustements proactifs si dérive","Aide précoce plus efficace que tardive","Bien-être = marathon pas sprint"],alerte:null}}
-];
-
-
-
 
 window.addEventListener("load", function() {
   debugLog("📦 Module 3 - Fichier chargé", "info");
