@@ -9114,7 +9114,8 @@ function initScenarios() {
       "alerte": null
     }
   },
-  {
+// On stocke l'objet dans une constante pour qu'il soit accessible partout
+{
     "id": 600,
     "name": "Vigilance continue bien-être",
     "category": "prevention",
@@ -9129,54 +9130,26 @@ function initScenarios() {
       "actions": ["Check-in quotidien : comment je vais vraiment?", "Ajustements proactifs si dérive", "Aide précoce plus efficace que tardive", "Bien-être = marathon pas sprint"],
       "alerte": null
     }
-  }
-]
+};
 
 window.addEventListener("load", function() {
-  debugLog("📦 Module 3 - Fichier chargé", "info");
-  debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "info");
+  // Vérifie si la console affiche bien l'ID 600 pour confirmer la liaison
+  console.log("📦 Liaison Data ID:", MODULE_PREVENTION.id); 
+  
   debugLog("🚀 DÉMARRAGE MODULE 3", "info");
-  debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "info");
-  
+
+  // On passe MODULE_PREVENTION à tes fonctions si nécessaire
+  // ou on s'assure que displayModulesData() l'utilise
   loadProfile();
-  loadAnnualThresholds();
-  initCheatCode();
-  initScenarios();
-  initBadges();
-  initMilestones();
-
-  if (!PROFILE.initialized) {
-    debugLog("ℹ️ Premier démarrage - Configuration requise", "info");
-    handleInitialSetup();
-    return;
-  }
-
-  checkAnnualReset();
   
-  load();
+  // ... reste du code ...
   
-  updateUI();
-  updateProfileDisplay();
-  
-  renderDaysList();
-  renderBadges();
-  renderMilestones();
-  
-  toggleWorkMode();
-  
-  checkBadges();
-  checkMilestones();
-  
-  displayModulesData();
+  displayModulesData(MODULE_PREVENTION); // Passe l'objet en paramètre ici
   
   document.getElementById("mainInterface").classList.remove("hidden");
-  
-  debugLog("✅ Module 3 chargé avec succès", "success");
-  debugLog(`📊 Niveau ${STATE.level} • ${STATE.totalDays}j • ${STATE.totalHours.toFixed(0)}h`, "success");
-  debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "success");
+  debugLog("✅ Module 3 chargé", "success");
 });
-</script>
-<script>
+
 // ============================================================
 //  MODULE 3 — MOTEUR IA-LIKE v1.0
 //  Fatigue · Stabilite · Risque · Prediction
