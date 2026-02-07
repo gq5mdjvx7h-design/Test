@@ -2534,10 +2534,62 @@ function initScenarios() {
     alerte: null
   }
 },
+{
+  id: 102,
+  name: "Visite périodique",
+  category: "sante",
+  tags: ["suivi médical"],
+  days: [
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" }
+  ],
+  desc: "Suivi médical régulier",
+  legal: "✅ Périodicité définie",
+  risk: "aucun",
+  conseil: {
+    titre: "🏥 Suivi Médical",
+    message: "Visite tous les 5 ans (3 ans si risques).",
+    actions: [
+      "Périodicité selon exposition aux risques",
+      "Organisée par l'employeur",
+      "Peut déboucher sur aménagements",
+      "Confidentialité médicale garantie"
+    ],
+    alerte: null
+  }
+},
+{
+  id: 103,
+  name: "Visite reprise maladie",
+  category: "sante",
+  tags: ["reprise"],
+  days: [
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" },
+    { h: 7, type: "normal" }
+  ],
+  desc: "Examen après arrêt >30j",
+  legal: "✅ Visite reprise obligatoire",
+  risk: "aucun",
+  conseil: {
+    titre: "🏥 Visite Reprise",
+    message: "Obligatoire après arrêt >30 jours ou AT/MP.",
+    actions: [
+      "Organisée dans les 8 jours du retour",
+      "Évalue aptitude au poste",
+      "Peut proposer aménagements",
+      "Préalable à la reprise effective"
+    ],
+    alerte: null
+  }
+},
 
 
-
-{id:103,name:“Visite reprise maladie”,category:“sante”,tags:[“reprise”],days:[{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”},{h:7,type:“normal”}],desc:“Examen après arrêt >30j”,legal:“✅ Visite reprise obligatoire”,risk:“aucun”,conseil:{titre:“🏥 Visite Reprise”,message:“Obligatoire après arrêt >30 jours ou AT/MP.”,actions:[“Organisée dans les 8 jours du retour”,“Évalue aptitude au poste”,“Peut proposer aménagements”,“Préalable à la reprise effective”],alerte:null}},
 
 {id:104,name:“Aménagement poste santé”,category:“sante”,tags:[“adaptation”],days:[{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”},{h:6,type:“normal”}],desc:“Poste adapté temporairement”,legal:“✅ Avis médecin travail”,risk:“aucun”,conseil:{titre:“🏥 Poste Adapté”,message:“Aménagement suite avis médecin du travail.”,actions:[“Prescription temporaire ou permanente”,“Maintien rémunération selon modalités”,“Réévaluation périodique”,“Recherche reclassement si permanent”],alerte:null}},
 
