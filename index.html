@@ -9129,11 +9129,10 @@ function initScenarios() {
       "message": "Le bien-être nécessite attention régulière.",
       "actions": ["Check-in quotidien : comment je vais vraiment?", "Ajustements proactifs si dérive", "Aide précoce plus efficace que tardive", "Bien-être = marathon pas sprint"],
       "alerte": null
-      }}
-      ];
-
-SCENARIOS = BASE_SCENARIOS;
-}
+          }   // fin du dernier scénario
+  ];    // fin du tableau
+  SCENARIOS = BASE_SCENARIOS;
+}       // fin de initScenarios()
 window.addEventListener("load", function() {
   debugLog("📦 Module 3 - Fichier chargé", "info");
   debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "info");
@@ -9177,7 +9176,6 @@ window.addEventListener("load", function() {
   debugLog(`📊 Niveau ${STATE.level} • ${STATE.totalDays}j • ${STATE.totalHours.toFixed(0)}h`, "success");
   debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "success");
 });
-</script>
 <script>
 // ============================================================
 //  MODULE 3 — MOTEUR IA-LIKE v1.0
