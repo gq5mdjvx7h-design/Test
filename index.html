@@ -9198,44 +9198,44 @@ function initScenarios() {
       "alerte": null
     }
   },
-  {
-    "id": 600,
-    "name": "Vigilance continue bien-être",
-    "category": "prevention",
-    "tags": ["vigilance", "équilibre"],
-    "days": [
-      { "h": 7, "type": "normal" },
-      { "h": 7, "type": "normal" },
-      { "h": 7, "type": "normal" },
-      { "h": 7, "type": "normal" },
-      { "h": 7, "type": "normal" }
+{
+  "id": 600,
+  "name": "Vigilance continue bien-être",
+  "category": "prevention",
+  "tags": ["vigilance", "équilibre"],
+  "days": [
+    { "h": 7, "type": "normal" },
+    { "h": 7, "type": "normal" },
+    { "h": 7, "type": "normal" },
+    { "h": 7, "type": "normal" },
+    { "h": 7, "type": "normal" }
+  ],
+  "desc": "Attention quotidienne signaux",
+  "legal": "✅ Prévention active",
+  "risk": "aucun",
+  "conseil": {
+    "titre": "🎯 Vigilance Continue",
+    "message": "Le bien-être nécessite attention régulière.",
+    "actions": [
+      "Check-in quotidien : comment je vais vraiment?",
+      "Ajustements proactifs si dérive",
+      "Aide précoce plus efficace que tardive",
+      "Bien-être = marathon pas sprint"
     ],
-    "desc": "Attention quotidienne signaux",
-    "legal": "✅ Prévention active",
-    "risk": "aucun",
-    "conseil": {
-      "titre": "🎯 Vigilance Continue",
-      "message": "Le bien-être nécessite attention régulière.",
-      "actions": [
-        "Check-in quotidien : comment je vais vraiment?",
-        "Ajustements proactifs si dérive",
-        "Aide précoce plus efficace que tardive",
-        "Bien-être = marathon pas sprint"
-      ],
-      "alerte": null
-    }
+    "alerte": null
   }
-];    // fin du tableau
+}
+];   // fin du tableau
 
 SCENARIOS = BASE_SCENARIOS;
-}       // fin de initScenarios()
+}    // fin de initScenarios()
 
 window.addEventListener("load", function() {
   debugLog("📦 Module 3 - Fichier chargé", "info");
   debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "info");
   debugLog("🚀 DÉMARRAGE MODULE 3", "info");
   debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "info");
-  
+
   loadProfile();
   loadAnnualThresholds();
   initCheatCode();
@@ -9260,9 +9260,9 @@ window.addEventListener("load", function() {
   checkBadges();
   checkMilestones();
   displayModulesData();
-  
+
   document.getElementById("mainInterface").classList.remove("hidden");
-  
+
   debugLog("✅ Module 3 chargé avec succès", "success");
   debugLog(`📊 Niveau ${STATE.level} • ${STATE.totalDays}j • ${STATE.totalHours.toFixed(0)}h`, "success");
   debugLog("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "success");
@@ -9270,9 +9270,7 @@ window.addEventListener("load", function() {
 </script>
 
 <script>
-// ============================================================
-//  MODULE 3 — MOTEUR IA-LIKE v1.0
-// ============================================================
+// MODULE IA-LIKE…
 
 const AI_ENABLED = true;
 const AI_VERSION = "1.0";
